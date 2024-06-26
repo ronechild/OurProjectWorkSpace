@@ -1,0 +1,86 @@
+package com.spring5legacy.mypro00.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.spring5legacy.mypro00.common.paging.MyReplyPagingCreatorDTO;
+import com.spring5legacy.mypro00.common.paging.MyReplyPagingDTO;
+import com.spring5legacy.mypro00.domain.MyReplyVO;
+import com.spring5legacy.mypro00.mapper.MyBoardMapper;
+import com.spring5legacy.mypro00.mapper.MyReplyMapper;
+
+import lombok.AllArgsConstructor;
+
+@Service
+@AllArgsConstructor
+public class MyReplyServiceImpl implements MyReplyService {
+
+	private MyReplyMapper myReplyMapper;
+	private MyBoardMapper myBoardMapper;
+	
+	// 게시물 조회 서비스
+//	@Override
+//	public List<MyReplyVO> getBoardList(MyReplyPagingDTO myReplyPagingDTO) {
+//		return myReplyMapper.selectReplyList(myReplyPagingDTO);
+//	}
+	
+	// 특정 게시물 댓글 목록 조회
+	@Override
+	public MyReplyPagingCreatorDTO getBoardList(MyReplyPagingDTO myReplyPaging) {
+		
+		Long rowTotal = myReplyMapper.selectReplyTotal(myReplyPaging.getBno());
+		List<MyReplyVO> myReplyList = myReplyMapper.selectReplyList(myReplyPaging);
+		
+		MyReplyPagingCreatorDTO myReplyPagingCreator = new MyReplyPagingCreatorDTO(myReplyPaging, rowTotal, myReplyList);
+		
+		return myReplyPagingCreator;
+	}
+	
+	// 특정 게시물의 댓글 등록
+	@Override
+	@Transactional
+	public Long registerComment(MyReplyVO myReply) {
+		myReplyMapper.insertComment(myReply);
+		myBoardMapper.updateBreplyCnt(myReply.getBno(), 1);
+		return myReply.getRno();
+	}
+	
+	@Override
+	@Transactional
+	public Long registerReply(MyReplyVO myReply) {
+		myReplyMapper.insertReply(myReply);
+		myBoardMapper.updateBreplyCnt(myReply.getBno(), 1);
+		return myReply.getRno();
+	}
+	@Override
+	@Transactional
+	public Long updateCommentAndReply(MyReplyVO myReply) {
+		myReplyMapper.updateCommentAndReply(myReply);
+		return myReply.getRno();
+	}
+	@Override
+	@Transactional
+	public Long updateSetBlind(MyReplyVO myReply) {
+		myReplyMapper.updateSetBlind(myReply);
+		return myReply.getRno();
+	}
+	@Override
+	@Transactional
+	public Long deleteReplies(MyReplyVO myReply) {
+		myReplyMapper.deleteReplies(myReply);
+		return myReply.getRno();
+	}
+	
+	@Override
+	@Transactional
+	public MyReplyVO selectReply(Long rno) {
+		
+		return myReplyMapper.selectReply(rno);
+	}
+	
+	
+
+
+}

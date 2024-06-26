@@ -1,0 +1,38 @@
+/**
+ * myreply.js: 댓글/답글 데이터 처리용 Ajax 클로저 모듈 */
+
+// alert("댓글 처리 클로저 모듈 소스 임포트...");
+
+ var myCommentModule = (function(){
+
+    function getReplyList(myPaging, callback, error){
+        var bno = myPaging.bno;
+        var pageNum = myPaging.pageNum;
+        // console.log("bno: " + bno);
+        // console.log("pageNum: " + pageNum);
+
+        // 댓글 목록 조회 컨트롤러의 매핑 URL: GET /replies/list/{bno}/{pageNum}
+        // $.ajax() 함수는, 자바스크립트 객체를 매개값으로 받아 처리
+        $.ajax({
+            type: "get",
+            url: "/mypro00/replies/list/" + bno + "/" + pageNum ,
+            dataType: "json",
+            success: function(myReplyPagingCreator){
+                if(callback){
+                    callback(myReplyPagingCreator);
+                }
+            },
+            error: function(xhr, status, err){
+                if(error){
+                    error(err);
+                }
+            } // error-end
+        }); // ajax-end
+    }   
+
+    return {
+        getReplyList : getReplyList // propertiy : function
+    }
+
+ })();
+ 

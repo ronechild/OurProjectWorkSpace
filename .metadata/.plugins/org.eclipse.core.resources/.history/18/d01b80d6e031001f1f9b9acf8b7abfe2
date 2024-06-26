@@ -1,0 +1,14 @@
+package com.spring5legacy.mypro00.common.security;
+
+import java.util.Collection;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+
+public class MyMemberUser extends User{
+
+	public MyMemberUser(String username, String password, Collection<? extends GrantedAuthority> authorities) {
+		super(username, password, authorities);
+	}
+
+}

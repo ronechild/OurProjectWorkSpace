@@ -1,0 +1,11 @@
+package com.spring5legacy.mypro00.common.security;
+
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
+
+public class MyLoginAuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler{
+	
+	public MyLoginAuthenticationSuccessHandler() {
+		
+	}
+
+}

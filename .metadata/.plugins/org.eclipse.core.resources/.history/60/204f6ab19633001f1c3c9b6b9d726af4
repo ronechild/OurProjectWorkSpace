@@ -1,0 +1,4 @@
+oracle.jdbc.hikari.driverClassName=oracle.jdbc.OracleDriver    		
+oracle.jdbc.hikari.jdbcUrl=jdbc:oracle:thin:@localhost:1521:xe		
+oracle.jdbc.hikari.username=ouruser                                				
+oracle.jdbc.hikari.password=ouruser                               		

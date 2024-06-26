@@ -1,0 +1,14 @@
+package com.spring5legacy.mypro00.common.security;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+
+@Controller
+public class MyAccessForbiddenDeniedController {
+	public String toAccessForbiddenPage(Model model) {
+		
+		model.addAttribute("msg","접근 금지");
+		
+		return "common/errors/myErrorAccessDeniedPage"; 
+	}
+}

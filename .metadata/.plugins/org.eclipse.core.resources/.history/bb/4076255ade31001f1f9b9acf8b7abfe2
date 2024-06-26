@@ -1,0 +1,5 @@
+package com.spring5legacy.mypro00.mapper;
+
+public interface MyMemberMapper {
+
+}

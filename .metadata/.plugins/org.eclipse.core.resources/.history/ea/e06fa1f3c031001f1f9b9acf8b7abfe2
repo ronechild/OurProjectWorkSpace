@@ -1,0 +1,23 @@
+package com.spring5legacy.mypro00.service;
+
+import com.spring5legacy.mypro00.common.paging.MyReplyPagingCreatorDTO;
+import com.spring5legacy.mypro00.common.paging.MyReplyPagingDTO;
+import com.spring5legacy.mypro00.domain.MyReplyVO;
+
+public interface MyReplyService {
+
+	// 게시물 조회 - 목록
+	public MyReplyPagingCreatorDTO getBoardList(MyReplyPagingDTO myReplyPagingDTO);
+	
+	public Long registerComment(MyReplyVO myReply);
+	
+	public Long registerReply(MyReplyVO myReply);
+	
+	public Long updateCommentAndReply(MyReplyVO myReply);
+	
+	public Long updateSetBlind(MyReplyVO myReply);
+	
+	public Long deleteReplies(MyReplyVO myReply);
+	
+	public Long selectReply(MyReplyVO myReply);
+}

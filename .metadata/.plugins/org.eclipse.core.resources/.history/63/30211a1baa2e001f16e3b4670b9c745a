@@ -1,0 +1,13 @@
+package com.spring5legacy.mypro00.service;
+
+import java.util.List;
+
+import com.spring5legacy.mypro00.common.paging.MyReplyPagingDTO;
+import com.spring5legacy.mypro00.domain.MyReplyVO;
+
+public interface MyReplyService {
+
+	// 게시물 조회 - 목록
+	public MyReplyPagingCreatotDTO getBoardList(MyReplyPagingDTO myReplyPagingDTO);
+	
+}

@@ -1,0 +1,48 @@
+package com.spring5legacy.mypro00.mapper;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
+import com.spring5legacy.mypro00.common.paging.MyBoardPagingDTO;
+import com.spring5legacy.mypro00.domain.MyBoardVO;
+
+public interface MyBoardMapper {
+
+	// 게시물 조회 목록
+	public List<MyBoardVO> selectMyBoardList(MyBoardPagingDTO myBoardPaging);
+	public List<MyBoardVO> selectMyBoardList2(MyBoardPagingDTO myBoardPaging);
+	
+	// 게시물 행 
+	public Long selectRowTotal(MyBoardPagingDTO myBoardPaging);
+	public Long selectRowTotal2(MyBoardPagingDTO myBoardPaging);
+	
+	// 게시물 등록 selectkey 이용
+	public int insertMyBoard(MyBoardVO myBoardVO);
+	
+	// 게시물 등록 
+	public int insertMyBoardNoKey(MyBoardVO myBoardVO);
+	
+	// 특정 게시물 조회
+	public MyBoardVO selectMyBoard(Long bno);
+	
+	// 특정 게시물 수정
+	public int updateMyBoard(MyBoardVO myBoardVO);
+	
+	// 특정 게시물 수정
+	public int updateMyBoard(@Param("bno") Long bno,@Param("btitle") String btitle,@Param("bcontent") String bcontent);
+	
+	// 게시물 블라인드 처리
+	public int updateBdelFlag(Long bno);
+	
+	// 특정 게시물 삭제
+	public int deleteMyBoard(Long bno);
+	
+	// 게시물 조회수 증가
+	public void updateBviewsCnt(Long bno);
+	
+	// 게시물 댓글 수 변경
+	public void updateBreplyCnt(Long bno, Integer amt);
+
+
+}

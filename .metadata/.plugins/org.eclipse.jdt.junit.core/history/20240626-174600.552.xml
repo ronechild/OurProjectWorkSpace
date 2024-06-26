@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="Test02MybatisSessionTest (1)" project="ourpro00" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="com.spring5legacy.ourpro00.Test02MybatisSessionTest" time="0.01">
+    <testcase name="testConnection" classname="com.spring5legacy.ourpro00.Test02MybatisSessionTest" time="0.01"/>
+  </testsuite>
+</testrun>

@@ -1,0 +1,7 @@
+package com.spring5legacy.mypro00.common.paging;
+
+public class MyReplyPagingCreatotDTO {
+
+	private MyReplyPagingDTO myReplyPaging;
+	private Long rowTotal;
+}

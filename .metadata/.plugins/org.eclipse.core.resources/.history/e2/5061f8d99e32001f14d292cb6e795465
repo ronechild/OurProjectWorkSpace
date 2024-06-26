@@ -1,0 +1,18 @@
+package com.spring5legacy.mypro00.common.security;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class MyLoginLogoutPageController {
+
+	@GetMapping(value = {"/myLogin", "/login"})
+	public String toLoginPage() {
+		return null;
+	}
+	
+	@GetMapping(value = {"/myLogout", "/logout"})
+	public String toLogoutPage() {
+		return null;
+	}
+}

@@ -1,0 +1,136 @@
+/**
+ * myreply.js: 댓글/답글 데이터 처리용 Ajax 클로저 모듈 */
+
+// alert("댓글 처리 클로저 모듈 소스 임포트...");
+
+ var myCommentModule = (function(){
+
+    function getReplyList(myPaging, callback, error){
+        var bno = myPaging.bno;
+        var pageNum = myPaging.pageNum;
+        // console.log("bno: " + bno);
+        // console.log("pageNum: " + pageNum);
+
+        // 댓글 목록 조회 컨트롤러의 매핑 URL: GET /replies/list/{bno}/{pageNum}
+        // $.ajax() 함수는, 자바스크립트 객체를 매개값으로 받아 처리
+        $.ajax({
+            type: "get",
+            url: "/mypro00/replies/list/" + bno + "/" + pageNum ,
+            dataType: "json",
+            success: function(myReplyPagingCreator){
+                if(callback){
+                    callback(myReplyPagingCreator);
+                }
+            },
+            error: function(xhr, status, err){
+                if(error){
+                    error(err);
+                }
+            } // error-end
+        }); // ajax-end
+    }
+
+    function myDateTimeFmt(dateTimeValue){
+        var myDate = new Date(dateTimeValue);
+        var myYear = myDate.getFullYear();
+        var myMonth = myDate.getMonth() + 1;
+        var myDay = myDate.getDate();
+        var myHour = myDate.getHours();
+        var myMin = myDate.getMinutes();
+        var mySec = myDate.getSeconds();
+        var myDateTime = [myYear,'/',
+                        (myMonth > 9 ? '':'0') + myMonth, '/',
+                        (myDay > 9 ? '':'0') + myDay, ' ',
+                        (myHour > 9 ? '':'0') + myHour, ':',
+                        (myMin > 9 ? '':'0') + myMin, ':',
+                        (mySec > 9 ? '':'0') + mySec ].join('')
+        return myDateTime;
+    }
+    
+    
+
+    function registerComment(comment, callback){
+        var bno = comment.bno;
+
+        // 댓글 목록 조회 컨트롤러의 매핑 URL: POST /replies/{bno}/new
+		   $.ajax({
+           type: "post" ,
+           url: "/mypro00/replies/" + bno + "/new",
+           data: JSON.stringify(comment),
+           contentType:"application/json;charset=utf-8",
+           dataType: "text" ,
+           success: function(result){
+              if(callback){
+                 callback(result);
+              }
+           }
+
+        }); // ajax-end
+    }    
+    
+    // 답글 등록
+	  function registerReply(comment, successCallback) {
+	  	var bno = comment.bno;
+	  	var prno = comment.prno;
+	  
+        $.ajax({
+            type: 'POST',
+            url: '/mypro00/replies/'+ bno + '/' + prno + '/reply'  , 
+            data: JSON.stringify(comment),
+            contentType: 'application/json; charset=utf-8',
+            success: function(result) {
+                if (successCallback) {
+                    successCallback(result);
+                }
+            }
+        });
+    }
+    
+    // 답글 및 댓글 수정
+    function updateComment(comment, successCallback) {
+    var bno = comment.bno;
+	var rno = comment.rno;
+	
+    $.ajax({
+        type: 'PUT',
+        url: '/mypro00/replies/' + bno + '/' + rno,
+        data: JSON.stringify(comment),
+        contentType: 'application/json; charset=utf-8',
+        success: function(result) {
+            if (successCallback) {
+                successCallback(result);
+            }
+        }    
+    });
+}
+
+	// 답글 및 댓글 블라인드 처리
+    function updateComment(comment, successCallback) {
+    var bno = comment.bno;
+	var rno = comment.rno;
+	
+    $.ajax({
+        type: 'PUT',
+        url: '/mypro00/replies/' + bno + '/' + rno,
+        data: JSON.stringify(comment),
+        contentType: 'application/json; charset=utf-8',
+        success: function(result) {
+            if (successCallback) {
+                successCallback(result);
+            }
+        }    
+    });
+}
+    
+
+    return {
+        getReplyList : getReplyList, // propertiy : function
+        myDateTimeFmt : myDateTimeFmt,
+        registerReply: registerReply,
+        registerComment : registerComment,
+        updateComment : updateComment
+    }
+    
+
+ })();
+ 

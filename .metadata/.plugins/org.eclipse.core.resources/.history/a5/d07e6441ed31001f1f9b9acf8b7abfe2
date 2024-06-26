@@ -1,0 +1,42 @@
+package com.spring5legacy.mypro00.common.security;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+
+import com.spring5legacy.mypro00.domain.MyAuthorityVO;
+import com.spring5legacy.mypro00.domain.MyMemberVO;
+
+public class MyMemberUser extends User{
+	
+	private MyMemberVO myMember;
+
+//	public static List<GrantedAuthority> changeToGrantedAuthList(List<MyAuthorityVO> authList) {
+//		// super(username, password, authorities);
+//		List<GrantedAuthority> grantedAuthList = new ArrayList<>();
+//		GrantedAuthority grantedAuth = null;
+//		
+//		for (MyAuthorityVO myAuth : myMember.getAuthList()) {
+//			grantedAuth = new SimpleGrantedAuthority(myAuth.getAuthority());
+//			grantedAuthList.add(grantedAuth);
+//		}
+//		return grantedAuthList;
+//	}
+//	
+//	public MyMemberUser(MyMemberVO myMember) {
+//		super(myMember.getUserid(), myMember.getUserpw(), changeToGrantedAuthList(myMember.getAuthList()));
+//		
+//	}
+	
+	public MyMemberUser(MyMemberVO myMember) {
+		super(myMember.getUserid(), myMember.getUserpw(), changeToGrantedAuthList(myMember.getAuthList()));
+		
+	}
+	
+	
+
+}

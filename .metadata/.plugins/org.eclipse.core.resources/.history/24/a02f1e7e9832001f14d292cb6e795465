@@ -1,0 +1,8 @@
+package com.spring5legacy.mypro00.common.security;
+
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class MyLoginLogoutPageController {
+
+}

@@ -1,0 +1,33 @@
+package com.spring5legacy.mypro00.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.spring5legacy.mypro00.common.paging.MyReplyPagingDTO;
+import com.spring5legacy.mypro00.domain.MyReplyVO;
+import com.spring5legacy.mypro00.mapper.MyReplyMapper;
+
+import lombok.AllArgsConstructor;
+
+@Service
+@AllArgsConstructor
+public class MyReplyServiceImpl implements MyReplyService {
+
+	private MyReplyMapper myReplyMapper;
+	
+	// 게시물 조회 서비스
+//	@Override
+//	public List<MyReplyVO> getBoardList(MyReplyPagingDTO myReplyPagingDTO) {
+//		return myReplyMapper.selectReplyList(myReplyPagingDTO);
+//	}
+	
+	@Override
+	public List<MyReplyVO> getBoardList(MyReplyPagingDTO myReplyPaging) {
+		Long rowTotal = myReplyMapper.selectReplyTotal(myReplyPaging.getBno());
+		List<MyReplyVO> myReplyList = myReplyMapper.selectReplyList(myReplyPaging);
+		return myReplyMapper.selectReplyList(myReplyPaging);
+	}
+
+
+}

@@ -1,0 +1,15 @@
+package com.spring5legacy.mypro00.mapper;
+
+import java.util.List;
+
+import com.spring5legacy.mypro00.common.paging.MyReplyPagingDTO;
+import com.spring5legacy.mypro00.domain.MyReplyVO;
+
+public interface MyReplyMapper {
+
+	public List<MyReplyVO> selectReplyList(MyReplyPagingDTO myReplyPaging);
+//	public List<MyReplyVO> selectReplyList(@Param("bno") Long bno, @Param("pageNum") Integer pageNum, 
+//										   @Param("rowAmountPerPage") Integer rowAmountPerPage);
+	// public Long selectRowTotal(@Param("myReplyPagingDTO") MyReplyPagingDTO myReplyPagingDTO);
+	public Long selectReplyTotal(Long bno);
+}
