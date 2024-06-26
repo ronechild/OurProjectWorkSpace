@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <aop-reference-model>
-<aop-project name="mypro00">
-<aspect-definition advice-class-name="sample.my03aop.aop.LogAdvice" advice-method-name="logBefore1" advice-type="BEFORE" aspect-end-line-number="45" aspect-name="logAdvice" aspect-start-line-number="45" factory-id="org.springframework.ide.eclipse.aop.core.annotationAspectDefinitionElementFactory" file="/mypro00/src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml" pointcut-expression="execution(* sample.my03aop.aop.service.SampleServiceImpl.doAdd2(String, String))" proxy-target-class="false">
-<aop-reference advice-type="BEFORE" bean="1:BeansModel|2:mypro00|3:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml|7:beans:beans:14|8:sampleServiceImpl:14" bean-file="/mypro00/src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml" bean-start-line="14" factory-id="org.springframework.ide.eclipse.aop.core.aopReferenceElementFactory" file="/mypro00/src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml" source="=mypro00/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;sample.my03aop.aop{LogAdvice.java[LogAdvice~logBefore1" source-start-line="25" target="=mypro00/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;sample.my03aop.aop.service{SampleServiceImpl.java[SampleServiceImpl~doAdd2~QString;~QString;" target-start-line="35"/>
-</aspect-definition>
-</aop-project>
+<aop-project name="mypro00"/>
+<aop-project name="ourpro00"/>
 </aop-reference-model>

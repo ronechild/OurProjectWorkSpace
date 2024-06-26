@@ -1,5 +1,0 @@
-package com.spring5legacy.mypro00.common.security;
-
-public class MyMemberUserDetailsServiceImpl {
-
-}
