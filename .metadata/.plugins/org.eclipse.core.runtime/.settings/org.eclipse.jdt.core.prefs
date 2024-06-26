@@ -1,6 +1,6 @@
 eclipse.preferences.version=1
-org.eclipse.jdt.core.classpathVariable.JRE_LIB=C\:/myjava/jdk-8u411/jre/lib/rt.jar
-org.eclipse.jdt.core.classpathVariable.JRE_SRC=C\:/myjava/jdk-8u411/src.zip
+org.eclipse.jdt.core.classpathVariable.JRE_LIB=C\:/myjava/jdk-1.8u411/jre/lib/rt.jar
+org.eclipse.jdt.core.classpathVariable.JRE_SRC=C\:/myjava/jdk-1.8u411/src.zip
 org.eclipse.jdt.core.classpathVariable.JRE_SRCROOT=
 org.eclipse.jdt.core.classpathVariable.M2_REPO=C\:/Users/soldesk/.m2/repository
 org.eclipse.jdt.core.codeComplete.visibilityCheck=enabled

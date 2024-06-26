@@ -1,7 +1,6 @@
 package com.spring5legacy.ourpro00;
 
 import javax.sql.DataSource;
-
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;

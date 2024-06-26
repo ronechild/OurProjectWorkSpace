@@ -18,4 +18,6 @@
 		<item key="EditorSelectionDialog.STORE_ID_DESCR" value="C:\myjava\VSCode-1.89.1\Code.exe"/>
 		<item key="EditorSelectionDialog.STORE_ID_FILE_EXTENSION" value=".js"/>
 	</section>
+	<section name="org.eclipse.ui.preferences.keysPreferencePage">
+	</section>
 </section>
