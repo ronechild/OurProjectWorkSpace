@@ -10,32 +10,37 @@
 	
 	<!-- 특정 구직글 조회 -->
 	<select id="selectJobSeeker">
-	
+		SELECT ano, atitle, acontent, awriter, aregdate, bno   
+			FROM ouruser.tbl_apply
+		WHERE ano = #{ano} 
 	</select>
 	
 	<!-- 구직글 총 수 -->
 	<select id="selectRowTotal">
-	
+		select count(*) FROM ouruser.tbl_apply
 	</select>
 	
 	<!-- 구직글 등록 -->
 	<insert id="insertJobSeeker">
-	
+	<selectKey keyProperty="ano" order="BEFORE" resultType="Long">
+			SELECT ouruser.seq_tbl_apply.nextval FROM DUAL
+		</selectKey>
+		INSERT INTO ouruser.tbl_apply
+			VALUES (#{ano}, #{atitle}, #{acontent}, #{awriter}, default, #{bno}) 
 	</insert>
 	
 	<!-- 특정 구직글 수정 -->
 	<update id="updateJobSeeker">
-	
+		UPDATE ouruser.tbl_apply
+			SET atitle = #{atitle},
+  					 acontent = #{acontent}
+		WHERE ano = #{ano}
 	</update>
 	
-	<!-- 특정 구직글 블라인드 처리 -->
-	<update id="updateDelFlag">
-	
-	</update>
 	
 	<!-- 특정 구직글 삭제 -->
 	<delete id="deleteJobSeeker">
-	
+		DELETE FROM ouruser.tbl_apply WHERE ano = #{ano} 
 	</delete>
 	
 </mapper>
