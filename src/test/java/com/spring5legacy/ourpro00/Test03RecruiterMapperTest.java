@@ -22,18 +22,18 @@ public class Test03RecruiterMapperTest {
     }
     
 //  //게시물 목록 조회 테스트 > 테스트 후 메서드 주석처리
-    @Test
-    public void selectRecruitList() {
-    	recruiterMapper.selectRecruitList();
-        System.out.println(recruiterMapper.selectRecruitList()); // 존재하는 게시물 번호로 테스트
-    }
-    
-  //특정 게시물 조회 테스트(by bno)  테스트 후 메서드 주석처리
 //    @Test
 //    public void selectRecruitList() {
 //    	recruiterMapper.selectRecruitList();
 //        System.out.println(recruiterMapper.selectRecruitList()); // 존재하는 게시물 번호로 테스트
 //    }
+    
+  //특정 게시물 조회 테스트(by bno)  테스트 후 메서드 주석처리
+    @Test
+    public void selectRecruit() {
+    	recruiterMapper.selectRecruit(2L);
+        System.out.println(recruiterMapper.selectRecruit(2L)); // 존재하는 게시물 번호로 테스트
+    }
     
 //  //게시물 등록 테스트 - selectKey 사용 안함
 //    @Test
