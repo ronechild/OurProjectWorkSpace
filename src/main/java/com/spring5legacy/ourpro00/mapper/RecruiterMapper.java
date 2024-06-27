@@ -1,9 +1,13 @@
 package com.spring5legacy.ourpro00.mapper;
 
+import java.util.List;
+
+import com.spring5legacy.ourpro00.domain.RecruiterVO;
+
 public interface RecruiterMapper {
 
 	// 구인글 목록 조회
-	public void selectRecruitList();
+	public List<RecruiterMapper> selectRecruitList();
 	
 	// 특정 구인글 조회
 	public void selectRecruit();

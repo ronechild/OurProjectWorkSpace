@@ -8,7 +8,6 @@ public class RecruiterServiceImpl implements RecruiterService{
 	// 구인글 목록 조회
 	@Override
 	public void selectRecruitList() {
-		
 	}
 
 	// 특정 구인글 조회

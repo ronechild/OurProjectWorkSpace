@@ -25,10 +25,10 @@
         <property name="dataSource" ref="dataSource" />
         <property name="mapperLocations">
             <list>
-                <!-- <value>classpath:mappers/CommentMapper.xml</value>
+               <value>classpath:mappers/CommentMapper.xml</value>
                 <value>classpath:mappers/JobSeekerMapper.xml</value>
                 <value>classpath:mappers/MemberMapper.xml</value>
-                <value>classpath:mappers/RecruiterMapper.xml</value> -->
+                <value>classpath:mappers/RecruiterMapper.xml</value> 
             </list>
         </property>
     </bean> 
@@ -36,5 +36,9 @@
     <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
         <constructor-arg index="0"  ref="sqlSessionFactory" />
     </bean> 
+    
+    <!-- 매퍼인터패이스 패키지 설정, DAO 클래스를 사용하는 경우에는 설정하지 않습니다. -->
+    <mybatis-spring:scan base-package="com.spring5legacy.ourpro00.mapper"/>
+    
 
 </beans>
