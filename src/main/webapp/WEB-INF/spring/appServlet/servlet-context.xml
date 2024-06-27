@@ -21,8 +21,10 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<!-- <context:component-scan base-package="com.spring5legacy.ourpro00.service" />
-	<context:component-scan base-package="com.spring5legacy.ourpro00.controller" /> -->
+	<beans:bean class="org.springframework.web.multipart.support.StandardServletMultipartResolver" id="multipartResolver"/>
+	<!-- <context:component-scan base-package="com.spring5legacy.ourpro00.service"/>
+	<context:component-scan base-package="com.spring5legacy.ourpro00.controller"/>
+	<context:component-scan base-package="com.spring5legacy.ourpro00.common.fileupload"/> -->
 	
 	
 	
