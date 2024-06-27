@@ -39,7 +39,7 @@
         </h1>
         <div class="btn_apply" style="margin-left: 60%;">
         <button type="button" id="btnToList" data-oper="list" class="btn  btn-outline btn-info"><span>목록</span></button>
-            <button type="button" class="btn btn-outline btn-success">입사지원</button>        
+            <button type="button" id="jobApply" class="btn btn-outline btn-success">입사지원</button>        
         </div>
     </div>
     </div>
@@ -69,12 +69,38 @@
             </div>
             <%-- 세부 기본내용 끝--%>
             <hr>
+
 <div class="form-group">
-                        <div class="col-sm-10">
-                            <textarea class="form-control bcontentTextBox" name="bcontent" style="resize: none;" 
-                                       readonly="readonly"><c:out value="글내용|bcontent"/></textarea>
-                        </div>
-                    </div>
+	<div class="col-sm-10">
+	    <textarea class="form-control bcontentTextBox" name="bcontent" style="resize: none;" 
+	               readonly="readonly"><c:out value="글내용|bcontent"/></textarea>
+	</div>
+</div>
+
+<form id="frmSendValue">
+		<input type="hidden" id="pageNum" name="pageNum" value="${myBoardPaging.pageNum }">
+		<input type="hidden" id="rowAmountPerPage" name="rowAmountPerPage" value="${myBoardPaging.rowAmountPerPage }">
+		<input type="hidden" id="bno" name="bno" value="${myBoard.bno}">
+		<input type="hidden" id="boccupation" name="boccupation" value="${myBoardPaging.boccupation}">
+		<input type="hidden" id="bregion" name="bregion" value="${myBoardPaging.bregion}">
+</form>
+ <script>
+ var frmSendValue = $("#frmSendValue");
+ $("#jobApply").on("click",function(){
+	 	frmSendValue.attr("action", "${contextPath}/application");
+	 	frmSendValue.attr("method","get");
+	 	
+	 	frmSendValue.submit();
+	 });
+ $("#btnToList").on("click",function(){
+ 	frmSendValue.find("#bno").remove();
+ 	frmSendValue.attr("action", "${contextPath}");
+ 	frmSendValue.attr("method","get");
+ 	
+ 	frmSendValue.submit();
+ });
+
+</script>
 
 
 

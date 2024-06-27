@@ -6,65 +6,103 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 
 <%@ include file="../include/header.jsp" %>
+<style>
+	.alert,dl{
+	display: inline-block;
+	width: 200px;
+	margin-left: 50px;
+	}
+	dd{
+	color: #28288C;
+	}
+	dt{
+	float: left;
+	}
+	.bcontentTextBox{
+	margin-left: 100px;
+	background-color: white;
+	}
+	
+</style>
 
-<div class="jv_cont jv_summary">
-    <h2 class="jv_title blind">핵심 정보</h2>
-    <div class="cont">
-        <div class="col">
-            <dl>
-    <dt>경력</dt>
-    <dd><strong>신입·경력</strong></dd>
-</dl>            <dl>
-    <dt>학력</dt>
-    <dd>
-        <strong>고교졸업 이상</strong>
-                    <span class="etc"> (각 부문 상이함)</span>
-            </dd>
-</dl>                <dl>
-        <dt>근무형태</dt>
-        <dd>
-            <strong>정규직</strong>                     </dd>
-    </dl>
-                                </div>
-        <div class="col">
-                <dl>
-        <dt>급여</dt>
-        <dd>
-            면접 후 결정                    </dd>
-    </dl>
-                                        <dl>
-        <dt>근무지역</dt>
-        <dd>
-            충남 아산시                            <button type="button" class="spr_jview btn_jview btn_move_map"><span>지도</span></button>
-                    </dd>
-    </dl>
+<hr>
+<%-- 제목 기업 지원 --%>
+<div class="wrap_jv_header" style="padding-left: 300px;">
+    <a class="placeholder" tabindex="-1"></a>
+    <div class="jv_header" data-rec_idx="48341817" data-rec_seq="0">
+	    <div class="title_inner">
+                            
+               <h3><c:out value="bwiter(기업명)"/> </h3>
+         </div>
+        <h1 class="tit_job" style="margin-left: 5%;">
+                        <c:out value="24년 신규 채용 공고 |btitle(제목)"/>    
+        </h1>
+        <div class="btn_apply" style="margin-left: 60%;">
+        <button type="button" id="btnToList" data-oper="list" class="btn  btn-outline btn-info"><span>목록</span></button>
+            <button type="button" id="jobApply" class="btn btn-outline btn-success">입사지원</button>        
         </div>
-        <div class="meta">
-                        <span class="salary_desc"><strong>최저임금계산에 대한 알림</strong> 하단에 명시된 급여, 근무 내용 등이 최저임금에 미달하는 경우 위 내용이 우선합니다.</span>
-                                    <ul class="list_meta">
-                                    <li>조회수 <strong>22,529</strong></li>
-                                                                
-<li class="wrap_share">
-    <div class="share">
-        <button type="button" class="spr_jview btn_jview btn_share">
-	        <svg aria-hidden="true" focusable="false" class="ic"><use xlink:href="#icon_sns_share"></use></svg>
-	        <span>공유하기</span>
-        </button>
-        <ul class="spr_jview list_share">
-    <li><a href="http://www.facebook.com/share.php?api_key=137906922916817&amp;display=popup&amp;u=https%3A%2F%2Fwww.saramin.co.kr%2Fzf_user%2Fjobs%2Frelay%2Fview%3Frec_idx%3D48341817%26view_type%3Detc" class="spr_jview facebook" onclick="window.open(this.href, this.target, 'width=578,height=380'); return false;" onmousedown="try{n_trackEvent('pop_view', 'top', 'facebook', '');}catch(e){}" title="페이스북 공유하기"><span class="blind">페이스북</span></a></li>
-    <li><a href="http://twitter.com/share?url=https%3A%2F%2Fwww.saramin.co.kr%2Fzf_user%2Fjobs%2Frelay%2Fview%3Frec_idx%3D48341817%26view_type%3Detc&amp;text=24%EB%85%84%20%EB%B6%80%EB%AC%B8%EB%B3%84%20%EC%8B%A0%EC%9E%85%C2%B7%EA%B2%BD%EB%A0%A5%EC%82%AC%EC%9B%90%20%EB%AA%A8%EC%A7%91%20-%20%EC%97%90%EC%9D%B4%EC%B9%98%EB%B9%84%EC%86%94%EB%A3%A8%EC%85%98%28%EC%A3%BC%29%20%23saramin" class="spr_jview twitter" onclick="window.open(this.href, this.target, 'width=554,height=454'); return false;" onmousedown="try{n_trackEvent('pop_view', 'top', 'twitter', '');}catch(e){}" title="트위터 공유하기"><span class="blind">트위터</span></a></li>
-    <li><button type="button" class="spr_jview copy_url" title="공고 주소 복사하기" onclick="JobsView.copyUrl('https://www.saramin.co.kr/zf_user/jobs/relay/view?rec_idx=48341817&amp;view_type=etc');" onmousedown="try{n_trackEvent('pop_view', 'top', 'copyurl', '' );}catch(e){}"><span class="blind">URL복사</span></button></li>
-    <li><button type="button" class="spr_jview send_sms" title="이 공고 내 폰으로 전송하기" onclick="Saramin.showQuickLogin();" onmousedown="try{n_trackEvent('pop_view', 'top', 'sendsms', '');}catch(e){}"><span class="blind">SMS발송</span></button></li>
-</ul>    </div>
-</li>                <!--wmg-31267-->
-                <li>
-	                <a href="/zf_user/help/inquery/email-inquiry-write?rec_idx=48341817&amp;view_type=etc" target="_blank" onmousedown="try{n_trackEvent('pop_view', 'warning', 'report', '');}catch(e){}" class="spr_jview btn_report"><svg aria-hidden="true" focusable="false" class="ic"><use xlink:href="#icon_report"></use></svg>신고하기</a>
-                </li>
-                <!-- //wmg-31267-->
-                            </ul>
-        </div>
+    </div>
+    </div>
+   <%-- 제목 기업 지원 끝--%>
+
+<hr>
+<%-- 세부 기본내용 --%>
+<div class="cont wrapper" style="padding-left: 300px;">
+	<div class="col">
+		<dl>
+		    <dt>등록일&nbsp;</dt><dd><c:out value="2024-06-27|bregdate"/></dd>
+		</dl>           
+		<dl >
+		    <dt>마감일&nbsp;</dt><dd style="color: #800000;"><c:out value="2024-06-27|benddate"/></dd>
+		</dl>
+		       <div class="alert alert-danger" style="height: 50px; width: 90px;">D-day - <c:out value="5"/></div>
+     </div>
+     <div class="col">
+ 		<dl>
+		    <dt>직종&emsp;</dt><dd><c:out value="직종|boccupation"/></dd>
+		</dl>           
+		<dl >
+		    <dt>지역&emsp;</dt><dd><c:out value="지역|bregion"/></dd>
+		</dl>
+     </div>
+        <br>
             </div>
+            <%-- 세부 기본내용 끝--%>
+            <hr>
+
+<div class="form-group">
+	<div class="col-sm-10">
+	    <textarea class="form-control bcontentTextBox" name="bcontent" style="resize: none;" 
+	               readonly="readonly"><c:out value="글내용|bcontent"/></textarea>
+	</div>
 </div>
+
+<form id="frmSendValue">
+		<input type="hidden" id="pageNum" name="pageNum" value="${myBoardPaging.pageNum }">
+		<input type="hidden" id="rowAmountPerPage" name="rowAmountPerPage" value="${myBoardPaging.rowAmountPerPage }">
+		<input type="hidden" id="bno" name="bno" value="${myBoard.bno}">
+		<input type="hidden" id="boccupation" name="boccupation" value="${myBoardPaging.boccupation}">
+		<input type="hidden" id="bregion" name="bregion" value="${myBoardPaging.bregion}">
+</form>
+ <script>
+ var frmSendValue = $("#frmSendValue");
+ <%-- 입사 지원 버튼 클릭--%>
+ $("#jobApply").on("click",function(){
+	 	frmSendValue.attr("action", "${contextPath}/application");
+	 	frmSendValue.attr("method","get");
+	 	
+	 	frmSendValue.submit();
+	 });
+ <%-- 목록 버튼 클릭--%>
+ $("#btnToList").on("click",function(){
+ 	frmSendValue.find("#bno").remove();
+ 	frmSendValue.attr("action", "${contextPath}");
+ 	frmSendValue.attr("method","get");
+ 	
+ 	frmSendValue.submit();
+ });
+
+</script>
 
 
 
