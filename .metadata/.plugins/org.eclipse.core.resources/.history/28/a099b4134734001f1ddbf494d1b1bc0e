@@ -1,0 +1,39 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
+
+<%@ include file="./WEB-INF/views/include/header.jsp" %>
+
+<hr>
+
+<div class="wrap_jv_header">
+    <a class="placeholder" tabindex="-1"></a>
+    <div class="jv_header" data-rec_idx="48341817" data-rec_seq="0">
+	    <div class="title_inner">
+                            <a href="/zf_user/company-info/view?csn=clBDejlQNlFrREgwZkFJUFhrMXZsQT09&amp;popup_yn=y" title="에이치비솔루션(주)" class="company" target="_blank" onclick="window.open(this.href, ''); return false;" onmousedown="try{n_trackEvent('pop_view', 'title', 'company', '');}catch(e){}">
+                에이치비솔루션(주)            </a>
+                                <button type="button" csn="clBDejlQNlFrREgwZkFJUFhrMXZsQT09" title="관심기업 등록" del_fl="n" aria-pressed="false" class="btn_jview spr_jview btn_interest" onclick="try{Saramin.btnJob('favor', this, '', 'list');}catch(e){}" onmousedown="try {n_trackEvent('pop_view', 'title', 'favor', '');}catch(e){}" first_nudge="off"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="icon_interested">
+                                <path d="M6.02498 12.7861L5.64593 12.4305L5.26661 12.0676L4.9045 11.7145L4.57727 11.3886L4.30315 11.1078L4.09798 10.8878L3.60986 10.3434L3.3016 9.99345L3.02797 9.67542L2.79004 9.38984L2.58897 9.13749L2.42437 8.91736L2.35722 8.8214C2.09522 8.43618 1.89245 8.04622 1.73708 7.6185C1.41094 6.38491 1.4304 5.39882 1.73942 4.62739C2.06107 3.82442 2.56896 3.24401 3.25465 2.87112C3.97841 2.47923 4.74412 2.39639 5.56989 2.63105C6.18765 2.82443 6.71818 3.1964 7.16412 3.7682L7.29598 3.94787L7.58589 4.37863L8.00062 4.99485L8.41545 4.3787L8.71259 3.93737C9.13803 3.32866 9.65597 2.91815 10.2666 2.68825L10.4462 2.62682C11.2606 2.39707 12.0242 2.47999 12.7465 2.87106C13.4323 3.24395 13.9403 3.82439 14.262 4.62745C14.5705 5.39767 14.5909 6.3831 14.2537 7.6522C14.1088 8.04661 13.9058 8.43727 13.6424 8.82404C13.6227 8.85295 13.6015 8.88333 13.5787 8.9152L13.4124 9.13756L13.2113 9.38998L12.9737 9.67507L12.549 10.1656L12.1189 10.6483L12.1177 10.6497L11.8097 10.99L11.569 11.2414L11.2664 11.5467L10.7343 12.0681L10.3555 12.4306L9.97658 12.786L9.61564 13.1169L9.28863 13.4077C9.1893 13.4942 9.09986 13.57 9.0226 13.6331C9.02237 13.6333 9.02214 13.6335 9.02192 13.6336L8.00223 14.461L7.999 14.4634L6.85007 13.5257C6.76132 13.4504 6.66238 13.3642 6.55569 13.2693L6.20886 12.9558C6.20844 12.9554 6.20801 12.955 6.20759 12.9546C6.148 12.9 6.08733 12.844 6.02592 12.787C6.02561 12.7867 6.0253 12.7864 6.02498 12.7861Z" fill="white" stroke="#8491A7"></path></svg><span>관심기업</span>
+                            </button>        		</div>
+        <h1 class="tit_job">
+                        24년 부문별 신입·경력사원 모집        </h1>
+
+        <button type="button" class="btn_scrap  scrap-48341817" onclick="Saramin.btnJob('scrap', this, '', 'list');" scraped="n" rec_idx="48341817" imgtype="button" data-pattern="{&quot;t_category&quot;:&quot;pop_view&quot;,&quot;t_content&quot;:&quot;relay_view_etc&quot;,&quot;t_ref&quot;:&quot;main&quot;,&quot;t_ref_content&quot;:&quot;platinum_fix_expand&quot;,&quot;t_ref_scnid&quot;:&quot;&quot;,&quot;dpId&quot;:&quot;&quot;,&quot;trainingStudentCode&quot;:&quot;&quot;}" onmousedown="try{n_trackEvent('pop_view', 'summary', 'scrap', '');}catch(e){}
+                " aria-label="스크랩 282건" aria-pressed="false">
+            <span class="txt_scrap">282</span>
+        </button>
+
+        <div class="btn_apply">
+            <span class="dday">D-10</span>            <button class="sri_btn_lg for_btn_event" title="클릭하면 입사지원할 수 있는 창이 뜹니다." onclick="try{quickApplyForm('48341817','','t_category=pop_view&amp;t_content=pop_view_etc&amp;t_ref=main&amp;t_ref_content=platinum_fix_expand&amp;t_ref_scnid=&amp;dpId=&amp;trainingStudentCode=&amp;inner_source=saramin&amp;inner_medium=pattern&amp;inner_campaign=pop_view_apply_0&amp;inner_term=etc&amp;referNonce=', ''); return false;} catch (e) {}; return false;" onmousedown="try{n_trackEvent('pop_view','summary','quick_apply','');}catch(e){}"><span class="sri_btn_immediately">입사지원</span></button>        </div>
+    </div>
+    </div>
+
+<hr>
+
+
+
+
+<%@ include file="./WEB-INF/views/include/footer.jsp" %>

@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+.dlinfo{
+	padding-left: 400px;
+	display: inline-block;
+	margin-left: 40px;
+}
+
+.search-input{
+	padding-left: 400px;
+	
+}

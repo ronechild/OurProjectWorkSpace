@@ -1,0 +1,38 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
+
+<%@ include file="./WEB-INF/views/include/header.jsp" %>
+
+<hr>
+
+<div class="wrap_jv_header" style="padding-left: 300px;">
+    <a class="placeholder" tabindex="-1"></a>
+    <div class="jv_header" data-rec_idx="48341817" data-rec_seq="0">
+	    <div class="title_inner">
+                            
+               <h3><c:out value="bwiter(기업명)"/> </h3>
+         </div>
+        <h1 class="tit_job">
+                        24년 부문별 신입·경력사원 모집        </h1>
+
+        <button type="button" class="btn_scrap  scrap-48341817" onclick="Saramin.btnJob('scrap', this, '', 'list');" scraped="n" rec_idx="48341817" imgtype="button" data-pattern="{&quot;t_category&quot;:&quot;pop_view&quot;,&quot;t_content&quot;:&quot;relay_view_etc&quot;,&quot;t_ref&quot;:&quot;main&quot;,&quot;t_ref_content&quot;:&quot;platinum_fix_expand&quot;,&quot;t_ref_scnid&quot;:&quot;&quot;,&quot;dpId&quot;:&quot;&quot;,&quot;trainingStudentCode&quot;:&quot;&quot;}" onmousedown="try{n_trackEvent('pop_view', 'summary', 'scrap', '');}catch(e){}
+                " aria-label="스크랩 282건" aria-pressed="false">
+            <span class="txt_scrap">282</span>
+        </button>
+
+        <div class="btn_apply" style="margin-left: 60%;">
+            <button type="button" class="btn btn-outline btn-success">입사지원</button>        
+        </div>
+    </div>
+    </div>
+
+<hr>
+
+
+
+
+<%@ include file="./WEB-INF/views/include/footer.jsp" %>

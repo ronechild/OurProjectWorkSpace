@@ -1,0 +1,27 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page session="false" %>
+
+<%@ include file="./include/header.jsp" %>
+<style>
+	th{text-align: center;}
+	a{color: black;}
+	a:link { text-decoration: none; }
+	a:visited { text-decoration: none; }
+	a:hover { text-decoration: none; }
+	a:active { text-decoration: none; }
+</style>
+
+<h1>
+	Hello world!  
+</h1>
+<div class="card" style="width: 18rem; margin: auto;">
+  <img src="..." class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
+
+<P>  The time on the server is ${serverTime}. </P>
+<%@ include file="./include/footer.jsp" %>

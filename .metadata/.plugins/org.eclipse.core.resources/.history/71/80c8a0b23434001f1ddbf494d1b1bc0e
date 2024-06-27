@@ -1,0 +1,132 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
+<%@ page session="false" %>
+
+<%@ include file="./include/header.jsp" %>
+<style>
+	th{text-align: center;}
+	a{color: black;}
+	a:link { text-decoration: none; }
+	a:visited { text-decoration: none; }
+	a:hover { text-decoration: none; }
+	a:active { text-decoration: none; }
+	div.jobBox{
+	
+	}
+	
+</style>
+
+<h1>
+	Hello world!  
+</h1>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<div>
+<ul>
+<c:forEach begin="1" end="20">
+	<div class="jobBox">
+		<div class="col-lg-3 col-md-6">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">26/5</div>
+                                    <div>신청자/모집인원</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+	</div>
+</c:forEach>
+
+	
+
+</ul>
+</div>
+
+<%--페이징버튼 --%>
+                            <div class="pagination pull-right">
+                            <ul class="pagination"  >
+                           		<c:if test="${pagingCreator.prev}">
+                           			<li class="paginate_button previous" tabindex="0">
+                            			<a href="1<%-- 
+                            			${contextPath }/myboard/list?pageNum=1&rowAmountPerPage=${pagingCreator.myBoardPaging.rowAmountPerPage }" 
+                            			--%>">&laquo;</a>
+                            		</li>
+                            		<li class="paginate_button previous" tabindex="0">
+                            			<a href="${pagingCreator.startPagingNum-10 }<%-- 
+                            			${contextPath }/myboard/list?pageNum=${pagingCreator.startPagingNum-10 }&rowAmountPerPage=${pagingCreator.myBoardPaging.rowAmountPerPage } 
+                            			--%>">이전</a>
+                            		</li>
+                            	</c:if>
+                            	<c:forEach var="i" begin="${pagingCreator.startPagingNum }" end="${pagingCreator.endPagingNum }" >
+                            	 <li class='paginate_button ${pagingCreator.myBoardPaging.pageNum == i ? "active" : "" }'  tabindex="0" >
+                            		 <a style="width: 62px; text-align: center;" 
+                            		    href="${i }<%-- 
+                            		    ${contextPath }/myboard/list?pageNum=${i }&rowAmountPerPage=${pagingCreator.myBoardPaging.rowAmountPerPage } 
+                            		    --%>">${i }</a>
+                            	 </li><%--이거보다 위의 삼항연산자 사용
+                            	  <c:choose>
+                            	   <c:when test="${i != pagingCreator.myBoardPaging.pageNum }">
+                            	    <li class="paginate_button "  tabindex="0" >
+                            		 <a style="width: 62px; text-align: center;" 
+                            		    href="${contextPath }/myboard/list?pageNum=${i }
+                            	   &rowAmountPerPage=${pagingCreator.myBoardPaging.rowAmountPerPage }">${i }</a>
+                            	    </li>
+                            	   </c:when>
+                            	   <c:otherwise>
+                            	    <li class="paginate_button active"  tabindex="0">
+                            		 <a style="width: 62px; text-align: center;" 
+                            		    href="${contextPath }/myboard/list?pageNum=${i }
+                            	   &rowAmountPerPage=${pagingCreator.myBoardPaging.rowAmountPerPage }">${i }</a>
+                            	    </li>
+                            	   </c:otherwise>
+                            	  </c:choose> --%>
+                            	</c:forEach>
+                            	<c:if test="${pagingCreator.next}">
+                           			<li class="paginate_button next"  tabindex="0" >
+                            			<a href="${pagingCreator.startPagingNum+10 }<%-- 
+                            			${contextPath }/myboard/list?pageNum=${pagingCreator.startPagingNum+10 }&rowAmountPerPage=${pagingCreator.myBoardPaging.rowAmountPerPage }
+                            			--%>">이후</a>
+                           			</li>
+                           			<li class="paginate_button previous" tabindex="0">
+                            			<a href="${pagingCreator.lastPageNum}<%--
+                            			${contextPath }/myboard/list?pageNum=${pagingCreator.lastPageNum}&rowAmountPerPage=${pagingCreator.myBoardPaging.rowAmountPerPage }
+                            			--%>">&raquo;</a>
+                            		</li>
+                           			
+                           		</c:if>
+                        	</ul>
+                        	
+                        	</div>
+                        	<%--페이징버튼 --%>
+                        	
+                            <%--
+                             <div style="text-align: center;">
+                             <c:if test="${pagingCreator.prev}"><a href="${contextPath }/myboard/list?pageNum=${pagingCreator.startPagingNum-10 }&rowAmountPerPage=${pagingCreator.myBoardPaging.rowAmountPerPage }">이전</a> |</c:if>
+                             <c:forEach var="i" begin="0" end="9" >
+                             	<c:if test="${pagingCreator.startPagingNum+i != pagingCreator.myBoardPaging.pageNum }">
+                             	<a href="${contextPath }/myboard/list?pageNum=${pagingCreator.startPagingNum+i }&rowAmountPerPage=${pagingCreator.myBoardPaging.rowAmountPerPage }"> ${pagingCreator.startPagingNum+i } </a>|
+                           	 	</c:if>
+                           	 	<c:if test="${pagingCreator.startPagingNum+i == pagingCreator.myBoardPaging.pageNum }">
+                           	 	<a href="${contextPath }/myboard/list?pageNum=${pagingCreator.startPagingNum+i }&rowAmountPerPage=${pagingCreator.myBoardPaging.rowAmountPerPage }"> ${pagingCreator.startPagingNum+i } </a>|
+                           	 	</c:if>
+                           	 	
+                           	 </c:forEach>
+                           	 <c:if test="${pagingCreator.next}"><a href="${contextPath }/myboard/list?pageNum=${pagingCreator.startPagingNum+10 }&rowAmountPerPage=${pagingCreator.myBoardPaging.rowAmountPerPage }">이후</a></c:if>
+                             </div> --%>
+
+<P>  The time on the server is ${serverTime}. </P>
+<%@ include file="./include/footer.jsp" %>

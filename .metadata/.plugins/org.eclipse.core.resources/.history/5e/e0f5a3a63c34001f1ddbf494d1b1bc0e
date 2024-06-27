@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+.search-input{
+	padding-left: 400px;
+	
+}
+@media (max-width: 1200px){
+    .wrap { display: block; width: 100%; } 
+    .left, .right, .fixed_box { width: 100%; height: 300px; } 
+}
