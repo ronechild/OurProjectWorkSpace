@@ -3,4 +3,19 @@
 
 <mapper namespace="com.spring5legacy.ourpro00.mapper.MemberMapper">
 
+	<!-- 유저 정보 -->
+	<select id="selectMember">
+	
+	</select>
+	
+	<!-- 회원 가입 -->
+	<insert id="insertMember">
+	
+	</insert>
+	
+	<!-- 회원 권한 부여 -->
+	<insert id="insertMemberAuthority">
+	
+	</insert>
+	
 </mapper>

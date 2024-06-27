@@ -3,4 +3,23 @@
 
 <mapper namespace="com.spring5legacy.ourpro00.mapper.CommentMapper">
 
+	<!-- 특정 구인글의 댓글 목록 조회 -->
+	<select id="selectCommentList">
+	
+	</select>
+	
+	<!-- 특정 구인글에 대한 댓글 등록 -->
+	<insert id="insertComment">
+	
+	</insert>
+	
+	<!-- 특정 댓글 수정 -->
+	<update id="updateComment">
+	
+	</update>
+	
+	<!-- 특정 댓글 삭제 -->
+	<delete id="deleteComment">
+	
+	</delete>
 </mapper>

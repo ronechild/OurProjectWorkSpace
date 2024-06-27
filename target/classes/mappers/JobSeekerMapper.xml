@@ -3,4 +3,39 @@
 
 <mapper namespace="com.spring5legacy.ourpro00.mapper.JobSeekerMapper">
 
+	<!-- 구직글 목록 조회 -->
+	<select id="selectJobSeekerList" resultType="com.spring5legacy.ourpro00.domain.JobSeekerVO">
+	
+	</select>
+	
+	<!-- 특정 구직글 조회 -->
+	<select id="selectJobSeeker">
+	
+	</select>
+	
+	<!-- 구직글 총 수 -->
+	<select id="selectRowTotal">
+	
+	</select>
+	
+	<!-- 구직글 등록 -->
+	<insert id="insertJobSeeker">
+	
+	</insert>
+	
+	<!-- 특정 구직글 수정 -->
+	<update id="updateJobSeeker">
+	
+	</update>
+	
+	<!-- 특정 구직글 블라인드 처리 -->
+	<update id="updateDelFlag">
+	
+	</update>
+	
+	<!-- 특정 구직글 삭제 -->
+	<delete id="deleteJobSeeker">
+	
+	</delete>
+	
 </mapper>
