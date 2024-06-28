@@ -8,16 +8,18 @@
 		SELECT ano, atitle, acontent, awriter, aregdate, bno   
 				FROM ouruser.tbl_apply
 	</select>
+	<!-- WHERE bno = #{bno} -->
+	
 	
 	<!-- 특정 구직글 조회 -->
-	<select id="selectJobSeeker">
+	<select id="selectJobSeeker" resultType="com.spring5legacy.ourpro00.domain.JobSeekerVO">
 		SELECT ano, atitle, acontent, awriter, aregdate, bno   
 			FROM ouruser.tbl_apply
 		WHERE ano = #{ano} 
 	</select>
 	
 	<!-- 구직글 총 수 -->
-	<select id="selectRowTotal">
+	<select id="selectRowTotal" resultType="com.spring5legacy.ourpro00.domain.JobSeekerVO">
 		select count(*) FROM ouruser.tbl_apply
 	</select>
 	

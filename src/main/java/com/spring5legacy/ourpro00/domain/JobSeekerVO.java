@@ -1,6 +1,7 @@
 package com.spring5legacy.ourpro00.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,4 +22,8 @@ public class JobSeekerVO {
 	private String awriter;
 	private Date aregdate;
 	private Long bno;
+	
+	private List<JobSeekerAttachFileVO> jobSeekerAttachFileList ;
+	
+	private Integer deletedAttachFileCnt;
 }

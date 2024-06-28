@@ -18,12 +18,16 @@ public interface JobSeekerService {
 	// 구직글 등록
 	public Long registerJobSeeker(JobSeekerVO jobSeeker);
 	
+	//특정 구직글 수정페이지
+	public JobSeekerVO showModify(Long bno) ;
+	
 	// 특정 구직글 수정
 	public boolean modifyJobSeeker(JobSeekerVO jobSeeker);
 	public boolean modifyJobSeeker(Long ano, String atitle, String acontent);
 	
 	// 특정 구직글 삭제
-	public boolean deleteJobSeeker(Long ano);
+	//public boolean deleteJobSeeker(Long ano);
+	public JobSeekerVO deleteJobSeeker(JobSeekerVO jobSeeker);
 
 
 	

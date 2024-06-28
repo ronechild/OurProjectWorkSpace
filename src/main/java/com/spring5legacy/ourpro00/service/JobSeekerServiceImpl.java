@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.spring5legacy.ourpro00.domain.JobSeekerAttachFileVO;
 import com.spring5legacy.ourpro00.domain.JobSeekerVO;
+import com.spring5legacy.ourpro00.mapper.JobSeekerAttachFileMapper;
 import com.spring5legacy.ourpro00.mapper.JobSeekerMapper;
 
 import lombok.AllArgsConstructor;
@@ -14,6 +16,7 @@ import lombok.AllArgsConstructor;
 public class JobSeekerServiceImpl implements JobSeekerService{
 	
 	private JobSeekerMapper jobSeekerMapper ;
+	private JobSeekerAttachFileMapper jobSeekerAttachFileMapper ;
 
 	// 구직글 목록 조회 
 	@Override
@@ -44,7 +47,24 @@ public class JobSeekerServiceImpl implements JobSeekerService{
 			System.out.println("등록 전달 jobSeeker: " + jobSeeker);
 			jobSeekerMapper.insertJobSeeker(jobSeeker) ;
 			System.out.println("등록 후 jobSeeker: " + jobSeeker);
+			
+			List<JobSeekerAttachFileVO> attachFileList = jobSeeker.getJobSeekerAttachFileList() ;
+			
+			if(attachFileList != null && attachFileList.size() > 0) {
+				for(JobSeekerAttachFileVO attachFile : attachFileList) {
+					attachFile.setAno(jobSeeker.getAno());
+					jobSeekerAttachFileMapper.instertAttachFile(attachFile);
+				}
+			}
 			return jobSeeker.getAno();
+		}
+	
+	//이력서 수정페이지 호출
+	 @Override
+		public JobSeekerVO showModify(Long bno) {
+			System.out.println("서비스: 수정bno: " + bno);
+			JobSeekerVO jobSeeker = jobSeekerMapper.selectJobSeeker(bno) ;
+			return jobSeeker;
 		}
 		
 		// 특정 구직글 수정
@@ -58,17 +78,43 @@ public class JobSeekerServiceImpl implements JobSeekerService{
 		@Override
 		public boolean modifyJobSeeker(JobSeekerVO jobSeeker) {
 			System.out.println("서비스: 게시물 수정 메서드에 전달된 VO: " + jobSeeker);
+			
+			long ano = jobSeeker.getAno() ;
 		
 			boolean modifyResult = jobSeekerMapper.updateJobSeeker(jobSeeker) == 1;
+			
+			jobSeekerAttachFileMapper.deleteAttachFiles(ano);
+			
+			List<JobSeekerAttachFileVO> attachFileList = jobSeeker.getJobSeekerAttachFileList() ;
+			
+			if(modifyResult && attachFileList != null) {
+				for(JobSeekerAttachFileVO attachFile : attachFileList) {
+					attachFile.setAno(ano);
+					jobSeekerAttachFileMapper.instertAttachFile(attachFile); 
+				}
+			}
 			
 			return modifyResult ;
 		}
 		
 		// 특정 구직글 삭제
 		@Override
-		public boolean deleteJobSeeker(Long ano) {
+		public JobSeekerVO deleteJobSeeker(JobSeekerVO jobSeeker) {
+			long ano = jobSeeker.getAno();
 			System.out.println("게시물 삭제 ano: " + ano);
-			return jobSeekerMapper.deleteJobSeeker(ano) == 1;
+			
+		//	List<JobSeekerAttachFileVO> attachFileList = jobSeekerAttachFileMapper.selectAttachFiles(ano) ;
+			
+			Integer deletedAttachFileCnt = jobSeekerAttachFileMapper.deleteAttachFiles(ano) ;
+			System.out.println("db로부터 삭제된 파일 갯수: " + jobSeekerAttachFileMapper.deleteAttachFiles(ano));
+			if(jobSeekerMapper.deleteJobSeeker(ano) == 1) {
+				jobSeeker.setDeletedAttachFileCnt(deletedAttachFileCnt);
+				System.out.println("controller로 전달: " + jobSeeker);
+				return jobSeeker;
+			} else {
+				return null;
+			}
+			
 		}
 
 
