@@ -14,12 +14,13 @@ public class RecruiterServiceImpl implements RecruiterService{
 	
 	private RecruiterMapper recruiterMapper;
 	private RecruiterAttachFileMapper recruiterAttachFileMapper;
-
+	
+	
 	// 구인글 목록 조회
 	@Override
-	public void selectRecruitList(RecruiterVO recruiterVO) {
+	public RecruiterVO selectRecruitList(RecruiterVO recruiterVO) {
 		System.out.println("서비스:::구인글 목록 조회 : ");
-		recruiterMapper.selectRecruitList(recruiterVO);
+		return new RecruiterVO();
 	}
 
 	// 특정 구인글 조회
@@ -27,7 +28,7 @@ public class RecruiterServiceImpl implements RecruiterService{
 	public void selectRecruit(Long bno) {
 		System.out.println("서비스:::특정 구인글 조회 : ");
 		recruiterMapper.selectRecruit(bno);
-		System.out.println("\t" + bno + "번 글 조회 완료");
+		System.out.println("\t" + bno + "번 글 호출 완료");
 	}
 
 	// 구인글 총 수
