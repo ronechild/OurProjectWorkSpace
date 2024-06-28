@@ -4,17 +4,16 @@
 <mapper namespace="com.spring5legacy.ourpro00.mapper.CommentMapper">
 
    <!-- 특정 구인글의 댓글 목록 조회 -->
-   <select id="selectCommentList">
-      SELECT rno, rcontent, rwriter, rregDate
+   <select id="selectCommentList" resultType="com.spring5legacy.ourpro00.domain.CommentVO">
+      SELECT rno, bno, rcontent, rwriter, rregDate, rblind
       FROM ouruser.tbl_reply
       WHERE bno = #{bno}
    </select>
    
    <!-- 특정 구인글에 대한 댓글 등록 -->
-   <insert id="insertComment">
+   <insert id="insertComment" parameterType="com.spring5legacy.ourpro00.domain.CommentVO">
       INSERT INTO ouruser.tbl_reply
-      VALUES (ouruser.seq_tbl_reply.NEXTVAL, 1, #{rcontent}, #{rwriter}, DEFAULT, DEFAULT) 
-      WHERE bno = #{bno}
+      VALUES (ouruser.seq_tbl_reply.NEXTVAL, #{bno}, #{rcontent}, #{rwriter}, DEFAULT, DEFAULT) 
    </insert>
    
    <!-- 특정 댓글 수정 -->
@@ -22,11 +21,12 @@
       UPDATE ouruser.tbl_reply
          SET rcontent = #{rcontent}, 
             rregDate = DEFAULT
-       WHERE rno = #{rno} 
+       WHERE rno = #{rno} AND bno = #{bno}
    </update>
    
    <!-- 특정 댓글 삭제 -->
    <delete id="deleteComment">
-      DELETE FROM ouruser.tbl_reply WHERE rno = #{rno}
+      DELETE FROM ouruser.tbl_reply
+       WHERE rno = #{rno}  AND bno = #{bno}
    </delete>
 </mapper>

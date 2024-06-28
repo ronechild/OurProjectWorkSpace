@@ -68,7 +68,7 @@ public class RecruiterJobSeekerController {
 		System.out.println(bno);
 		model.addAttribute("recruiterVO", recruiterService.selectRecruit(bno));
 		System.out.println("컨트롤러:::" + bno + "번 구인글 호출");
-		return "/detail";
+		return "/board/detail";
 	}
 	
 	// 구인글 수정 페이지 (구인자)

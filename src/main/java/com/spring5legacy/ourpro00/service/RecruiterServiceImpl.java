@@ -9,7 +9,10 @@ import com.spring5legacy.ourpro00.domain.RecruiterVO;
 import com.spring5legacy.ourpro00.mapper.RecruiterAttachFileMapper;
 import com.spring5legacy.ourpro00.mapper.RecruiterMapper;
 
+import lombok.AllArgsConstructor;
+
 @Service
+@AllArgsConstructor
 public class RecruiterServiceImpl implements RecruiterService{
 	
 	private RecruiterMapper recruiterMapper;
@@ -28,7 +31,7 @@ public class RecruiterServiceImpl implements RecruiterService{
 	public RecruiterVO selectRecruit(Long bno) {
 		System.out.println("서비스:::특정 구인글 조회 : " + bno);
 		RecruiterVO recruiterVO = recruiterMapper.selectRecruit(bno);
-		System.out.println("\t" + bno + "번 글 호출 완료");
+		System.out.println( bno + "번 글 호출 완료");
 		return recruiterVO;
 	}
 

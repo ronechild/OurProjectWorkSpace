@@ -95,7 +95,7 @@ $(".panel-footer").on("click",function(){
 	var bno = $(this).data("bno");
 	frmSendValue.append('<input type="hidden" id="bno" name="bno" value="' + bno + '">');
 	
-	frmSendValue.attr("action", "${contextPath}/detail");
+	frmSendValue.attr("action", "${contextPath}/board/detail");
 	frmSendValue.attr("method","get");
 	    	
 	frmSendValue.submit();
