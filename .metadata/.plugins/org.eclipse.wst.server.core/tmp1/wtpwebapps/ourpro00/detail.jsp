@@ -64,6 +64,9 @@
 		<dl >
 		    <dt>지역&emsp;</dt><dd><c:out value="지역|bregion"/></dd>
 		</dl>
+		<dl >
+		    <dt>모집인원&nbsp;</dt><dd><c:out value="인원|bhcnt"/></dd>
+		</dl>
      </div>
         <br>
             </div>

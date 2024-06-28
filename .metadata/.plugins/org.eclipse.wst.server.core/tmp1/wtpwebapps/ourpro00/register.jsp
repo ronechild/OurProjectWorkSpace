@@ -22,12 +22,16 @@
 	margin-left: 100px;
 	background-color: white;
 	}
-	.appBox{
+	.contentBox{
 	margin-left: 100px;
 	margin-right: 100px;
 	}
 	.btn_apply{
 	margin-left: 50%; 
+	display: inline-block;
+	}
+	.inputdata{
+	width: 60%; 
 	display: inline-block;
 	}
 	
@@ -42,10 +46,10 @@
                             
                <h3><c:out value="bwiter(기업명)"/> </h3>
          </div>
-        <h1 class="tit_job" style="margin-left: 5%;">
-                        <c:out value="24년 신규 채용 공고 |btitle(제목)"/>    
+        <h1 class="tit_job" >
+			<input class="form-control"  style="width: 75%; height: 70px; font-size: 30pt;" name="btitle" id="btitle" placeholder="글제목을 입력하십시오">
         </h1>
-        <h4 style="display: inline-block;">구직 이력서 작성</h4>
+        <h4 style="display: inline-block;">구인 게시글 작성</h4>
         <div class="btn_apply">
         	<button type="button" id="jobApply" class="btn btn-outline btn-success jobApply">등록</button>      
             <button type="button" id="jobCancle" class="btn btn-outline btn-danger jobCancle" >지원 취소</button>        
@@ -62,9 +66,9 @@
 		    <dt>등록일&nbsp;</dt><dd><c:out value="2024-06-27|bregdate"/></dd>
 		</dl>           
 		<dl >
-		    <dt>마감일&nbsp;</dt><dd style="color: #800000;"><c:out value="2024-06-27|benddate"/></dd>
+		    <dt style="margin-top: 7px">마감일&nbsp;</dt><dd><input type="date" class="form-control inputdata" id="benddate" name="benddate"
+                        	 value= '<c:out value="${pagingCreator.myBoardPaging.benddate }"/>'></dd>
 		</dl>
-		       <div class="alert alert-danger" style="height: 50px; width: 90px;">D-day - <c:out value="5"/></div>
      </div>
      <div class="col">
  		<dl>
@@ -73,27 +77,46 @@
 		<dl >
 		    <dt>지역&emsp;</dt><dd><c:out value="지역|bregion"/></dd>
 		</dl>
+		<dl >
+		    <dt>모집인원&nbsp;</dt><dd><input type="number" class="inputdata" ></dd>
+		</dl>
      </div>
         <br>
             </div>
             <%-- 세부 기본내용 끝--%>
             <hr>
 
-<div class="appBox">
-	<form role="form" method="post" name="frmApplication" id="frmApplication" action="${contextPath }/board/application?" >
-		<div class="form-group">
-			<input class="form-control" name="btitle" id="btitle" placeholder="글제목을 입력하십시오">
-		                           	
-		</div>
+<div class="contentBox">
+	<form role="form" method="post" name="frmRegister" id="frmRegister" action="${contextPath }/board/application?" >
 		<div class="form-group">
 	    	<textarea class="form-control" name="bcontent" id="bcontent" style="height: 500px;" placeholder="글내용을 입력하십시오"></textarea>
 	    </div>
+		    
+        <div class="panel panel-default">
+            <div class="panel-heading"> <h4>파일 첨부</h4> </div> <%-- /.panel-heading --%>
+            <div class="panel-body">
+            
+                    <div class="form-group uploadDiv">
+                       	<input type="file" class="btn btn-primary fileInput" name="fileInput" id="fileInput" multiple>
+                       	
+                    </div>	
+                    <div class="form-group fileUploadResult">
+                    	<ul>
+                    		<%-- 업로드후  --%>
+                    	</ul>
+                    </div>	
+                
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+	                
 		<div class="form-group" style="width: 100px; display: inline-block;">
 			<input class="form-control" name="bwriter" id="bwriter"  value='<security:authentication property="principal.username"/>' readonly>
 		</div>
-		<div class="btn_apply" style="margin-left: 70%;">
+		<div class="btn_apply" style="margin-left: 80%;">
 			<button type="button" id="jobApply" class="btn btn-outline btn-success jobApply">등록</button>      
-	       	<button type="button" id="jobCancle" class="btn btn-outline btn-danger jobCancle" >지원 취소</button>    
+	       	<button type="button" id="jobCancle" class="btn btn-outline btn-danger jobCancle" >취소</button>    
         </div>
 		<security:csrfInput/>
 	</form>	
@@ -107,21 +130,63 @@
 </form>
  <script>
  var frmSendValue = $("#frmSendValue");
- var frmApplication = $("#frmApplication");
- <%-- 지원 취소버튼 클릭--%>
+ var frmRegister = $("#frmRegister");
+ <%-- 취소버튼 클릭--%>
  $(".jobCancle").on("click",function(){
-	 	frmApplication.empty();
+	 	frmRegister.empty();
 	 	frmSendValue.attr("action", "${contextPath}/detail");
 	 	frmSendValue.attr("method","get");
 	 	
 	 	frmSendValue.submit();
 	 });
-//등록버튼 클릭 처리 제이쿼리
+<%--등록버튼 클릭 처리 제이쿼리--%>
  $("#reg").on("click",function(){
-	 frmApplication.submit();
+	 frmRegister.submit();
 	 frmSendValue.attr("action", "${contextPath}/detail");
 	 frmSendValue.submit();
 });
+ <%--내용확인 함수--%>
+ function checkValues() {
+ 	var btitle = document.getElementById("btitle").value;
+ 	var bcontent = document.getElementById("bcontent").value;
+ 	var benddate = document.getElementById("benddate").value;
+ 	var bhcnt = document.getElementById("bhcnt").value;
+ 	
+ 	
+ 	
+ 	var regExp = /^\s+$/;
+ 	
+		if(!btitle||!bcontent||benddate||bhcnt||regExp.test(btitle)||regExp.test(bcontent)||regExp.test(bhcnt)||regExp.test(bhcnt)){
+			alert("모든 내용을입력하세요");
+			return false;
+		}else{
+			
+			//frmRegister.submit();
+			return true;
+		}
+	}
+ <%-- 파일크기및 확장자제한 --%>
+ function fileNameTest(fileName, fileSize) {
+ 	
+ 	var allowedMaxSize = 104857600;
+ 	var regExpForbiddenFile = /((^\.[^.]+$|^[^.]+$)|\.(exe|sh|c|dll|alz|zip|tar|7z)$)/i;
+ 	
+ 	if(fileSize > allowedMaxSize){
+ 		alert(fileSize + "업로드 파일의 크기는 100mb보다 작아야합니다");
+ 		
+ 		return false;
+ 	}
+ 	
+ 	if(regExpForbiddenFile.test(fileName)){
+ 		
+ 		alert(fileName + ": 지원되지않거나 잘못된형식의 파일입니다");
+ 		
+ 		return false;
+ 	}
+ 	
+ 	return true;
+ 	
+ }
  
 
 </script>

@@ -22,7 +22,7 @@
 	margin-left: 100px;
 	background-color: white;
 	}
-	.appBox{
+	.contentBox{
 	margin-left: 100px;
 	margin-right: 100px;
 	}
@@ -73,13 +73,16 @@
 		<dl >
 		    <dt>지역&emsp;</dt><dd><c:out value="지역|bregion"/></dd>
 		</dl>
+		<dl >
+		    <dt>모집인원&nbsp;</dt><dd><c:out value="인원|bhcnt"/></dd>
+		</dl>
      </div>
         <br>
             </div>
             <%-- 세부 기본내용 끝--%>
             <hr>
 
-<div class="appBox">
+<div class="contentBox">
 	<form role="form" method="post" name="frmApplication" id="frmApplication" action="${contextPath }/board/application?" >
 		<div class="form-group">
 			<input class="form-control" name="btitle" id="btitle" placeholder="글제목을 입력하십시오">
@@ -91,7 +94,7 @@
 		<div class="form-group" style="width: 100px; display: inline-block;">
 			<input class="form-control" name="bwriter" id="bwriter"  value='<security:authentication property="principal.username"/>' readonly>
 		</div>
-		<div class="btn_apply" style="margin-left: 70%;">
+		<div class="btn_apply" style="margin-left: 80%;">
 			<button type="button" id="jobApply" class="btn btn-outline btn-success jobApply">등록</button>      
 	       	<button type="button" id="jobCancle" class="btn btn-outline btn-danger jobCancle" >지원 취소</button>    
         </div>
