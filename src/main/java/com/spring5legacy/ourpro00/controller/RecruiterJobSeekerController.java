@@ -1,7 +1,6 @@
 package com.spring5legacy.ourpro00.controller;
 
-import java.util.List;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +22,7 @@ public class RecruiterJobSeekerController {
 	private RecruiterService recruiterService;
 	
 	// 생성자를 이용한 의존성 주입 : 
+	@Autowired
 	public RecruiterJobSeekerController(RecruiterService recruiterService, JobSeekerService jobSeekerService) {
 		this.recruiterService = recruiterService;
 		this.jobSeekerService = jobSeekerService;
@@ -64,9 +64,11 @@ public class RecruiterJobSeekerController {
 //	}
 	@GetMapping("/detail")
 	@PreAuthorize("permitAll")
-	public void showRecruit(Model model, Long bno) {
+	public String showRecruit(Model model, Long bno) {
+		System.out.println(bno);
 		model.addAttribute("recruiterVO", recruiterService.selectRecruit(bno));
 		System.out.println("컨트롤러:::" + bno + "번 구인글 호출");
+		return "/detail";
 	}
 	
 	// 구인글 수정 페이지 (구인자)
@@ -123,9 +125,6 @@ public class RecruiterJobSeekerController {
 		System.out.println("컨트롤러:jsp에 전달할 model: " + model);
 	}
 	
-	
-	
-	
 	// 구인글 이력서 조회 페이지
 	@GetMapping("/recruitDetail")
 	@PreAuthorize("hasAuthority('USER', 'COMPANY')")
@@ -136,13 +135,6 @@ public class RecruiterJobSeekerController {
 		System.out.println("컨트롤러:::" + ano + "번 이력서 호출");
 	}
 	
-	
-	
-	
-	
-	
-	
-	
     //이력서 수정 페이지 호출
     @GetMapping("/modifyA")
     public void showModify(Long ano, Model model) {
@@ -151,7 +143,7 @@ public class RecruiterJobSeekerController {
     }
 	
     //이력서 수정
-    @PostMapping("/modify")
+    @PostMapping("/modifyA")
     public String modifyJobSeeker(JobSeekerVO jobSeeker, RedirectAttributes redirectAttr) {
 
     	if(jobSeekerService.modifyJobSeeker(jobSeeker)) {

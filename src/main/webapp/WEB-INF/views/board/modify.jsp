@@ -44,7 +44,7 @@
 <hr>
 <%-- 제목 기업 지원 --%>
 <div class="titleWrapper">
-<div class="wrap_jv_header" >
+<div class="wrap_jv_header">
     <a class="placeholder" tabindex="-1"></a>
     <div class="jv_header" data-rec_idx="48341817" data-rec_seq="0">
 	    <div class="title_inner">
@@ -52,7 +52,8 @@
                <h3><c:out value="bwiter(기업명)"/> </h3>
          </div>
         <h1 class="tit_job" >
-			<input class="form-control"  style="width: 75%; height: 70px; font-size: 30pt;" name="btitle" id="btitle" placeholder="글제목을 입력하십시오">
+			<input class="form-control"  style="width: 75%; height: 70px; font-size: 30pt;" name="btitle" id="btitle" placeholder="글제목을 입력하십시오"
+				value="24년 신규 채용 공고 |btitle(제목)">
         </h1>
         <h4 style="display: inline-block;">구인 게시글 작성</h4>
         <div class="btn_apply">
@@ -83,19 +84,20 @@
 		    <dt>지역&emsp;</dt><dd><c:out value="지역|bregion"/></dd>
 		</dl>
 		<dl >
-		    <dt>모집인원&nbsp;</dt><dd><input type="number" id="bhcnt" class="inputdata" ></dd>
+		    <dt>모집인원&nbsp;</dt><dd><input type="number" id="bhcnt" class="inputdata" value="5" ></dd>
 		</dl>
      </div>
         <br>
-            </div>
-       </div>
+      </div>
+</div>
             <%-- 세부 기본내용 끝--%>
             <hr>
 
 <div class="contentBox">
 	<form role="form" method="post" name="frmRegister" id="frmRegister" action="${contextPath }/board/application?" >
 		<div class="form-group">
-	    	<textarea class="form-control" name="bcontent" id="bcontent" style="height: 500px;" placeholder="글내용을 입력하십시오"></textarea>
+	    	<textarea class="form-control" name="bcontent" id="bcontent" style="height: 500px;" placeholder="글내용을 입력하십시오"
+	    	>경력직 신입구함 | bcontent(내용)</textarea>
 	    </div>
 		    
         <div class="panel panel-default">

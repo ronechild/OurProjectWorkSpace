@@ -9,7 +9,7 @@ import com.spring5legacy.ourpro00.domain.JobSeekerVO;
 public interface JobSeekerMapper {
 	
 	// 구직글 목록 조회 
-	public List<JobSeekerVO> selectJobSeekerList();
+	public List<JobSeekerVO> selectJobSeekerList(String awriter);
 	
 	// 특정 구직글 조회
 	public JobSeekerVO selectJobSeeker(Long ano);

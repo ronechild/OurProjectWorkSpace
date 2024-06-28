@@ -5,7 +5,7 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <%@ page session="false" %>
 
-<%@ include file="./include/header.jsp" %>
+<%@ include file="../include/header.jsp" %>
 <style>
 	th{text-align: center;}
 	a{color: black;}
@@ -105,4 +105,4 @@ $(".panel-footer").on("click",function(){
 
 
 </script>
-<%@ include file="./include/footer.jsp" %>
+<%@ include file="../include/footer.jsp" %>

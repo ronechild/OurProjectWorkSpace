@@ -11,9 +11,9 @@
 	
 	<!-- 특정 구인글 조회 -->
 	<select id="selectRecruit" resultType="com.spring5legacy.ourpro00.domain.RecruiterVO">
-		select bno, btitle, bcontent, bwriter, bregdate, benddate, breplycnt, bappcnt,
-       				 bblind, boccupation, bregion
-    		FROM ouruser.tbl_hiring
+		SELECT bno, btitle, bcontent, bwriter, bregdate, benddate, breplycnt, bappcnt,
+       				 bblind, boccupation, bregion, bhcnt
+    	FROM ouruser.tbl_hiring
     	WHERE bno = #{bno}
 	</select>
 	

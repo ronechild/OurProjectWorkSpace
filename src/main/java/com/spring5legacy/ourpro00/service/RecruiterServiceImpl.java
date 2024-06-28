@@ -26,7 +26,7 @@ public class RecruiterServiceImpl implements RecruiterService{
 	// 특정 구인글 조회
 	@Override
 	public RecruiterVO selectRecruit(Long bno) {
-		System.out.println("서비스:::특정 구인글 조회 : ");
+		System.out.println("서비스:::특정 구인글 조회 : " + bno);
 		RecruiterVO recruiterVO = recruiterMapper.selectRecruit(bno);
 		System.out.println("\t" + bno + "번 글 호출 완료");
 		return recruiterVO;

@@ -22,7 +22,7 @@ public class JobSeekerServiceImpl implements JobSeekerService{
 	@Override
 	public List<JobSeekerVO> getJobSeekerList(String awriter) {
 		System.out.println("구직글 목록");
-		return jobSeekerMapper.selectJobSeekerList();
+		return jobSeekerMapper.selectJobSeekerList(awriter);
 	}
 
 	// 특정 구직글 조회
