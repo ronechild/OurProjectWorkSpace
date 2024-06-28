@@ -3,10 +3,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
-
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
 <context:property-placeholder location="classpath:jdbc_properties/jdbc.properties"/>
 	
@@ -25,10 +26,10 @@
         <property name="dataSource" ref="dataSource" />
         <property name="mapperLocations">
             <list>
-                <!-- <value>classpath:mappers/CommentMapper.xml</value>
-                <value>classpath:mappers/JobSeekerMapper.xml</value>
                 <value>classpath:mappers/MemberMapper.xml</value>
-                <value>classpath:mappers/RecruiterMapper.xml</value> -->
+                <value>classpath:mappers/CommentMapper.xml</value>
+                <value>classpath:mappers/JobSeekerMapper.xml</value>
+                <value>classpath:mappers/RecruiterMapper.xml</value>
             </list>
         </property>
     </bean> 
@@ -37,4 +38,6 @@
         <constructor-arg index="0"  ref="sqlSessionFactory" />
     </bean> 
 
+	<mybatis-spring:scan base-package="com.spring5legacy.ourpro00.mapper" template-ref="sqlSession"/>
+	
 </beans>

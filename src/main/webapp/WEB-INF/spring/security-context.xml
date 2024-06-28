@@ -2,27 +2,22 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-5.8.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-
-
-	<bean id="bCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
-
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 	<bean id="memberDetailsService" class="com.spring5legacy.ourpro00.common.security.MemberDetailsService"/>
 
+	<bean id="bcryptPassWordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+
 	<security:http>
-		
-		<!-- 권한 설정  -->
-		<security:intercept-url pattern="/" access="permitAll"/>
-		
-		<security:form-login/>
+		<security:form-login login-page="/signup" login-processing-url="/login" />
 		<security:logout/>	
 	</security:http>
 	
 	<security:authentication-manager>
 		<security:authentication-provider user-service-ref="memberDetailsService">
-		
-			<security:password-encoder ref="bCryptPasswordEncoder"/>
+			<security:password-encoder ref="bcryptPassWordEncoder"/>
 		</security:authentication-provider>
 	</security:authentication-manager>
 	

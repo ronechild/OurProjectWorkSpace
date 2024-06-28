@@ -3,24 +3,38 @@
 
 <mapper namespace="com.spring5legacy.ourpro00.mapper.MemberMapper">
 
-	<!-- 유저 정보 -->
-	<select id="selectMember">
-	
-	</select>
-	
-	<!-- 회원 가입 -->
-	<insert id="insertMember">
-	
-	</insert>
-	
-	<!-- 회원 권한 부여 -->
-	<insert id="insertMemberAuthority">
-	
-	</insert>
-	
-	<!-- 회원 탈퇴 -->
-	<update id="updateMdropFlag">
-	
-	</update>
-	
+	<resultMap type="com.spring5legacy.ourpro00.domain.AuthorityVO" id="authMap">
+		<result property="userid" column="userid"/>
+		<result property="authority" column="authority"/>
+	</resultMap>
+	<resultMap type="com.spring5legacy.ourpro00.domain.MemberVO" id="memberMap">
+		<result property="userid" column="userid"/>
+		<result property="userpw" column="userpw"/>
+		<result property="username" column="username"/>
+		<result property="mdropFlag" column="mdropFlag"/>
+		<result property="enabled" column="enabled"/>
+		<result property="email" column="email"/>
+		<result property="phone" column="phone"/>
+		<collection property="authorityList" resultMap="authMap"/>
+	</resultMap>
+
+   <!-- 유저 정보 -->
+   <select id="selectMember" resultMap="memberMap">
+      SELECT A.USERID ,A.USERPW ,A.USERNAME ,A.MDROPFLG ,A.ENABLED ,A.EMAIL ,A.PHONE, B.AUTHORITY
+	  FROM ouruser.tbl_member A LEFT OUTER JOIN ouruser.TBL_MYMEMBER_AUTHORITIES B ON (A.USERID = B.USERID)
+	  WHERE A.USERID = #{userid}
+   </select>
+   
+   <!-- 회원 가입 -->
+   <insert id="insertMember">
+      INSERT into ouruser.tbl_member
+      VALUES (#{userid}, #{userpw}, #{username}, DEFAULT, DEFAULT, #{email}, #{phone})
+   </insert>
+   
+   <!-- 회원 권한 부여 -->
+   <insert id="insertMemberAuth">
+      INSERT INTO  ouruser.tbl_mymember_authorities 
+      VALUES(#{userid}, #{authority})
+   </insert>
+   
 </mapper>
