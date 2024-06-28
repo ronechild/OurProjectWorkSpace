@@ -7,10 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ToLoginLogoutPageController {
 
-	@GetMapping("/login")
+	@GetMapping("/signup")
 	public String toLoginPage(String error, String logout, Model model) {
-		
-		return "common/login";
+		return "common/signup";
 	}
 	
 	@GetMapping("/logout")

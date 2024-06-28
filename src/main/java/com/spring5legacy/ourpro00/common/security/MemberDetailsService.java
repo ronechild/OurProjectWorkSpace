@@ -18,7 +18,6 @@ public class MemberDetailsService  implements UserDetailsService{
 	
 	@Autowired
 	public void setMemberMapper(MemberMapper memberMapper) {
-		System.out.println("중");
 		this.memberMapper = memberMapper;
 	}
 
