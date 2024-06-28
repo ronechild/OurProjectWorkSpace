@@ -73,12 +73,6 @@
             <%-- 세부 기본내용 끝--%>
             <hr>
 
-<div class="form-group">
-	<div class="col-sm-10">
-	    <textarea class="form-control bcontentTextBox" name="bcontent" style="resize: none; height: 500px;" 
-	               readonly="readonly"><c:out value="글내용|bcontent"/></textarea>
-	</div>
-</div>
 <!--해당 글 구직자 이력서 목록 테이블  -->
  <table class="table table-striped table-bordered table-hover" id="dataTables-example"
               style="width:100%;text-align:center;">
@@ -110,49 +104,6 @@
 </table>
 <!--해당 글 구직자 이력서 목럭  끝-->
 
-<div class="row">
-    <div class="col-lg-12">
-        <div class="panel panel-default" >
-            <div class="panel-heading">
-                <p style="margin-bottom: 0px; font-size: 16px;">
-                    <strong id="btnStrong" style="padding-top: 2px;">
-                        <span>댓글&nbsp;<c:out value="${myBoard.breplyCnt}"/>개</span> 
-                        <span>&nbsp;</span>
-                        <security:authorize access="isAuthenticated()">
-		                        <button type="button" id="btnRegCmt" class="btn btn-warning btn-sm">댓글 등록</button>
-                   		</security:authorize>
-                    </strong>
-                </p>
-            </div> <%-- /.panel-heading --%>
-<%-- 댓글 들어가는 화면부분 --%>
-			 <div class="panel-body">
-			<%-- 댓글 입력창 div 시작 --%>
-			    <div class="form-group" style="margin-bottom: 5px;">
-			        <textarea class="form-control txtBoxCmt" name="rcontent"
-			                   placeholder="로그인후 댓글작성 부탁드립니다"
-			        ></textarea>
-			    </div>
-			    <hr style="margin-top: 10px; margin-bottom: 10px;">
-			<%-- 댓글 입력창 div 끝 --%>
-			    <ul class="commentUL"><%-- 댓글 목록 표시 영역 - JavaScript로 내용이 생성되어 표시됩니다.--%>
-					<li class="left clearfix commentLi"  data-bno="123456"  data-rno="12">
-					    <div>
-					        <div id="replyTab" class="replyTab">
-					           
-					        </div>  
-					    </div>
-					</li>
-			      </ul><%-- /.chat --%>
-			</div><%-- /.panel-body --%>
-			<%--페이징버튼 --%>
-			<div class="panel-footer text-center" id="showCmtPagingNums">
-			                <%-- 댓글 목록의 페이징 번호 표시 영역 - JavaScript로 내용이 생성되어 표시됩니다.--%>
-			            
-            </div><%--페이징버튼 --%>
-        </div><%-- /.panel --%>
-    </div><%-- .col-lg-12 --%>
-</div><%-- .row : 댓글 화면 표시 끝 --%>
-<%-- 댓글 들어가는 화면 끝 --%>
 
 
 
@@ -168,77 +119,7 @@
  var frmSendValue = $("#frmSendValue");
  var bno = '<c:out value= "${myBoard.bno}"/>';
  
- <%-- 댓글 목록표시 함수 --%>
- function showCmtList(pageNum){
- 	myCommentModule.getReplyList(
- 		//{bno: bno, pageNum: pageNum || 1 },//페이징 구현 불확실//스크립트에만 사용 앞에값이있으면 페이지넘을쓰고 없으면 뒤에 1을씀
- 		
- 		function(myReplyPagingCreator){//js callback에 들어감
- 			console.log("myReplyPagingCreator: \n" + myReplyPagingCreator);
- 			var replyTab = $("div.replyTab");
- 			var replyFileInputHtml = "";
- 			
- 			for(var myReply of myReplyPagingCreator.myReplyList){// 댓글리스트함수 불러와서 재귀함수내에서 myReply로 댓글마다 재귀
- 				
- 				if(!myReply.rno){//댓글다떨어지면 함수종료
- 					return false;
- 				}
- 				replyFileInputHtml 
- 					+= '<div class="replys">'
- 					+   "	<span class='header info-rwriter'>";
- 					
- 				//블라인드처리 이프문
- 				if(myReply.rdelFlag == 0){
- 					
- 					
- 					replyFileInputHtml //작성자및 날짜
-					+= "		<strong class='primary-font'>" +  myReply.rwriter + "</strong>"
-					+   "		<span>&nbsp;</span>"
-					+   "		<small class='text-muted'>" + myReply.rregdate+ "${myBoard.bwriter}" + "</small>";
- 						
- 					if("${usernameh}"==myReply.rwriter||"${adminh}" != ""){//어드민이거나 본인만수정삭제기능
- 						replyFileInputHtml
- 						+= '	<button type="button" class="btn btn-outline btn-danger btn-xs pull-right btnCmtRemove">삭제</button>'
- 						+ '	<button type="button" class="btn btn-outline btn-default btn-xs pull-right btnCmtBlind">블라</button>'
- 						+ '	<button type="button" style="display:in-block;" class="btn btn-outline btn-warning btn-xs btnCmtModify">수정</button>'
- 	                    + '	<button type="button" style="display:none;" class="btn btn-warning btn-xs btnCmtModifyUpload">수정 등록</button>'
- 	                    + '	<hr class="txtBoxCmtHr" style="margin-top:10px; margin-bottom:10px">'
- 	                    + '	<textarea class="form-control txtBoxCmtMod" name="rcontent" style="margin-bottom:10px; display:none;">'
- 	                    + 		myReply.rcontent + '</textarea>'
- 					}
- 	                    
-                    replyFileInputHtml //글내용
-					+= "	</span>"
-		            + 	 "	<p class='replyContent' style='white-space : pre'>" + myReply.rcontent + "</p>"
-		        	+	 '	<br></textarea></div>';
- 	               		
- 	               	
- 				} else{
- 						replyFileInputHtml 
- 						+= "		<strong class='primary-font'>" + "</strong>"
- 						+ " 	<span>&nbsp;</span>"
- 						+ "		<small class='text-muted'>" + "</small>"
- 						+ " </span>"
- 			            + "	<br><p style='white-space : pre'>블라인드 처리 되었습니다</p><br>"
- 	               		+	'<hr class="txtBoxCmtHr" style="margin-top:10px; margin-bottom:10px"></div>';
- 				}
- 		       
- 		                
- 			}
- 			if(replyFileInputHtml){
- 				replyTab.html(replyFileInputHtml);
-            	 	replyFileInputHtml = "";
-               }
- 			/*페이징구현 불확실 showCmtPagingNums(myReplyPagingCreator.rowTotal,
- 							  myReplyPagingCreator.myReplyPaging.pageNum,
- 							  myReplyPagingCreator.myReplyPaging.rowAmountPerPage); */
- 			
- 	        
- 		           
- 		} 
- 	)
- }
- 
+
  <%-- 입사지원버튼 활성화 appli화면으로--%>
  $(".jobApply").on("click",function(){
 	 	frmSendValue.attr("action", "${contextPath}/application");

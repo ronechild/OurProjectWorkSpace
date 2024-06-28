@@ -78,7 +78,7 @@
 		    <dt>지역&emsp;</dt><dd><c:out value="지역|bregion"/></dd>
 		</dl>
 		<dl >
-		    <dt>모집인원&nbsp;</dt><dd><input type="number" class="inputdata" ></dd>
+		    <dt>모집인원&nbsp;</dt><dd><input type="number" id="bhcnt" class="inputdata" ></dd>
 		</dl>
      </div>
         <br>
@@ -141,6 +141,10 @@
 	 });
 <%--등록버튼 클릭 처리 제이쿼리--%>
  $(".jobApply").on("click",function(){
+	 if(!checkValues()){
+			return;
+		}
+	 var attachFileInputHTML="";
 	 $("div.fileUploadResult ul li").each(function(i, objLi){
 		   var attachLi = $(objLi);
 		   
@@ -157,8 +161,6 @@
   	   frmRegister.append(attachFileInputHTML);
   	   }
 	 frmRegister.submit();
-	 frmSendValue.attr("action", "${contextPath}/detail");
-	 frmSendValue.submit();
 });
  <%--내용확인 함수--%>
  function checkValues() {
@@ -171,8 +173,8 @@
  	
  	var regExp = /^\s+$/;
  	
-		if(!btitle||!bcontent||benddate||bhcnt||regExp.test(btitle)||regExp.test(bcontent)||regExp.test(bhcnt)||regExp.test(bhcnt)){
-			alert("모든 내용을입력하세요");
+		if(!btitle||!bcontent||!benddate||!bhcnt||regExp.test(btitle)||regExp.test(bcontent)||regExp.test(bhcnt)||regExp.test(bhcnt)){
+			alert("모든 내용을입력하세요"+btitle+bcontent+benddate+bhcnt);
 			return false;
 		}else{
 			

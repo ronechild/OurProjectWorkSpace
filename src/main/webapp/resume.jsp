@@ -45,10 +45,9 @@
         <h1 class="tit_job" style="margin-left: 5%;">
                         <c:out value="24년 신규 채용 공고 |btitle(제목)"/>    
         </h1>
-        <h4 style="display: inline-block;">구직 이력서 작성</h4>
+        <h4 style="display: inline-block;">이력서 상세 열람</h4>
         <div class="btn_apply">
-        	<button type="button" id="jobApply" class="btn btn-outline btn-success jobApply">등록</button>      
-            <button type="button" id="jobCancle" class="btn btn-outline btn-danger jobCancle" >지원 취소</button>        
+            <button type="button" id="backpage" class="btn btn-outline btn-warning" >목록</button>        
         </div>
     </div>
     </div>
@@ -84,19 +83,20 @@
 
 <div class="contentBox">
 	<form role="form" method="post" name="frmApplication" id="frmApplication" action="${contextPath }/board/application?" >
+	
 		<div class="form-group">
-			<input class="form-control" name="btitle" id="btitle" placeholder="글제목을 입력하십시오">
+			<div class="form-group" style="width: 100px; display: inline-block;">
+				<input class="form-control" name="bwriter" id="bwriter"  value='<security:authentication property="principal.username"/>' readonly>
+			</div>
+			<input class="form-control" name="btitle" id="btitle" value='<c:out value="${btitle }"/>' readonly="readonly">
 		                           	
 		</div>
 		<div class="form-group">
-	    	<textarea class="form-control" name="bcontent" id="bcontent" style="height: 500px;" placeholder="글내용을 입력하십시오"></textarea>
+	    	<textarea class="form-control" name="bcontent" id="bcontent" style="height: 500px;" value='<c:out value="${bcontent }"/>' readonly="readonly"></textarea>
 	    </div>
-		<div class="form-group" style="width: 100px; display: inline-block;">
-			<input class="form-control" name="bwriter" id="bwriter"  value='<security:authentication property="principal.username"/>' readonly>
-		</div>
-		<div class="btn_apply" style="margin-left: 80%;">
-			<button type="button" id="jobApply" class="btn btn-outline btn-success jobApply">등록</button>      
-	       	<button type="button" id="jobCancle" class="btn btn-outline btn-danger jobCancle" >지원 취소</button>    
+		
+		<div class="btn_apply pull-right">
+			<button type="button" id="backpage" class="btn btn-outline btn-warning" >목록</button>        
         </div>
 		<security:csrfInput/>
 	</form>	
@@ -111,7 +111,7 @@
  <script>
  var frmSendValue = $("#frmSendValue");
  var frmApplication = $("#frmApplication");
- <%-- 지원 취소버튼 클릭--%>
+ <%-- 목록 버튼 클릭--%>
  $(".jobCancle").on("click",function(){
 	 	frmApplication.empty();
 	 	frmSendValue.attr("action", "${contextPath}/detail");
@@ -119,32 +119,6 @@
 	 	
 	 	frmSendValue.submit();
 	 });
-//등록버튼 클릭 처리 제이쿼리
- $(".jobApply").on("click",function(){
-	 if(!checkValues()){
-			return;
-		}
-	 frmApplication.submit();
-});
-
- <%--내용확인 함수--%>
- function checkValues() {
- 	var btitle = document.getElementById("btitle").value;
- 	var bcontent = document.getElementById("bcontent").value;
- 	
- 	
- 	
- 	var regExp = /^\s+$/;
- 	
-		if(!btitle||!bcontent||regExp.test(btitle)||regExp.test(bcontent)){
-			alert("모든 내용을입력하세요");
-			return false;
-		}else{
-			
-			//frmRegister.submit();
-			return true;
-		}
-	}
  
 
 </script>
