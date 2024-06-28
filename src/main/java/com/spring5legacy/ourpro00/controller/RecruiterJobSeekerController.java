@@ -8,16 +8,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.spring5legacy.ourpro00.domain.RecruiterVO;
+import com.spring5legacy.ourpro00.service.RecruiterService;
 
 @Controller
 @RequestMapping(value = {"/board/*"})
 public class RecruiterJobSeekerController {
 	
+	private RecruiterService recruiterService;
+	
 	// 홈페이지
 	@GetMapping("/homepage")
 	@PreAuthorize("permitAll")
 	public void showRecruitList(Model model, RecruiterVO recruiterVO) {
-		model.addAttribute(recruiterVO);
+		model.addAttribute("?" Re);
 		System.out.println("컨트롤러:::구인글 목록 조회");
 	}
 	
@@ -64,6 +67,9 @@ public class RecruiterJobSeekerController {
 	
 	
 	// 구인글 이력서 조회 페이지
+	@GetMapping("/recruitDetail")
+	public void showJobSeekerRecruit() {
+	}
 	
 	
 //	// 이력서 수정 페이지 (구직자)
