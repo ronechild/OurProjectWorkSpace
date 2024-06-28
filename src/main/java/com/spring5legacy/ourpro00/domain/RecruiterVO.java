@@ -1,6 +1,7 @@
 package com.spring5legacy.ourpro00.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,21 +11,23 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class RecruiterVO {
+
+	private Long bno;
+	private String btitle;
+	private String bcontent;
+	private String bwriter;
+	private Date bregDate;
+	private Date bendDate;
+	private Integer breplyCnt;
+	private Integer bappCnt;
+	private Integer bblind; 
+	private String boccupation;
+	private String bregion;
+	private Integer bhcnt;
 	
-	private Long BNO;
-	private String BTITLE;
-	private String BCONTENT;
-	private String BWRITER;
-	private Date BREGDATE;
-	private Date BENDDATE;
-	private Long BREPLYCNT;
-	private Long BAPPCNT;
-	private Long BBLIND;
-	private String BOCCUPATION;
-	private String BREGION;
-	private Long BHCNT;
+	private List<RecruiterAttachFileVO> attachFileList;
 }

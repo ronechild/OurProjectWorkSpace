@@ -7,23 +7,23 @@ import com.spring5legacy.ourpro00.domain.RecruiterVO;
 public interface RecruiterMapper {
 
 	// 구인글 목록 조회
-	public List<RecruiterMapper> selectRecruitList();
+	public List<RecruiterVO> selectRecruitList(RecruiterVO recruiterVO);
 	
 	// 특정 구인글 조회
 	public RecruiterVO selectRecruit(Long bno);
 	
 	// 구인글 총 수
-	public void selectRowTotal();
+	public Long selectRowTotal();
 	
 	// 구인글 등록
-	public void insertRecruit();
+	public void insertRecruit(RecruiterVO recruiterVO);
 	
 	// 특정 구인글 수정
-	public void updateRecruit();
-	
+	public Integer updateRecruit(RecruiterVO recruiterVO);
+
 	// 특정 구인글 블라인드 처리
-	public void updateDelFlag();
+	public void updateDelFlag(Long bno);
 	
 	// 특정 구인글 삭제
-	public void deleteRecruit();
+	public void deleteRecruit(Long bno);
 }
