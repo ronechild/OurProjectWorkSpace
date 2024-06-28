@@ -3,23 +3,30 @@
 
 <mapper namespace="com.spring5legacy.ourpro00.mapper.CommentMapper">
 
-	<!-- 특정 구인글의 댓글 목록 조회 -->
-	<select id="selectCommentList">
-	
-	</select>
-	
-	<!-- 특정 구인글에 대한 댓글 등록 -->
-	<insert id="insertComment">
-	
-	</insert>
-	
-	<!-- 특정 댓글 수정 -->
-	<update id="updateComment">
-	
-	</update>
-	
-	<!-- 특정 댓글 삭제 -->
-	<delete id="deleteComment">
-	
-	</delete>
+   <!-- 특정 구인글의 댓글 목록 조회 -->
+   <select id="selectCommentList">
+      SELECT rno, rcontent, rwriter, rregDate
+      FROM ouruser.tbl_reply
+      WHERE bno = #{bno}
+   </select>
+   
+   <!-- 특정 구인글에 대한 댓글 등록 -->
+   <insert id="insertComment">
+      INSERT INTO ouruser.tbl_reply
+      VALUES (ouruser.seq_tbl_reply.NEXTVAL, 1, #{rcontent}, #{rwriter}, DEFAULT, DEFAULT) 
+      WHERE bno = #{bno}
+   </insert>
+   
+   <!-- 특정 댓글 수정 -->
+   <update id="updateComment">
+      UPDATE ouruser.tbl_reply
+         SET rcontent = #{rcontent}, 
+            rregDate = DEFAULT
+       WHERE rno = #{rno} 
+   </update>
+   
+   <!-- 특정 댓글 삭제 -->
+   <delete id="deleteComment">
+      DELETE FROM ouruser.tbl_reply WHERE rno = #{rno}
+   </delete>
 </mapper>

@@ -3,19 +3,21 @@
 
 <mapper namespace="com.spring5legacy.ourpro00.mapper.MemberMapper">
 
-	<!-- 유저 정보 -->
-	<select id="selectMember">
-	
-	</select>
-	
-	<!-- 회원 가입 -->
-	<insert id="insertMember">
-	
-	</insert>
-	
-	<!-- 회원 권한 부여 -->
-	<insert id="insertMemberAuthority">
-	
-	</insert>
-	
+   <!-- 유저 정보 -->
+   <select id="selectMember">
+      SELECT USERID, USERPW, USERNAME, MDROPFLG, ENABLED, EMAIL, PHONE
+      FROM ouruser.tbl_member 
+   </select>
+   
+   <!-- 회원 가입 -->
+   <insert id="insertMember">
+      INSERT into ouruser.tbl_member
+      VALUES (#{userid}, #{userpw}, #{username}, DEFAULT, DEFAULT, #{email}, #{phone})
+   </insert>
+   
+   <!-- 회원 권한 부여 -->
+   <insert id="insertMemberAuthority">
+      INSERT INTO  ouruser.tbl_mymember_authorities VALUES(#{userid}, #{authority})
+   </insert>
+   
 </mapper>

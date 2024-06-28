@@ -21,13 +21,18 @@
 		select count(*) FROM ouruser.tbl_apply
 	</select>
 	
-	<!-- 구직글 등록 -->
+	 <!-- 구직글 등록 -->
+	<!--<insert id="insertJobSeeker">
+		INSERT INTO ouruser.tbl_apply
+			VALUES (ouruser.seq_tbl_apply.NEXTVAL, #{atitle}, #{acontent}, #{awriter}, default,  #{bno}) 
+	</insert> -->
+	
 	<insert id="insertJobSeeker">
-	<selectKey keyProperty="ano" order="BEFORE" resultType="Long">
+		<selectKey keyProperty="ano" order="BEFORE" resultType="Long">
 			SELECT ouruser.seq_tbl_apply.nextval FROM DUAL
 		</selectKey>
 		INSERT INTO ouruser.tbl_apply
-			VALUES (#{ano}, #{atitle}, #{acontent}, #{awriter}, default, #{bno}) 
+		    VALUES(#{ano}, #{atitle}, #{acontent}, #{awriter}, default,  #{bno})
 	</insert>
 	
 	<!-- 특정 구직글 수정 -->
