@@ -10,7 +10,7 @@ public class ToLoginLogoutPageController {
 	@GetMapping("/login")
 	public String toLoginPage(String error, String logout, Model model) {
 		
-		return null;
+		return "common/login";
 	}
 	
 	@GetMapping("/logout")
