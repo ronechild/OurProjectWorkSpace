@@ -9,7 +9,10 @@ import com.spring5legacy.ourpro00.domain.RecruiterVO;
 import com.spring5legacy.ourpro00.mapper.RecruiterAttachFileMapper;
 import com.spring5legacy.ourpro00.mapper.RecruiterMapper;
 
+import lombok.AllArgsConstructor;
+
 @Service
+@AllArgsConstructor // 생성자 의존성 주입
 public class RecruiterServiceImpl implements RecruiterService{
 	
 	private RecruiterMapper recruiterMapper;
