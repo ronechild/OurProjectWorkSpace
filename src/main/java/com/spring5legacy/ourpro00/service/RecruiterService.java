@@ -5,10 +5,10 @@ import com.spring5legacy.ourpro00.domain.RecruiterVO;
 public interface RecruiterService {
 
 	// 구인글 목록 조회
-	public RecruiterVO selectRecruitList(RecruiterVO recruiterVO);
+	public RecruiterVO selectRecruitList();
 	
 	// 특정 구인글 조회
-	public void selectRecruit(Long bno);
+	public RecruiterVO selectRecruit(Long bno);
 	
 	// 구인글 총 수
 	public void selectRowTotal();
