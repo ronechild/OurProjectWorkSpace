@@ -20,14 +20,14 @@ public class RecruiterVO {
 	private String btitle;
 	private String bcontent;
 	private String bwriter;
-	private Date bregDate;
-	private Date bendDate;
-	private Integer breplyCnt;
-	private Integer bappCnt;
-	private Integer bblind; 
-	private String boccupation;
-	private String bregion;
-	private Integer bhcnt;
+	private Date bregDate; // 등록일
+	private Date bendDate; // 마감일
+	private Integer breplyCnt; // 게시물의 댓글+답글 수
+	private Integer bappCnt; // 지원 신청 수
+	private Integer bblind;  // 블라인드
+	private String boccupation; // 직종 (default : null)
+	private String bregion; // 지역 (default : null)
+	private Integer bhcnt; // 모집인원(?)
 	
 	private List<RecruiterAttachFileVO> attachFileList;
 }

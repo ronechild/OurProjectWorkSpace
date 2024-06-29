@@ -30,7 +30,7 @@ public class RecruiterJobSeekerController {
 	
 	// 홈페이지
 	@GetMapping("/homepage")
-	@PreAuthorize("permitAll")
+//	@PreAuthorize("permitAll")
 	public void showRecruitList(Model model) {
 		model.addAttribute("recruitList", recruiterService.selectRecruitList());
 		System.out.println("컨트롤러:::구인글 목록 조회");
@@ -38,14 +38,14 @@ public class RecruiterJobSeekerController {
 	
 	// 구인글 작성 페이지 (구인자)
 	@GetMapping("/register")
-	@PreAuthorize("hasAuthority('COMPANY')")
+//	@PreAuthorize("hasAuthority('COMPANY')")
 	public void showRegisterRecruit() {
 		System.out.println("컨트롤러:::구인글 작성 페이지 호출");
 	}
 	
 	// 구인글 등록 (구인자)
 	@PostMapping("/register")
-	@PreAuthorize("hasAuthority('COMPANY')")
+//	@PreAuthorize("hasAuthority('COMPANY')")
 	public String registerRecruit(RecruiterVO recruiterVO, RedirectAttributes redirectAttr) {
 		recruiterService.insertRecruit(recruiterVO);
 		Long bno = recruiterVO.getBno();
@@ -63,7 +63,7 @@ public class RecruiterJobSeekerController {
 //		System.out.println("컨트롤러:::" + bno + "번 구인글 호출");
 //	}
 	@GetMapping("/detail")
-	@PreAuthorize("permitAll")
+//	@PreAuthorize("permitAll")
 	public String showRecruit(Model model, Long bno) {
 		System.out.println(bno);
 		model.addAttribute("recruiterVO", recruiterService.selectRecruit(bno));
@@ -80,7 +80,7 @@ public class RecruiterJobSeekerController {
 //		System.out.println("컨트롤러:::" + bno + "번 구인글 수정 페이지 호출");
 //	}
 	@GetMapping("/modify")
-	@PreAuthorize("hasAuthority('COMPANY')")
+//	@PreAuthorize("hasAuthority('COMPANY')")
 	public void showModifyRecruit(Model model, Long bno) {
 		model.addAttribute("recruiterVO", recruiterService.selectRecruit(bno));
 		System.out.println("컨트롤러:::" + bno + "번 구인글 수정 페이지 호출");
@@ -88,7 +88,7 @@ public class RecruiterJobSeekerController {
 	
 	// 구인글 수정 (구인자)
 	@PostMapping("/modify")
-	@PreAuthorize("hasAuthority('COMPANY')")
+//	@PreAuthorize("hasAuthority('COMPANY')")
 	public String modifyRecruit(RecruiterVO recruiterVO) {
 		recruiterService.updateRecruit(recruiterVO);
 		Long bno = recruiterVO.getBno();
@@ -99,13 +99,13 @@ public class RecruiterJobSeekerController {
 	
 	// 이력서 작성 페이지 (구직자)
 	@GetMapping("/registerA")
-    @PreAuthorize("hasAuthority('USER')")
+//    @PreAuthorize("hasAuthority('USER')")
     public void showJobSeekerRegisterPage() {
     }
 	
     //이력서 등록
     @PostMapping("/registerA")
-    //@PreAuthorize("isAuthenticated()")
+//    @PreAuthorize("isAuthenticated()")
     public String registerJobSeeker(JobSeekerVO jobSeeker, RedirectAttributes redirectAttr) {
     	System.out.println("controller: 전달된 정보 jobSeeker: " + jobSeeker);
     	Long ano = jobSeekerService.registerJobSeeker(jobSeeker) ;
@@ -127,7 +127,7 @@ public class RecruiterJobSeekerController {
 	
 	// 구인글 이력서 조회 페이지
 	@GetMapping("/recruitDetail")
-	@PreAuthorize("hasAuthority('USER', 'COMPANY')")
+//	@PreAuthorize("hasAuthority('USER', 'COMPANY')")
 	public void showJobSeekerDetail(Long ano, Model model) {
     	
     	model.addAttribute("jobSeeker", jobSeekerService.getJobSeeker(ano)) ;

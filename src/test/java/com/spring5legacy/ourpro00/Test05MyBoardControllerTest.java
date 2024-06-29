@@ -39,16 +39,16 @@ public class Test05MyBoardControllerTest {
     } //테스트 환경 구성-끝
 
 
-//    //게시물 목록 조회 테스트
-//    @Test
-//    public void showJobSeekerList() throws Exception {
-//        log.info(mockMvc.perform(MockMvcRequestBuilders.get("/board/list")
-//        		                )
-//                        .andReturn()
-//                        .getModelAndView()
-//                        //.getViewName()) ;
-//                        .getModelMap());
-//    }
+    //게시물 목록 조회 테스트
+    @Test
+    public void showJobSeekerList() throws Exception {
+        log.info(mockMvc.perform(MockMvcRequestBuilders.get("/board/list")
+        		                )
+                        .andReturn()
+                        .getModelAndView()
+                        //.getViewName()) ;
+                        .getModelMap());
+    }
     
 
 //    //게시물 등록-페이지 호출 테스트
@@ -103,17 +103,17 @@ public class Test05MyBoardControllerTest {
 
 
 
-    //특정 게시물 삭제 테스트 - 실제 삭제
-    @Test
-    public void testRemoveBoard() throws Exception {
-        //삭제전 데이터베이스에 게시물 번호 확인할 것
-        String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/board/remove")
-                                                                  .param("ano", "24"))
-                                  .andReturn()
-                                  .getModelAndView()
-                                  .getViewName();
-        log.info(resultPage);
-    }
+//    //특정 게시물 삭제 테스트 - 실제 삭제
+//    @Test
+//    public void testRemoveBoard() throws Exception {
+//        //삭제전 데이터베이스에 게시물 번호 확인할 것
+//        String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/board/remove")
+//                                                                  .param("ano", "24"))
+//                                  .andReturn()
+//                                  .getModelAndView()
+//                                  .getViewName();
+//        log.info(resultPage);
+//    }
 
     
 }

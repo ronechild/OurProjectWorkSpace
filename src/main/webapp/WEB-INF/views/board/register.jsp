@@ -42,45 +42,45 @@
 </style>
 
 <hr>
-<%-- 제목 기업 지원 --%>
+<%-- 구인글 정보 --%>
 <div class="titleWrapper">
 <div class="wrap_jv_header" >
     <a class="placeholder" tabindex="-1"></a>
     <div class="jv_header" data-rec_idx="48341817" data-rec_seq="0">
 	    <div class="title_inner">
                             
-               <h3><c:out value="bwiter(기업명)"/> </h3>
+               <h3><c:out value="${recruiterVO.bwriter}"/> </h3>
          </div>
         <h1 class="tit_job" >
-			<input class="form-control"  style="width: 75%; height: 70px; font-size: 30pt;" name="btitle" id="btitle" placeholder="글제목을 입력하십시오">
+			<input class="form-control"  style="width: 75%; height: 70px; font-size: 30pt;" name="btitle" id="btitle" placeholder="구인글 제목">
         </h1>
-        <h4 style="display: inline-block;">구인 게시글 작성</h4>
+        <h4 style="display: inline-block;">구인글 작성</h4>
         <div class="btn_apply">
         	<button type="button" id="jobApply" class="btn btn-outline btn-success jobApply">등록</button>      
-            <button type="button" id="jobCancle" class="btn btn-outline btn-danger jobCancle" >지원 취소</button>        
+            <button type="button" id="jobCancle" class="btn btn-outline btn-danger jobCancle" >취소</button>        
         </div>
     </div>
     </div>
-   <%-- 제목 기업 지원 끝--%>
+   <%-- 구인글 정보 끝--%>
 
 <hr>
 <%-- 세부 기본내용 --%>
 <div class="cont wrapper" >
 	<div class="col">
 		<dl>
-		    <dt>등록일&nbsp;</dt><dd><c:out value="2024-06-27|bregdate"/></dd>
+		    <dt>등록일&nbsp;</dt><dd><c:out value="${recruiterVO.bregDate}"/></dd>
 		</dl>           
 		<dl >
 		    <dt style="margin-top: 7px">마감일&nbsp;</dt><dd><input type="date" class="form-control inputdata" id="benddate" name="benddate"
-                        	 value= '<c:out value="${pagingCreator.myBoardPaging.benddate }"/>'></dd>
+                        	 value= '<c:out value="${recruiterVO.bendDate }"/>'></dd>
 		</dl>
      </div>
      <div class="col">
  		<dl>
-		    <dt>직종&emsp;</dt><dd><c:out value="직종|boccupation"/></dd>
+		    <dt>직종&emsp;</dt><dd><c:out value="${recruiterVO.boccupation}"/></dd>
 		</dl>           
 		<dl >
-		    <dt>지역&emsp;</dt><dd><c:out value="지역|bregion"/></dd>
+		    <dt>지역&emsp;</dt><dd><c:out value="${recruiterVO.bregion}"/></dd>
 		</dl>
 		<dl >
 		    <dt>모집인원&nbsp;</dt><dd><input type="number" id="bhcnt" class="inputdata" ></dd>
@@ -93,9 +93,9 @@
             <hr>
 
 <div class="contentBox">
-	<form role="form" method="post" name="frmRegister" id="frmRegister" action="${contextPath }/board/application?" >
+	<form role="form" method="post" name="frmRegister" id="frmRegister" action="${contextPath }/board/application?">
 		<div class="form-group">
-	    	<textarea class="form-control" name="bcontent" id="bcontent" style="height: 500px;" placeholder="글내용을 입력하십시오"></textarea>
+	    	<textarea class="form-control" name="bcontent" id="bcontent" style="height: 500px;" placeholder="구인글 내용"></textarea>
 	    </div>
 		    
         <div class="panel panel-default">
@@ -128,11 +128,11 @@
 	</form>	
 </div>
 <form id="frmSendValue">
-		<input type="hidden" id="pageNum" name="pageNum" value="${myBoardPaging.pageNum }">
-		<input type="hidden" id="rowAmountPerPage" name="rowAmountPerPage" value="${myBoardPaging.rowAmountPerPage }">
-		<input type="hidden" id="bno" name="bno" value="${myBoard.bno}">
-		<input type="hidden" id="boccupation" name="boccupation" value="${myBoardPaging.boccupation}">
-		<input type="hidden" id="bregion" name="bregion" value="${myBoardPaging.bregion}">
+<%-- 		<input type="hidden" id="pageNum" name="pageNum" value="${myBoardPaging.pageNum }">
+		<input type="hidden" id="rowAmountPerPage" name="rowAmountPerPage" value="${myBoardPaging.rowAmountPerPage }"> --%>
+		<input type="hidden" id="bno" name="bno" value="${recruiterVO.bno}">
+		<input type="hidden" id="boccupation" name="boccupation" value="${recruiterVO.boccupation}">
+		<input type="hidden" id="bregion" name="bregion" value="${recruiterVO.bregion}">
 </form>
  <script>
  var frmSendValue = $("#frmSendValue");
