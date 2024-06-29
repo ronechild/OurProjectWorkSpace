@@ -1,19 +1,18 @@
 package com.spring5legacy.ourpro00;
 
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.spring5legacy.ourpro00.domain.RecruiterVO;
 import com.spring5legacy.ourpro00.mapper.RecruiterMapper;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/mybatis-context.xml")
 public class Test03RecruiterMapperTest {
 
-    private RecruiterMapper recruiterMapper ;
+    @SuppressWarnings("unused")
+	private RecruiterMapper recruiterMapper ;
     
     @Autowired
     public void setRecruiterMapper (RecruiterMapper recruiterMapper) {
@@ -28,12 +27,12 @@ public class Test03RecruiterMapperTest {
 //        System.out.println(recruiterMapper.selectRecruitList()); // 존재하는 게시물 번호로 테스트
 //    }
     
-  //특정 게시물 조회 테스트(by bno)  테스트 후 메서드 주석처리
-    @Test
-    public void selectRecruit() {
-    	recruiterMapper.selectRecruit(2L);
-        System.out.println(recruiterMapper.selectRecruit(2L)); // 존재하는 게시물 번호로 테스트
-    }
+//  //특정 게시물 조회 테스트(by bno)  테스트 후 메서드 주석처리
+//    @Test
+//    public void selectRecruit() {
+//    	recruiterMapper.selectRecruit(2L);
+//        System.out.println(recruiterMapper.selectRecruit(2L)); // 존재하는 게시물 번호로 테스트
+//    }
     
 //  //게시물 등록 테스트 - selectKey 사용 안함
 //    @Test

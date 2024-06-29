@@ -11,7 +11,7 @@
 	<bean id="bcryptPassWordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 
 	<security:http>
-		<security:form-login login-page="/signup" login-processing-url="/login" />
+		<security:form-login login-page="/signup" login-processing-url="/login"  authentication-success-forward-url="/board/homepage"/>
 		<security:logout/>	
 	</security:http>
 	

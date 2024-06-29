@@ -1,22 +1,18 @@
 package com.spring5legacy.ourpro00;
 
-import org.apache.ibatis.annotations.Param;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.spring5legacy.ourpro00.domain.JobSeekerVO;
-import com.spring5legacy.ourpro00.domain.RecruiterVO;
 import com.spring5legacy.ourpro00.mapper.JobSeekerMapper;
-import com.spring5legacy.ourpro00.mapper.RecruiterMapper;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/mybatis-context.xml")
 public class Test03JobSeekerMapperTest {
 
-    private JobSeekerMapper jobSeekerMapper ;
+    @SuppressWarnings("unused")
+	private JobSeekerMapper jobSeekerMapper ;
     
     @Autowired
     public void setRecruiterMapper (JobSeekerMapper jobSeekerMapper) {

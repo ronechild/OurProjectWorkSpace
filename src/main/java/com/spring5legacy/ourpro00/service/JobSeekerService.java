@@ -9,6 +9,9 @@ public interface JobSeekerService {
 	// 구직글 목록 조회 
 	public List<JobSeekerVO> getJobSeekerList(String awriter);
 	
+	//디테일페이지 구직글 목록 조회
+	public List<JobSeekerVO> getJobSeekerListForDetail(Long bno);
+	
 	// 특정 구직글 조회
 	public JobSeekerVO getJobSeeker(Long ano);
 	
@@ -28,6 +31,8 @@ public interface JobSeekerService {
 	// 특정 구직글 삭제
 	//public boolean deleteJobSeeker(Long ano);
 	public JobSeekerVO deleteJobSeeker(JobSeekerVO jobSeeker);
+
+	
 
 
 	

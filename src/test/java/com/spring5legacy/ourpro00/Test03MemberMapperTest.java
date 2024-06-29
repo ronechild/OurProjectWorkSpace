@@ -1,6 +1,5 @@
 package com.spring5legacy.ourpro00;
 
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -8,8 +7,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.spring5legacy.ourpro00.domain.AuthorityVO;
-import com.spring5legacy.ourpro00.domain.MemberVO;
 import com.spring5legacy.ourpro00.mapper.MemberMapper;
 
 import lombok.extern.log4j.Log4j;
@@ -20,10 +17,12 @@ import lombok.extern.log4j.Log4j;
 @ContextConfiguration({	"file:src/main/webapp/WEB-INF/spring/mybatis-context.xml",
                         	 "file:src/main/webapp/WEB-INF/spring/security-context.xml",
                           "file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml" })
-@Log4j
+//@Log4j
+@SuppressWarnings("unused")
 public class Test03MemberMapperTest {
     //사용자 암호의 암호화 빈 주입
-    private PasswordEncoder pwencoder;
+	private PasswordEncoder pwencoder;
+    private MemberMapper memberMapper;
 
     @Autowired
     public void setPwencoder (PasswordEncoder pwencoder) {
@@ -31,7 +30,6 @@ public class Test03MemberMapperTest {
     }
 
     //매퍼인터페이스 주입
-    private MemberMapper memberMapper;
     
     @Autowired
     public void setMyMemberMapper (MemberMapper memberMapper) {
@@ -60,22 +58,23 @@ public class Test03MemberMapperTest {
     //테스트 메서드 2: 회원 권한 등록 테스트
 //    @Test
 //    public void testInsertMyMemAuthority() {
-//        AuthorityVO myAuthority = new AuthorityVO();
+//        AuthorityVO authority = new AuthorityVO();
 //        
 //        for(int i = 2; i <= 10; i++) {
 //        	if (i<5) {
-//        		myAuthority.setUserid("user" + i);
-//        		myAuthority.setAuthority("USER");
+//        		authority.setUserid("user" + i);
+//        		authority.setAuthority("USER");
 //			} else if (i<8){
-//				myAuthority.setUserid("user" + i);
-//				myAuthority.setAuthority("COMPANY");
+//				authority.setUserid("user" + i);
+//				authority.setAuthority("COMPANY");
 //			} else {
-//				myAuthority.setUserid("user" + i);
-//				myAuthority.setAuthority("ADMIN");
+//				authority.setUserid("user" + i);
+//				authority.setAuthority("ADMIN");
 //			}
 //                
-//            log.info(myAuthority);
-//            memberMapper.insertMemberAuth(myAuthority);
+//            log.info(authority);
+//            memberMapper.insertMemberAuthority(authority);
+//            
 //        } //for-End
 //    }
     
