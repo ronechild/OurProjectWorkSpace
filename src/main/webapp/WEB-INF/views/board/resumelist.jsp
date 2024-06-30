@@ -27,8 +27,8 @@
    background-color: white;
    }
     .contentBox{
-	margin-left: 10%;
-	margin-right: 10%;
+   margin-left: 10%;
+   margin-right: 10%;
    }
    
 </style>
@@ -149,12 +149,12 @@
  
  <%--  홈화면으로--%>
  $(".btnToList").on("click",function(){
-	 
-	 	frmSendValue.find("#bno").remove();
-	 	frmSendValue.attr("action", "${contextPath}/board/homepage");
-	 	frmSendValue.attr("method","post");
-	 	
-	 	frmSendValue.submit();
+    
+       frmSendValue.find("#bno").remove();
+       frmSendValue.attr("action", "${contextPath}/board/homepage");
+       frmSendValue.attr("method","get");
+       
+       frmSendValue.submit();
  });
  
  

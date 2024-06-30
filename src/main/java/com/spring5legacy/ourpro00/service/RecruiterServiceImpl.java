@@ -24,9 +24,6 @@ public class RecruiterServiceImpl implements RecruiterService{
 	public List<RecruiterVO> selectRecruitList(RecruiterVO recruiter) {
 		System.out.println("서비스:::구인글 목록 조회 : ");
 		
-		
-		System.out.println("입력 받은 구인글 목록 : " + recruiterMapper.selectRecruitList(recruiter));
-		
 		return recruiterMapper.selectRecruitList(recruiter);
 	}
 
@@ -36,9 +33,6 @@ public class RecruiterServiceImpl implements RecruiterService{
 		System.out.println("서비스:::특정 구인글 조회 : " + bno);
 		RecruiterVO recruiterVO = recruiterMapper.selectRecruit(bno);
 		System.out.println( bno + "번 글 호출 완료");
-		
-		System.out.println("recruiterVO : " + recruiterVO);
-		
 		return recruiterVO;
 	}
 
@@ -52,6 +46,18 @@ public class RecruiterServiceImpl implements RecruiterService{
 	@Override
 	public void insertRecruit(RecruiterVO recruiterVO) {
 		System.out.println("서비스:::구인글 등록 : ");
+		System.out.println("서비스:::recruiterVO : " + recruiterVO);
+		
+//		System.out.println("bno: " + recruiterVO.getBno());
+//		System.out.println("btitle: " + recruiterVO.getBtitle());
+//		System.out.println("bcontent: " + recruiterVO.getBcontent());
+//		System.out.println("bwriter: " + recruiterVO.getBwriter());
+//		System.out.println("bregDate: " + recruiterVO.getBregDate());
+//		System.out.println("bendDate: " + recruiterVO.getBendDate());
+//		System.out.println("boccupation: " + recruiterVO.getBoccupation());
+//		System.out.println("bregion: " + recruiterVO.getBregion());
+//		System.out.println("bhcnt: " + recruiterVO.getBhcnt());
+		
 		recruiterMapper.insertRecruit(recruiterVO);
 		
 		// 첨부파일 등록 : 
@@ -72,22 +78,33 @@ public class RecruiterServiceImpl implements RecruiterService{
 	@Override
 	public void updateRecruit(RecruiterVO recruiterVO) {
 		System.out.println("서비스:::구인글 수정 : ");
+		
+		System.out.println("bno: " + recruiterVO.getBno());
+		System.out.println("btitle: " + recruiterVO.getBtitle());
+		System.out.println("bcontent: " + recruiterVO.getBcontent());
+		System.out.println("bwriter: " + recruiterVO.getBwriter());
+		System.out.println("bregDate: " + recruiterVO.getBregDate());
+		System.out.println("bendDate: " + recruiterVO.getBendDate());
+		System.out.println("boccupation: " + recruiterVO.getBoccupation());
+		System.out.println("bregion: " + recruiterVO.getBregion());
+		System.out.println("bhcnt: " + recruiterVO.getBhcnt());
+		
 		recruiterMapper.updateRecruit(recruiterVO);
 		
 		boolean updated = recruiterMapper.updateRecruit(recruiterVO) == 1; // 수정 여부 : 1
 		
 		// 첨부파일 처리 : 
-		recruiterAttachFileMapper.deleteAttachFiles(recruiterVO.getBno());
-		
-		List<RecruiterAttachFileVO> attachFileList = recruiterVO.getAttachFileList();
-				
-		if(updated) { // 수정 시, 첨부파일 모두 삭제하고, 수정완료 버튼을 눌렀을 때에도 작동해야함 > attachFileList != null 삭제
-			for(RecruiterAttachFileVO attachFile : attachFileList) {
-				attachFile.setBno(recruiterVO.getBno());
-				recruiterAttachFileMapper.instertAttachFile(attachFile);
-				System.out.println("\t" + "\t" + "첨부한 파일 이름 : " + attachFile.getBFileName());
-			}
-		}
+//		recruiterAttachFileMapper.deleteAttachFiles(recruiterVO.getBno());
+//		
+//		List<RecruiterAttachFileVO> attachFileList = recruiterVO.getAttachFileList();
+//				
+//		if(updated) { // 수정 시, 첨부파일 모두 삭제하고, 수정완료 버튼을 눌렀을 때에도 작동해야함 > attachFileList != null 삭제
+//			for(RecruiterAttachFileVO attachFile : attachFileList) {
+//				attachFile.setBno(recruiterVO.getBno());
+//				recruiterAttachFileMapper.instertAttachFile(attachFile);
+//				System.out.println("\t" + "\t" + "첨부한 파일 이름 : " + attachFile.getBFileName());
+//			}
+//		}
 		
 		System.out.println("\t" + recruiterVO.getBno() + "번 글 수정 완료");
 	}
@@ -106,5 +123,12 @@ public class RecruiterServiceImpl implements RecruiterService{
 		System.out.println("서비스:::구인글 삭제 : ");
 		recruiterMapper.deleteRecruit(bno);
 		System.out.println("\t" + bno + "번 글 삭제 완료");
+	}
+	
+	// *
+	// userid의 username을 찾기
+	public String findRecruiter(String userid) {
+		return recruiterMapper.findRecruiter(userid);
+		
 	}
 }

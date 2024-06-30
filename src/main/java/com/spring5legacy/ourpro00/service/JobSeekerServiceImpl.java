@@ -107,12 +107,14 @@ public class JobSeekerServiceImpl implements JobSeekerService{
 			
 			List<JobSeekerAttachFileVO> attachFileList = jobSeeker.getJobSeekerAttachFileList() ;
 			
-			if(modifyResult && attachFileList != null) {
-				for(JobSeekerAttachFileVO attachFile : attachFileList) {
-					attachFile.setAno(ano);
-					jobSeekerAttachFileMapper.insertAttachFile(attachFile); 
-				}
-			}
+			if (attachFileList != null && attachFileList.size() > 0) {
+	            attachFileList
+	            .forEach(attachFile -> { attachFile.setAno(jobSeeker.getAno()) ;
+	            System.out.println("아님 여기?");
+	                                        jobSeekerAttachFileMapper.insertAttachFile(attachFile) ;
+	                            			System.out.println("되지??");
+	                    }); //forEach-end
+	        }
 			
 			return modifyResult ;
 		}

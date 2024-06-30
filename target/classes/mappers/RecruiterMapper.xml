@@ -6,14 +6,14 @@
 
 	<!-- 구인글 목록 조회 -->
 	<select id="selectRecruitList" resultType="com.spring5legacy.ourpro00.domain.RecruiterVO">
-		SELECT bno, btitle, bwriter, bregdate, benddate, breplycnt, bappcnt, bhcnt
+		SELECT bno, btitle, bwriter, bregDate, bendDate, breplyCnt, bappCnt, bhcnt
 		FROM tbl_hiring
 		ORDER BY bno DESC
 	</select>
 	
 	<!-- 특정 구인글 조회 -->
 	<select id="selectRecruit" resultType="com.spring5legacy.ourpro00.domain.RecruiterVO">
-		SELECT bno, btitle, bcontent, bwriter, bregdate, benddate, breplycnt, bappcnt,
+		SELECT bno, btitle, bcontent, bwriter, bregDate, bendDate, breplyCnt, bappCnt,
        				 bblind, boccupation, bregion, bhcnt
     	FROM ouruser.tbl_hiring
     	WHERE bno = #{bno}
@@ -31,22 +31,26 @@
 		</selectKey>
 			INSERT INTO ouruser.tbl_hiring
 				VALUES (#{bno}, #{btitle}, #{bcontent}, #{bwriter}, DEFAULT,
-       			 				 #{benddate}, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT) 
+       			 				 #{bendDate}, DEFAULT, DEFAULT, DEFAULT, #{boccupation}, #{bregion}, #{bhcnt}) 
 	</insert>
 	
 	<!-- 특정 구인글 수정 -->
 	<update id="updateRecruit">
 		UPDATE ouruser.tbl_hiring
-    		SET btitle = #{btitle}, 
-        			bcontent = #{bcontent}, 
-      				bendDate = #{bendDate}
-   		 WHERE bno = #{bno} 
+    		SET 
+    			btitle = #{btitle}, 
+   				bcontent = #{bcontent}, 
+    			bendDate = #{bendDate}, 
+    			boccupation = #{boccupation}, 
+    			bregion = #{bregion}, 
+    			bhcnt = #{bhcnt}
+   		 	WHERE bno = #{bno} 
 	</update>
 	
 	<!-- 특정 구인글 지원수 증가 : 지원시 + 1 -->
 	<update id="updateBappcnt">
 		UPDATE ouruser.tbl_hiring
-				SET bappcnt= bappcnt+ 1
+				SET bappCnt= bappCnt+ 1
 		WHERE bno = #{bno}
 	</update>
 	
@@ -61,5 +65,29 @@
 	<delete id="deleteRecruit">
 		DELETE FROM ouruser.tbl_hiring WHERE bno = #{bno}
 	</delete>
+	
+	
+	<!-- * -->
+	<!-- userid의 username을 찾기 -->
+<!-- 	<select id="findRecruiter" resultType="String">
+		SELECT username
+		    FROM ouruser.tbl_member
+		    WHERE userid = #{userid}
+	</select> -->
+	
+	<!-- ** -->
+	<!-- userid의 username을 찾기 -->
+	<select id="findRecruiter" resultType="String">
+		SELECT username
+		    FROM ouruser.tbl_member
+		    WHERE userid = #{userid}
+	</select>
+	
+	<!-- ** -->
+	<!-- 구인글 첨부파일 블라인드 처리 -->
+<!-- 	<update id="updateAttachFileDelFlag">
+		UPDATE ouruser.tbl_
+	</update> -->
+	
 	
 </mapper>

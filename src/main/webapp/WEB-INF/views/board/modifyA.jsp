@@ -5,6 +5,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 
+<c:set var="contextPath" value="${pageContext.request.contextPath }"/>
+
 <%@ include file="../include/header.jsp" %>
 <style>
 	.alert,dl{
@@ -50,7 +52,7 @@
     <div class="jv_header" data-rec_idx="48341817" data-rec_seq="0">
 	    <div class="title_inner">
                             
-               <h3><c:out value="bwiter(기업명)"/>    이력서 수정 </h3> 
+               <h3><c:out value="${recruit.bwriter }"/>    이력서 수정 </h3> 
          </div>
       
          <h1 class="tit_job" >
@@ -73,11 +75,10 @@
 <div class="cont wrapper" >
 	<div class="col">
 		<dl>
-		    <dt>등록일&nbsp;</dt><dd><c:out value="2024-06-27|bregdate"/></dd>
+		    <dt>등록일&nbsp;</dt><dd><c:out value="${jobSeeker.aregDate}"/></dd>
 		</dl>           
 		<dl >
-		    <dt style="margin-top: 7px">마감일&nbsp;</dt><dd><input type="date" class="form-control inputdata" id="benddate" name="benddate"
-                        	 value= '<c:out value="${pagingCreator.myBoardPaging.benddate }"/>'></dd>
+		    <dt style="margin-top: 7px">마감일&nbsp;</dt><dd><c:out value="${recruit.bendDate }"/></dd>
 		</dl>
      </div>
      <div class="col">
@@ -88,7 +89,7 @@
 		    <dt>지역&emsp;</dt><dd><c:out value="지역|bregion"/></dd>
 		</dl>
 		<dl >
-		    <dt>모집인원&nbsp;</dt><dd><input type="number" id="bhcnt" class="inputdata" ></dd>
+		    <dt>모집인원&nbsp;</dt><dd><c:out value="${recruit.bhcnt }"/></dd>
 		</dl>
      </div>
         <br>
@@ -125,7 +126,7 @@
         <!-- /.panel -->
 	               <%--  <security:authentication property="principal.username"/> --%>
 		<div class="form-group" style="width: 100px; display: inline-block;">
-		
+		<!-- awriter -->
 			<input class="form-control" name="awriter" id="awriter"  value="stu1" readonly>
 			
 		</div>
@@ -146,6 +147,7 @@
 
  <script>
  var frmModifyA = $("#frmModifyA");
+ var fileUploadResultUL = $(".fileUploadResult ul") ;
  <%-- 버튼 클릭--%>
  $("button").on("click", function(){
 		
@@ -162,12 +164,32 @@
 			
 		} else if (operation == "modify") {
 			
-			if (!checkValues()){
-		    	return ;
-			}
+			 //alert("되긴함?") ;
+			 if(!checkValues()){
+					return;
+				}
+			 var attachFileInputHTML="";
+			 $(".fileUploadResult ul li").each(function(i, objLi){
+				   var attachLi = $(objLi);
+				   
+				   
+				   attachFileInputHTML
+				   +="<input type='hidden' name='jobSeekerAttachFileList[" + i + "].uuid' value='" + attachLi.data("uuid") + "'>"
+				   +  "<input type='hidden' name='jobSeekerAttachFileList[" + i + "].uploadPath' value='" + attachLi.data("uploadpath") + "'>"
+				   +  "<input type='hidden' name='jobSeekerAttachFileList[" + i + "].fileName' value='" + attachLi.data("filename") + "'>"
+				   /* +  "<input type='hidden' name='jobSeekerAttachFileList[" + i + "].ano' value='" + attachLi.data("") + "'>" */
+				   
+			   });
+			 alert(attachFileInputHTML);
+			 if(attachFileInputHTML){
+				 frmModifyA.append(attachFileInputHTML);
+		  	   }
+			 frmModifyA.submit();
 			
 			frmModifyA.attr("action", "${contextPath}/board/modifyA");
 			alert("수정완료");
+			
+			
 			
 		} else { 
 			
@@ -198,20 +220,20 @@
 		}
 	}
  <%-- 파일크기및 확장자제한 --%>
- function fileNameTest(afileName, afileSize) {
+ function checkUploadFile(fileName, fileSize) {
  	
  	var allowedMaxSize = 104857600;
  	var regExpForbiddenFile = /((^\.[^.]+$|^[^.]+$)|\.(exe|sh|c|dll|alz|zip|tar|7z)$)/i;
  	
- 	if(afileSize > allowedMaxSize){
- 		alert(afileSize + "업로드 파일의 크기는 100mb보다 작아야합니다");
+ 	if(fileSize > allowedMaxSize){
+ 		alert(fileSize + "업로드 파일의 크기는 100mb보다 작아야합니다");
  		
  		return false;
  	}
  	
- 	if(regExpForbiddenFile.test(afileName)){
+ 	if(regExpForbiddenFile.test(fileName)){
  		
- 		alert(afileName + ": 지원되지않거나 잘못된형식의 파일입니다");
+ 		alert(fileName + ": 지원되지않거나 잘못된형식의 파일입니다");
  		
  		return false;
  	}
@@ -220,7 +242,135 @@
  	
  }
  
+ <%-- 업로드 결과 표시 함수 --%>
+ function showUploadResult(uploadResult){
+ 	
+ 	var htmlStr = "";
+ 	
+ 	if(uploadResult == null || uploadResult.length == 0) {
+ 	//if(!uploadResult) { //동작 않함
+ 		htmlStr = "<li>첨부파일이 없습니다.</li>" ;
+ 		fileUploadResultUL.html(htmlStr) ;
+ 		return ;
+ 	}
+ 	
+ 	var fullFileName = null ;
+ 	
+ 	<%-- 전달받은 파일들의 정보 각각에 대하여 --%>
+ 	$(uploadResult).each(function(i, attachFile){
+ 		
+ 	    fullFileName = encodeURI(attachFile.repoPath + "/" +
+                                  attachFile.uploadPath + "/" +
+                                  attachFile.uuid + "_" + attachFile.fileName) ;	
+ 	
+ 		
+ 			htmlStr
+ 			+="<li data-uploadpath='" + attachFile.uploadPath + "'" 
+ 			+ "    data-uuid='" + attachFile.uuid + "'" 
+ 			+ "    data-filename='" + attachFile.fileName + "'" 
+ 			+ "    data-filetype='F'>"
+ 			+ "        <img src='${contextPath}/resources/icons/icon-attach.png' style='width:30px;'/>"
+ 			+ "        &emsp;" + attachFile.fileName
+ 			+ "        <span class='glyphicon glyphicon-remove-sign' data-filename='" + fullFileName + "'"
+             + "              data-filetype='F' style='color:red;'></span>"
+ 			+ "</li>"
+ 		
+ 		
+ 	});
+ 	
 
+ 	//fileUploadResultUL.html(htmlStr) ;
+ 	fileUploadResultUL.append(htmlStr) ;
+ 	
+ 	
+ 	
+
+ }
+ 	
+
+ $("#fileInput").on("change", function(){
+ 	
+ 	var fileInput = $("input[name='fileInput']") ;
+     //var fileInputs = $(this) ;
+
+     var uploadFiles = fileInput[0].files ;//반드시 [0]을 붙여야 함
+     console.log(uploadFiles) ;
+     
+
+     <%-- Ajax를 이용한 파일 업로드는, 웹 브라우저의 FormData() 내장 생성자를 이용하여 전송 --%>
+     var formData = new FormData() ;
+     
+     for(var i = 0 ; i < uploadFiles.length ; i++) {
+     	
+     	if(!checkUploadFile(uploadFiles[i].name, uploadFiles[i].size)){
+     		console.log("파일이름: " + uploadFiles[i].name) ;
+     		console.log("파일크기: " + uploadFiles[i].size) ;
+     		$("#fileInput").val("") ;
+     		return ;	
+     	}
+     	formData.append("uploadFiles", uploadFiles[i]) ;
+     	
+     }
+     
+     $.ajax({
+     	type: "post" ,
+     	url : "${contextPath}/doFileUpload" ,
+     	data: formData ,
+     	contentType: false ,  //contentType에 전송타입(즉, MIME 타입)을 지정하지 않음.
+     	processData: false ,  //contentType에 설정된 형식으로 data를 변환처리가 수행되지 않음
+     	dataType: "json" ,
+     	success: function(uploadResult, status){
+     		console.log(uploadResult)  ;
+     		//$(".uploadDiv").html(cloneFileInput.html()) ;
+     		$("#fileInput").val("") ;
+     		showUploadResult(uploadResult) ;
+     	}
+     });
+
+ }) ;
+
+
+ <%-- 파일 삭제: 서버에 업로드된 파일이 삭제되고, 이를 화면에 반영해 주어야 함 --%>
+ <%-- 이벤트 위임(Event Delegation) 적용 div.fileUploadResult > ul > li:nth-child(1) > span --%>
+ $(".fileUploadResult ul").on("click", "li span" , function(){
+     var fileName = $(this).data("filename") ;
+     
+     
+     var fileLi = $(this).parent() ;
+     //var fileLi = $(this).closest("li") ;
+     
+     //post 가 아닌 다른 type의 전송방식(예, delete)를 사용하려면
+     //프로젝트의 web.xml 파일에 org.springframework.web.filter.FormContentFilter 필터를 설정해야 함
+     $.ajax({
+         type: "post" ,  
+         url: "${contextPath}/deleteFile" ,
+         data: {fileName: fileName} ,
+        //data: JSON.stringify({fileName: fileName, fileType: fileType}) ,
+        // contentType: "application/json; charset=utf-8" ,
+         dataType: "text" ,
+         success: function(result) {
+         	if(result == "DelSuccess") {
+         		alert("파일이 삭제되었습니다.") ;
+         		fileLi.remove() ;
+         	} else {
+         		if(confirm("파일이 존재하지 않습니다. 해당 항목을 삭제하시겠습니까?")) {
+         			fileLi.remove() ;
+         		}
+         	}
+         } ,
+         error: function(xhr, status, e) {
+         	
+         		alert("서버 장애") ;
+         		console.log(e) ;
+        	
+         		if(confirm("파일이 존재하지 않습니다. 해당 항목을 삭제하시겠습니까?")) {
+         			fileLi.remove() ;
+         		}
+         	
+         } 
+         
+     });
+ }) ;
 </script>
 
 

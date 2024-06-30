@@ -26,4 +26,8 @@ public interface RecruiterService {
 	
 	// 특정 구인글 삭제
 	public void deleteRecruit(Long bno);
+	
+	// *
+	// userid의 username을 찾기
+	public String findRecruiter(String userid);
 }

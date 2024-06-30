@@ -22,9 +22,15 @@
    margin-left: 100px;
    background-color: white;
    }
-   .contentBox{
-	margin-left: 10%;
-	margin-right: 10%;
+   .attachFile{
+   margin-left: 10%;
+   margin-right: 10%;
+   margin-bottom: 10%;
+   }
+   
+   .contentBox {
+   margin-left: 10%;
+   margin-right: 10%;
    }
    .btn_apply{
    margin-left: 60%; 
@@ -53,7 +59,7 @@
         </h1>
         <h4 style="display: inline-block;">이력서 상세 열람</h4>
         <div class="btn_apply">
-            <button type="button" id="btnResumelist" class="btn btn-outline btn-warning btnResumelist" >목록</button> 
+            <button type="button" id="btnResumelist" class="btn btn-outline btn-warning btnResumelist" >내가 쓴 구직글들</button> 
             <button type="button" id="btnHome" class="btn btn-outline btn-warning btnHome" >홈</button>   
             <button type="button" id="btnToModifyA" class="btn btn-outline btn-warning btnToModifyA" >수정</button>
             <button type="button" id="btnTodetail" class="btn btn-outline btn-warning btnTodetail" >구직글로 ㄱ</button>   
@@ -165,6 +171,45 @@
       <input type="hidden" id="bno" name="bno" value="${jsList.bno }">
  --%>
 </form>
+<div class="attachFile">
+<%-- 첨부파일 표시 --%>    
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                   <strong style="font-size:16px;">첨부 파일</strong><%--수정--%>
+                </div><!-- /.panel-heading -->
+                <div class="panel-body">
+                   <div class="form-group fileUploadResult"><%--첨부파일 목록 표시 div--%>
+                       <ul>
+                    
+<c:choose>                 
+<c:when test="${empty jobSeeker.jobSeekerAttachFileList }">
+    <li style="font-size: 12pt;">첨부파일이 없습니다</li>
+</c:when>
+<c:otherwise>
+    <c:forEach var="jsAttachFileList" items="${jobSeeker.jobSeekerAttachFileList }">
+            <li class="attachLi"
+                data-repopath = "${jsAttachFileList.repoPath }"
+                data-uploadpath = "${jsAttachFileList.uploadPath }"
+                data-uuid = "${jsAttachFileList.uuid }"
+                data-filename = "${jsAttachFileList.fileName }">
+                    <img src='${contextPath}/resources/icons/icon-attach.png' style='width:25px;'>
+                    &emsp;${jsAttachFileList.fileName}
+            </li>
+    </c:forEach>
+</c:otherwise>
+</c:choose>
+                       </ul>
+                   </div>
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col-lg-12 -->
+    </div><!-- /.row -->
+</div>
+
+
+<!-- dd ----------------------------------------------------->
  <script>
  var frmSendValue = $("#frmSendValue");
  var frmApplication = $("#frmApplication");
@@ -175,7 +220,7 @@
     
        var awriter = '<c:out value="${jobSeeker.awriter}"/>' ;
        
-       alert(awriter + "  목록 버튼 awriter왜 안 나와") ;
+       alert("  awriter가 작성한 이력서들") ;
        
        location.href="${contextPath}/board/resumelist?awriter=" + awriter  ;
     });
@@ -191,25 +236,20 @@
  <%-- 홈 버튼 클릭--%>
  $(".btnHome").on("click",function(){
     
-	 	frmSendValue.find("#bno").remove();
-	 	frmSendValue.attr("action", "${contextPath}/board/homepage");
-	 	frmSendValue.attr("method","post");
-	 	
-	 	frmSendValue.submit();
+       frmSendValue.find("#bno").remove();
+       frmSendValue.attr("action", "${contextPath}/board/homepage");
+       frmSendValue.attr("method","get");
+       
+       frmSendValue.submit();
      });
  
  <%-- 수정 버튼 클릭--%>
  $(".btnToModifyA").on("click",function(){
-    
+	 var bno = '<c:out value= "${recruit.bno}"/>';
     var ano = '<c:out value="${jobSeeker.ano}"/>' ;
-       location.href = "${contextPath}/board/modifyA?ano=" + ano  ;
+       location.href = "${contextPath}/board/modifyA?ano=" + ano + "&bno=" + bno  ;
      });
- 
   
 </script>
-
-
-
-
 
 <%@ include file="../include/footer.jsp" %>

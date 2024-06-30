@@ -153,18 +153,22 @@
 		              <th>작성자</th>
 		              <th>지원일</th>
 		          </tr>
+		          
 		      </thead>
-		      <tbody>
+		      <tbody class="appliTab">
 		      	<c:choose>
 		    	 <c:when test="${not empty jsList }">
-		        	<c:forEach items="${jsList }" var="appList" >
+		    	 	<div class="appliTab">
+		    	 	<%-- <c:forEach items="${jsList }" var="appList" >
 		              <tr class="myTr" data-ano='<c:out value="${appList.ano}"/>'>
 		                  <td><c:out value="${appList.ano }"/></td>
 		                  <td><c:out value="${appList.atitle }"/><!-- </a> --></td>
 		                  <td><c:out value="${appList.awriter }"/></td>
 		                  <td><fmt:formatDate value="${appList.aregDate }" pattern="yyyy/MM/dd HH:mm:s"/></td>
 		              </tr>
-		           </c:forEach>
+		           </c:forEach> --%>
+		    	 	</div>
+		        	
 		         </c:when>
 		        <c:otherwise>
 		         <td colspan="6" style="background-color: #F7F8E0;">등록된 게시물이 없습니다</td>
@@ -172,6 +176,7 @@
 		       </c:choose>
 		    </tbody>
 		</table>
+		<button type="button" style="display:in-block;" class="btn btn-outline btn-info btn-xs btn-block appliScroll">더 보기</button>
 	</div>
 <%--해당 글 구직자 이력서 목럭  끝--%>
 
@@ -245,6 +250,28 @@ var myCommentModule = (function() {
         $.ajax({
         	type: "get" ,
         	url: "/ourpro00/comments/list/" + bno ,
+        	dataType: "json" ,
+        	success: function(replyList){
+        		if(callback){
+        			callback(replyList);
+        		}
+        	}
+        	
+        }); //ajax-end
+		
+	}//getReplyList 함수종료
+	
+	function getAppList(myPaging, callback){
+		var bno = myPaging.bno;
+		// 페이징 구현 불확실 var pageNum = myPaging.pageNum ;
+		//console.log("bno: " + bno);
+		//console.log("pageNum: " + pageNum);
+		
+		//댓글 목록 조회 컨트롤러의 매핑 URL: GET /replies/list/{bno}/{pageNum}
+        //$.ajax() 함수는, 자바스크립트 객체를 매개값으로 받아 처리
+        $.ajax({
+        	type: "get" ,
+        	url: "/ourpro00/comments/list/" + bno+"/app" ,
         	dataType: "json" ,
         	success: function(replyList){
         		if(callback){
@@ -339,13 +366,34 @@ var myCommentModule = (function() {
         }); //ajax-end
 		
 	}
+		
+		   function myDateTimeFmt(datetimeValue) {
+		       var myDate = new Date(datetimeValue) ;
+		       
+		       var yyyy = myDate.getFullYear() ;
+		       var mm = myDate.getMonth() + 1 ;  // getMonth() is zero-based
+		       var dd = myDate.getDate() ;
+		       var hh = myDate.getHours() ;
+		       var mi = myDate.getMinutes() ;
+		       var ss = myDate.getSeconds() ;
+		       
+		               // 2023/06/02 07:05:03
+		       return [yyyy, '/',
+		              (mm < 10 ? "0" : "") + mm, "/" ,
+		              (dd > 9 ? '' : "0") + dd, " " ,
+		              (hh > 9 ? '' : "0") + hh, ":" ,
+		              (mi > 9 ? '' : "0") + mi, ":" ,
+		              (ss > 9 ? '' : "0") + ss ].join('') ;  //배열값들을 조인시켜 하나의 문자열로 반환
+		   }
 
 	return {
 		getReplyList: getReplyList,
 		registerComment:registerComment,
 		modifyComment:modifyComment,
 		blindComment:blindComment,
-		removeComment:removeComment
+		removeComment:removeComment,
+		getAppList:getAppList,
+		myDateTimeFmt:myDateTimeFmt
 		
 	}
 })();
@@ -354,7 +402,58 @@ var myCommentModule = (function() {
  
  var frmSendValue = $("#frmSendValue");
  var bno = '<c:out value= "${recruit.bno}"/>';
+ var scorllAppliPagingNum =0;
+ var scorllReplyPagingNum =0;
+ showAppList()
  showCmtList();
+ 
+ <%-- 이력서 목록표시 함수 --%>
+ function showAppList(){
+	 
+	 myCommentModule.getAppList(
+		 		{bno: bno},
+		 		
+		 		function(appList){//js callback에 들어감
+		 			console.log("appList: \n" + appList);
+		 			var appliTab = $("tbody.appliTab");
+		 			var appliFileInputHtml = "";
+		 			var myAppli = "";
+		 			var saveNum;
+
+
+		 			for(var  i = scorllAppliPagingNum ; i < (scorllAppliPagingNum+10) ; i++){	
+	 				saveNum=i;
+	 				
+	 				
+	 				if(!appList[i]){//댓글다떨어지면 포문종료
+	 					break;
+	 				}
+	 				myAppli =appList[i]
+
+	                    
+		 			appliFileInputHtml
+		 			 += 	'<tr class="myTr" data-ano=' + myAppli.ano + '>'
+	                 + 	'<td>' + myAppli.ano + '</td>'
+	                 + 	'<td>' + myAppli.atitle + '</td>'
+	                 + 	'<td>' + myAppli.awriter + '</td>'
+	                 + 	'<td>' + myCommentModule.myDateTimeFmt(myAppli.aregDate) + '</td></tr>'; 
+	 			}
+	 			
+
+			scorllAppliPagingNum = (scorllAppliPagingNum+10);
+	 			if(appliFileInputHtml){
+	 				appliTab.append(appliFileInputHtml);
+	 				appliFileInputHtml = "";
+	               }
+	 			if(!appList[saveNum]){//댓글다떨어지면 함수종료
+	 				$(".appliScroll").remove();
+ 					return false;
+ 				}
+	 			return true;
+ 			}
+ 		)
+             
+ }
  
  <%-- 댓글 목록표시 함수 --%>
  function showCmtList(){
@@ -365,12 +464,19 @@ var myCommentModule = (function() {
  			console.log("replyList: \n" + replyList);
  			var replyTab = $("div.replyTab");
  			var replyFileInputHtml = "";
+ 			var myReply = "";
+ 			var saveNum;
  			
- 			for(var myReply of replyList){// 댓글리스트함수 불러와서 재귀함수내에서 myReply로 댓글마다 재귀
+ 			for(var i = scorllReplyPagingNum ; i<(scorllReplyPagingNum+5) ;i++){// 댓글리스트함수 불러와서 재귀함수내에서 myReply로 댓글마다 재귀
  				
- 				if(!myReply.rno){//댓글다떨어지면 함수종료
+ 				if(!replyList[i]){//댓글다떨어지면 함수종료
  					return false;
  				}
+ 			
+ 				saveNum = i;
+ 				myReply = replyList[i];
+ 				
+ 				
  				replyFileInputHtml 
  					+= '<div class="replys">'
  					+   "	<span class='header info-rwriter'>";
@@ -413,12 +519,18 @@ var myCommentModule = (function() {
  						+ " </span>"
  			            + "	<br><p style='white-space : pre'>블라인드 처리 되었습니다</p><br>"
  	               		+	'<hr class="txtBoxCmtHr" style="margin-top:10px; margin-bottom:10px"></div>';
+ 	               		
  				}
+ 				
+ 				
  		       
  		                
  			}
+ 			scorllReplyPagingNum = saveNum;
+ 			replyFileInputHtml 
+			+= '	<button type="button" style="display:in-block;" class="btn btn-outline btn-info btn-xs btn-block replyScroll">더 보기</button>'
  			if(replyFileInputHtml){
- 				replyTab.html(replyFileInputHtml);
+ 				replyTab.append(replyFileInputHtml);
             	 	replyFileInputHtml = "";
                }
  			/*페이징구현 불확실 showCmtPagingNums(replyList.rowTotal,
@@ -577,16 +689,25 @@ var myCommentModule = (function() {
 		);//myCommentModule.registerComment()-end
 	});
 	
-    $(".myTr").on("click", function(){
+	$(document).on("click",".myTr", function(){
         var ano = $(this).data("ano") ;  
         alert(ano) ;
         
-       location.href = "${contextPath}/board/resume?ano="+ ano  ;
+       location.href = "${contextPath}/board/resume?ano="+ ano  +"&bno=" + bno  ;;
 
 
         
       })
-	
+ <%--댓글 더보기 버튼 활성화--%>
+      $(document).on("click",".replyScroll",function(){ 
+    	  $(this).remove();
+    	  showCmtList();
+      })
+<%--이력서 더보기 버튼 활성화--%>
+      $(document).on("click",".appliScroll",function(){ 
+			
+    	  showAppList();
+      })
 	
  
  <%--댓글 이력서 스왑버튼--%>

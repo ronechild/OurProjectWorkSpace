@@ -76,7 +76,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="${contextPath }/">My Admin Board</a>
+                <a class="navbar-brand" href="${contextPath}/board/homepage">My Admin Board</a>
             </div>
             <!-- /.navbar-header -->
 

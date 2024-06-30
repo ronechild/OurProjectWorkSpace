@@ -6,17 +6,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.spring5legacy.ourpro00.domain.CommentVO;
+import com.spring5legacy.ourpro00.domain.JobSeekerVO;
 import com.spring5legacy.ourpro00.mapper.CommentMapper;
+import com.spring5legacy.ourpro00.mapper.JobSeekerMapper;
 
 import lombok.AllArgsConstructor;
-import lombok.extern.log4j.Log4j;
 
 @Service
 @AllArgsConstructor
-@Log4j
 public class CommentServiceImpl implements CommentService{
 	
 	private CommentMapper commentMapper ;
+	private JobSeekerMapper jobSeekerMapper;
 
 	// 특정 구인글의 댓글 목록 조회
 	@Override
@@ -25,6 +26,15 @@ public class CommentServiceImpl implements CommentService{
 		List<CommentVO> commentList =  commentMapper.selectCommentList(bno) ;
 		
 		return commentList ;
+	}
+	
+	// 특정 구인글의 이력서 목록 조회
+	@Override
+	public List<JobSeekerVO> selectAppliList(Long bno) {
+			
+		List<JobSeekerVO> appliList =  jobSeekerMapper.selectJobSeekerListForDetail(bno) ;
+			
+		return appliList ;
 	}
 
 	// 특정 구인글에 대한 댓글 등록

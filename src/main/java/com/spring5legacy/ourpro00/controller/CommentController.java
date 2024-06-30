@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,9 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring5legacy.ourpro00.domain.CommentVO;
+import com.spring5legacy.ourpro00.domain.JobSeekerVO;
 import com.spring5legacy.ourpro00.service.CommentService;
-
-import lombok.AllArgsConstructor;
 
 @RestController
 //@AllArgsConstructor
@@ -43,7 +41,15 @@ public class CommentController {
 	}
 	
 	
+	// 특정 구인글의 이력서 목록 조회
 	
+		@GetMapping(value = "/list/{bno}/app", produces = "application/json;charset=utf-8")
+		public ResponseEntity<List<JobSeekerVO>>  selectAppliList(@PathVariable("bno") Long bno){
+			
+			List<JobSeekerVO> AppliList = commentService.selectAppliList(bno);
+			
+			return new ResponseEntity<List<JobSeekerVO>>(AppliList,HttpStatus.OK) ;
+		}
 	
 	// 특정 구인글에 대한 댓글 등록
 	@PostMapping(value = "/list/{bno}/new")
