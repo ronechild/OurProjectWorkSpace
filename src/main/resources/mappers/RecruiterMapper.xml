@@ -3,10 +3,12 @@
 
 <mapper namespace="com.spring5legacy.ourpro00.mapper.RecruiterMapper">
 
+
 	<!-- 구인글 목록 조회 -->
 	<select id="selectRecruitList" resultType="com.spring5legacy.ourpro00.domain.RecruiterVO">
-		SELECT bno, bwriter, bregdate, benddate, breplycnt, bappcnt
+		SELECT bno, btitle, bwriter, bregdate, benddate, breplycnt, bappcnt, bhcnt
 		FROM tbl_hiring
+		ORDER BY bno DESC
 	</select>
 	
 	<!-- 특정 구인글 조회 -->

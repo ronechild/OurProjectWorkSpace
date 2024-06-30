@@ -34,7 +34,7 @@ public class LoginAuthenticationSuccessHandler  extends SavedRequestAwareAuthent
 		SavedRequest savedRequest = requestCache.getRequest(request, response);
 		
 		if (savedRequest == null) {
-			response.sendRedirect("/");// 경로 추가 하기
+			response.sendRedirect("board/hompage");
 		} else {
 			super.onAuthenticationSuccess(request, response, authentication);
 		}

@@ -59,7 +59,7 @@
     <!-- Custom Theme JavaScript -->
     <script src="${contextPath}/resources/dist/js/sb-admin-2.js"></script>
   <!-- Project custom -->
-     <link href="${contextPath}/resources/vendor/bootstrap/css/newcss.css" rel="stylesheet">
+     <link href="${contextPath}/resources/css/newcss.css" rel="stylesheet">
 
 </head>
 
@@ -81,10 +81,55 @@
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
-                <li class="homebtn">
-                    <a class="button" href="${contextPath }">
-                        <i class="glyphicon glyphicon-home"></i>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#me">
+                        <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
+                    <ul class="dropdown-menu dropdown-messages">
+                        <li>
+                            <a href="#me">
+                                <div>
+                                    <strong>John Smith</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>Yesterday</em>
+                                    </span>
+                                </div>
+                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#me">
+                                <div>
+                                    <strong>John Smith</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>Yesterday</em>
+                                    </span>
+                                </div>
+                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#me">
+                                <div>
+                                    <strong>John Smith</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>Yesterday</em>
+                                    </span>
+                                </div>
+                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#me">
+                                <strong>Read All Messages</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-messages -->
                 </li>
                 <!-- /.dropdown -->
                 <li class="dropdown">
@@ -245,5 +290,7 @@
             </ul>
             <!-- /.navbar-top-links -->
 
-            
+            <div class="navbar-default sidebar" role="navigation">
+            </div>
+            <!-- /.navbar-static-side -->
         </nav>

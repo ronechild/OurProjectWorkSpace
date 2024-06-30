@@ -16,6 +16,10 @@
 	div.jobBox{
 	
 	}
+	col-xs-3{
+	position: absolute;
+	display: inline-block;
+	}
 	
 </style>
 
@@ -35,22 +39,25 @@
 <div>
 <ul>
 <%-- items="$" var="jobList" --%>
-<c:forEach begin="1" end="20">
+<c:forEach  items="${recruitList }" var = "recruit">
 	<div class="jobBox">
 		<div class="col-lg-3 col-md-6">
                     <div class="panel panel-primary">
-                        <div class="panel-heading">
+                        <div class="panel-heading" style="height: 110px;">
                             <div class="row">
-                                <div class="col-xs-3">
+                                <div class="col-xs-3 text-left" style="margin-top:10px; font-size: large; width: 75%">
+                                 <div ><c:out value="${recruit.btitle }"/></div>
+                                 <div style="font-size: medium; margin-top: 5px; color: #E1FFE1;"><c:out value="🏦${recruit.bwriter }"/></div>
                                 </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge"><c:out value="jobList"/></div>
-                                    <div><c:out value="신청자/모집인원"/></div>
+                                <div class="col-xs-3 pull-right" >
+                                    <div class="huge"><c:out value="${recruit.bappCnt }/${recruit.bhcnt }"/></div>
+                                    <div style="width: 140%; position: relative; right: 30%;"><c:out value="지원자/모집인원"/></div>
                                 </div>
                             </div>
                         </div>
                         <a href="#">
-                            <div class="panel-footer">
+                            <div class="panel-footer" style="height: 40px;">
+                            	<input type="hidden" id="bnotrunk" value="${recruit.bno }">
                                 <span class="pull-left"><c:out value="Detail"/></span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                 <div class="clearfix"></div>
@@ -84,18 +91,16 @@
 </div>
 
 <form id="frmSendValue">
-		<input type="hidden" id="pageNum" name="pageNum" <%-- value="${pagingCreator.myBoardPaging.pageNum }" --%>>
-		<input type="hidden" id="rowAmountPerPage" name="rowAmountPerPage" <%-- value="${pagingCreator.myBoardPaging.rowAmountPerPage }" --%>>
 
 </form>
 
 <script>
 var frmSendValue = $("#frmSendValue");
 $(".panel-footer").on("click",function(){
-	var bno = $(this).data("bno");
+	var bno = $(this).children("#bnotrunk").val();
 	frmSendValue.append('<input type="hidden" id="bno" name="bno" value="' + bno + '">');
 	
-	frmSendValue.attr("action", "${contextPath}/detail");
+	frmSendValue.attr("action", "${contextPath}/board/detail");
 	frmSendValue.attr("method","get");
 	    	
 	frmSendValue.submit();

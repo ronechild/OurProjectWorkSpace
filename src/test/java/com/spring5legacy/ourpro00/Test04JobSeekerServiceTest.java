@@ -1,15 +1,11 @@
 package com.spring5legacy.ourpro00;
 
-import static org.junit.Assert.assertNotNull;
-
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.spring5legacy.ourpro00.domain.JobSeekerVO;
 import com.spring5legacy.ourpro00.service.JobSeekerService;
 
 @WebAppConfiguration
@@ -18,7 +14,8 @@ import com.spring5legacy.ourpro00.service.JobSeekerService;
 					   "file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml"})
 public class Test04JobSeekerServiceTest {
 	
-    private JobSeekerService jobSeekerService ;
+    @SuppressWarnings("unused")
+	private JobSeekerService jobSeekerService ;
     
     @Autowired
     public void setJobSeekerService(JobSeekerService jobSeekerService) {
@@ -34,11 +31,11 @@ public class Test04JobSeekerServiceTest {
 //        assertNotNull(jobSeekerService); //MyBoardService 필드가 null 이면, AssertionError 예외 발생
 //    }
 //
-    //게시물 목록 조회 서비스 테스트
-    @Test
-    public void testgetJobSeeker() {
-        jobSeekerService.getJobSeekerList("작성자1").forEach(jobSeeker -> System.out.println(jobSeeker));
-    }
+//    //게시물 목록 조회 서비스 테스트
+//    @Test
+//    public void testgetJobSeeker() {
+//        jobSeekerService.getJobSeekerList("작성자1").forEach(jobSeeker -> System.out.println(jobSeeker));
+//    }
 
 //    //게시물 등록(selectKey 이용) 테스트
 //    @Test

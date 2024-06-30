@@ -24,6 +24,13 @@ public class JobSeekerServiceImpl implements JobSeekerService{
 		System.out.println("구직글 목록");
 		return jobSeekerMapper.selectJobSeekerList(awriter);
 	}
+	
+	// 구직글 목록 조회 
+	@Override
+	public List<JobSeekerVO> getJobSeekerListForDetail(Long bno) {
+		System.out.println("구직글 목록");
+		return jobSeekerMapper.selectJobSeekerListForDetail(bno);
+	}
 
 	// 특정 구직글 조회
 	@Override

@@ -7,34 +7,34 @@
 
 <%@ include file="../include/header.jsp" %>
 <style>
-	.alert,dl{
-	display: inline-block;
-	width: 200px;
-	margin-left: 50px;
-	}
-	dd{
-	color: #28288C;
-	}
-	dt{
-	float: left;
-	}
-	.bcontentTextBox{
-	margin-left: 100px;
-	background-color: white;
-	}
-	.contentBox{
-	margin-left: 100px;
-	margin-right: 100px;
-	}
-	.btn_apply{
-	margin-left: 60%; 
-	display: inline-block;
-	}
-	.titleWrapper{
-	padding-left: 25%; 
-	padding-right: 20%;
-	}
-	
+   .alert,dl{
+   display: inline-block;
+   width: 200px;
+   margin-left: 50px;
+   }
+   dd{
+   color: #28288C;
+   }
+   dt{
+   float: left;
+   }
+   .bcontentTextBox{
+   margin-left: 100px;
+   background-color: white;
+   }
+   .contentBox{
+	margin-left: 10%;
+	margin-right: 10%;
+   }
+   .btn_apply{
+   margin-left: 60%; 
+   display: inline-block;
+   }
+   .titleWrapper{
+   padding-left: 25%; 
+   padding-right: 20%;
+   }
+   
 </style>
 
 <hr>
@@ -44,16 +44,19 @@
 <div class="wrap_jv_header" >
     <a class="placeholder" tabindex="-1"></a>
     <div class="jv_header" data-rec_idx="48341817" data-rec_seq="0">
-	    <div class="title_inner">
+       <div class="title_inner">
                             
                <h3><c:out value="bwiter(기업명)"/> </h3>
          </div>
         <h1 class="tit_job" style="margin-left: 5%;">
-                        <c:out value="24년 신규 채용 공고 |btitle(제목)"/>    
+                        <c:out value="이력서 상세 페이지"/>    
         </h1>
         <h4 style="display: inline-block;">이력서 상세 열람</h4>
         <div class="btn_apply">
-            <button type="button" id="backpage" class="btn btn-outline btn-warning" >목록</button>        
+            <button type="button" id="btnResumelist" class="btn btn-outline btn-warning btnResumelist" >목록</button> 
+            <button type="button" id="btnHome" class="btn btn-outline btn-warning btnHome" >홈</button>   
+            <button type="button" id="btnTodetail" class="btn btn-outline btn-warning btnTodetail" >구직글로 ㄱ</button>       
+                
         </div>
     </div>
     </div>
@@ -62,72 +65,138 @@
 <hr>
 <%-- 세부 기본내용 --%>
 <div class="cont wrapper">
-	<div class="col">
-		<dl>
-		    <dt>등록일&nbsp;</dt><dd><c:out value="2024-06-27|bregdate"/></dd>
-		</dl>           
-		<dl >
-		    <dt>마감일&nbsp;</dt><dd style="color: #800000;"><c:out value="2024-06-27|benddate"/></dd>
-		</dl>
-		       <div class="alert alert-danger" style="height: 50px; width: 90px;">D-day - <c:out value="5"/></div>
+   <div class="col">
+   
+   
+      <dl>
+          <dt>글 번호&nbsp;</dt><dd><c:out value="${jobSeeker.ano}"/></dd>
+      </dl> 
+      
+      <dl>
+          <dt>작성자&nbsp;</dt><dd><c:out value="${jobSeeker.awriter}"/></dd>
+      </dl> 
+      
+      
+      <dl>
+          <dt>등록일&nbsp;</dt><dd><c:out value="${jobSeeker.aregDate}"/></dd>
+      </dl>           
+      <dl >
+          <dt>마감일&nbsp;</dt><dd style="color: #800000;"><c:out value="2024-06-27|benddate"/></dd>
+      </dl>
+             <div class="alert alert-danger" style="height: 50px; width: 90px;">D-day - <c:out value="5"/></div>
      </div>
      <div class="col">
- 		<dl>
-		    <dt>직종&emsp;</dt><dd><c:out value="직종|boccupation"/></dd>
-		</dl>           
-		<dl >
-		    <dt>지역&emsp;</dt><dd><c:out value="지역|bregion"/></dd>
-		</dl>
-		<dl >
-		    <dt>모집인원&nbsp;</dt><dd><c:out value="인원|bhcnt"/></dd>
-		</dl>
+       <dl>
+          <dt>직종&emsp;</dt><dd><c:out value="직종|boccupation"/></dd>
+      </dl>           
+      <dl >
+          <dt>지역&emsp;</dt><dd><c:out value="지역|bregion"/></dd>
+      </dl>
+      <dl >
+          <dt>모집인원&nbsp;</dt><dd><c:out value="인원|bhcnt"/></dd>
+      </dl>
      </div>
         <br>
             </div>
             <%-- 세부 기본내용 끝--%>
             <hr>
 </div>
-
-<div class="contentBox">
-	<form role="form" method="post" name="frmApplication" id="frmApplication" action="${contextPath }/board/application?" >
-	
-		<div class="form-group">
-			<div class="form-group" style="width: 100px; display: inline-block;">
-				<input class="form-control" name="bwriter" id="bwriter"  value='<security:authentication property="principal.username"/>' readonly>
-			</div>
-			<input class="form-control" name="btitle" id="btitle" value='<c:out value="${btitle }"/>' readonly="readonly">
-		                           	
-		</div>
-		<div class="form-group">
-	    	<textarea class="form-control" name="bcontent" id="bcontent" style="height: 500px;" readonly="readonly"><c:out value="${bcontent }"/>' </textarea>
-	    </div>
-		
-		<div class="btn_apply pull-right">
-			<button type="button" id="backpage" class="btn btn-outline btn-warning" >목록</button>        
-        </div>
-		<security:csrfInput/>
-	</form>	
+<div class= "contentBox">
+<div class="form-group">
+        <label class="control-label" style="white-space: nowrap;">글내용</label>
+        <textarea class="form-control bcontentResume" rows="3" name="bcontent"
+                  readonly="readonly" style="height: 400px;"
+                  ><c:out value="${jobSeeker.acontent}"/></textarea>
+ </div>
+ 
+ <div class="form-group">
+        <label class="control-label" style="white-space: nowrap;">작성자</label>
+        <input class="form-control writer" name="bwriter"
+               value='<c:out value="${jobSeeker.awriter}"/>' readonly="readonly"/>
 </div>
+
+<div class="form-group">
+        <label class="control-label" style="white-space: nowrap;">구인글번호</label>
+        <input class="form-control" name="bwriter"
+               value='<c:out value="${jobSeeker.bno}"/>' readonly="readonly"/>
+</div>
+</div>
+
+
+
+<%-- <div class="contentBox">
+   <form role="form" method="post" name="frmApplication" id="frmApplication" action="${contextPath }/board/application?" >
+   
+      <div class="form-group">
+      
+         <div class="form-group" style="width: 100px; display: inline-block;">
+            <input class="form-control" name="bwriter" id="bwriter"  value='<security:authentication property="principal.username"/>' readonly>
+         </div>
+         
+         <input class="form-control" name="btitle" id="btitle" value='<c:out value="${btitle }"/>' readonly="readonly">
+                                    
+      </div>
+      <div class="form-group">
+          <textarea class="form-control" name="bcontent" id="bcontent" style="height: 500px;" readonly="readonly"><c:out value="${bcontent }"/>' </textarea>
+       </div>
+      
+      <div class="panel panel-default">
+            <div class="panel-heading"> <h4>파일 첨부</h4> </div> /.panel-heading
+            <div class="panel-body">
+      
+      <div class="btn_apply pull-right">
+         <button type="button" id="backpage" class="btn btn-outline btn-warning" >목록</button>        
+        </div>
+        
+      </div><!-- /.panel-body -->
+ </div> <!-- /.panel -->        
+      <security:csrfInput/>
+   </form>   
+</div>      --%> <!-- contentBox - end -->
+
 <form id="frmSendValue">
-		<input type="hidden" id="pageNum" name="pageNum" value="${myBoardPaging.pageNum }">
-		<input type="hidden" id="rowAmountPerPage" name="rowAmountPerPage" value="${myBoardPaging.rowAmountPerPage }">
-		<input type="hidden" id="bno" name="bno" value="${myBoard.bno}">
-		<input type="hidden" id="boccupation" name="boccupation" value="${myBoardPaging.boccupation}">
-		<input type="hidden" id="bregion" name="bregion" value="${myBoardPaging.bregion}">
+      <%-- <input type="hidden" id="ano" name="ano" value="${jsList.ano }">
+      <input type="hidden" id="atitle" name="atitle" value="${jsList.atitle }">
+      <input type="hidden" id="acontent" name="acontent" value="${jsList.acontent }">
+      <input type="hidden" id="awriter" name="awriter" value="${jsList.awriter }">
+      <input type="hidden" id="aregDate" name="aregDate" value="${jsList.aregDate }">
+      <input type="hidden" id="bno" name="bno" value="${jsList.bno }">
+ --%>
 </form>
  <script>
  var frmSendValue = $("#frmSendValue");
  var frmApplication = $("#frmApplication");
+ 
+ 
  <%-- 목록 버튼 클릭--%>
- $(".jobCancle").on("click",function(){
-	 	frmApplication.empty();
-	 	frmSendValue.attr("action", "${contextPath}/detail");
-	 	frmSendValue.attr("method","get");
+ $("#btnResumelist").on("click",function(){
+    
+       var awriter = '<c:out value="${jobSeeker.awriter}"/>' ;
+       
+       alert(awriter + "  목록 버튼 awriter왜 안 나와") ;
+       
+       location.href="${contextPath}/board/resumelist?awriter=" + awriter  ;
+    });
+
+ <%-- 구직글 버튼 클릭--%>
+ $(".btnTodetail").on("click",function(){
+    
+    var bno = '<c:out value="${jobSeeker.bno}"/>' ;
+       location.href = "${contextPath}/board/detail?bno=" + bno  ;
+     });
+ 
+ 
+ <%-- 홈 버튼 클릭--%>
+ $(".btnHome").on("click",function(){
+    
+	 	frmSendValue.find("#bno").remove();
+	 	frmSendValue.attr("action", "${contextPath}/board/homepage");
+	 	frmSendValue.attr("method","post");
 	 	
 	 	frmSendValue.submit();
-	 });
+     });
  
-
+  
 </script>
 
 

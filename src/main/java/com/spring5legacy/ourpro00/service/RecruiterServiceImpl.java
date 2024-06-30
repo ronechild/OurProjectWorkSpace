@@ -12,7 +12,7 @@ import com.spring5legacy.ourpro00.mapper.RecruiterMapper;
 import lombok.AllArgsConstructor;
 
 @Service
-@AllArgsConstructor // 생성자 의존성 주입
+@AllArgsConstructor
 public class RecruiterServiceImpl implements RecruiterService{
 	
 	private RecruiterMapper recruiterMapper;
@@ -21,9 +21,10 @@ public class RecruiterServiceImpl implements RecruiterService{
 	
 	// 구인글 목록 조회
 	@Override
-	public RecruiterVO selectRecruitList() {
+	public List<RecruiterVO> selectRecruitList(RecruiterVO recruiter) {
 		System.out.println("서비스:::구인글 목록 조회 : ");
-		return new RecruiterVO();
+		
+		return recruiterMapper.selectRecruitList(recruiter);
 	}
 
 	// 특정 구인글 조회
@@ -31,7 +32,7 @@ public class RecruiterServiceImpl implements RecruiterService{
 	public RecruiterVO selectRecruit(Long bno) {
 		System.out.println("서비스:::특정 구인글 조회 : " + bno);
 		RecruiterVO recruiterVO = recruiterMapper.selectRecruit(bno);
-		System.out.println("\t" + bno + "번 글 호출 완료");
+		System.out.println( bno + "번 글 호출 완료");
 		return recruiterVO;
 	}
 

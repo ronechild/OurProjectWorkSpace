@@ -1,11 +1,13 @@
 package com.spring5legacy.ourpro00.service;
 
+import java.util.List;
+
 import com.spring5legacy.ourpro00.domain.RecruiterVO;
 
 public interface RecruiterService {
 
 	// 구인글 목록 조회
-	public RecruiterVO selectRecruitList();
+	public List<RecruiterVO> selectRecruitList(RecruiterVO recruiter);
 	
 	// 특정 구인글 조회
 	public RecruiterVO selectRecruit(Long bno);
