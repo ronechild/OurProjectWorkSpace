@@ -77,7 +77,7 @@ public class RecruiterJobSeekerController {
 		model.addAttribute("jsList", jobSeekerService.getJobSeekerListForDetail(bno)) ;
 		System.out.println("컨트롤러:::" + bno + "번 구인글 호출" +recruiterService.selectRecruit(bno));
 		
-		System.out.println(recruiterService.selectRecruit(bno));
+		System.out.println("7번 bno의 데이터 : " + recruiterService.selectRecruit(7L));
 		
 		return "/board/detail";
 	}

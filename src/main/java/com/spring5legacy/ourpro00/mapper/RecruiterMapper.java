@@ -10,7 +10,7 @@ public interface RecruiterMapper {
 	public List<RecruiterVO> selectRecruitList(RecruiterVO recruiterVO);
 	
 	// 특정 구인글 조회
-	public RecruiterVO selectRecruit (Long bno);
+	public RecruiterVO selectRecruit(Long bno);
 	
 	// 구인글 총 수
 	public Long selectRowTotal();
