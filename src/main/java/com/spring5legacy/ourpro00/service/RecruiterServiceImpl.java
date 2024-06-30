@@ -33,6 +33,9 @@ public class RecruiterServiceImpl implements RecruiterService{
 		System.out.println("서비스:::특정 구인글 조회 : " + bno);
 		RecruiterVO recruiterVO = recruiterMapper.selectRecruit(bno);
 		System.out.println( bno + "번 글 호출 완료");
+		
+		System.out.println(recruiterVO);
+		
 		return recruiterVO;
 	}
 

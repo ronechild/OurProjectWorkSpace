@@ -17,8 +17,11 @@ import com.spring5legacy.ourpro00.domain.RecruiterVO;
 import com.spring5legacy.ourpro00.service.JobSeekerService;
 import com.spring5legacy.ourpro00.service.RecruiterService;
 
+import lombok.AllArgsConstructor;
+
 @Controller
 @RequestMapping(value = {"/board/*"})
+@AllArgsConstructor
 public class RecruiterJobSeekerController {
 
 	private JobSeekerService jobSeekerService ;
@@ -67,12 +70,15 @@ public class RecruiterJobSeekerController {
 //		System.out.println("컨트롤러:::" + bno + "번 구인글 호출");
 //	}
 	@GetMapping("/detail")
-	@PreAuthorize("permitAll")
+//	@PreAuthorize("permitAll")
 	public String showRecruit(Model model, Long bno) {
 		System.out.println(bno);
 		model.addAttribute("recruit", recruiterService.selectRecruit(bno));
 		model.addAttribute("jsList", jobSeekerService.getJobSeekerListForDetail(bno)) ;
 		System.out.println("컨트롤러:::" + bno + "번 구인글 호출" +recruiterService.selectRecruit(bno));
+		
+		System.out.println(recruiterService.selectRecruit(bno));
+		
 		return "/board/detail";
 	}
 	
@@ -85,7 +91,7 @@ public class RecruiterJobSeekerController {
 //		System.out.println("컨트롤러:::" + bno + "번 구인글 수정 페이지 호출");
 //	}
 	@GetMapping("/modify")
-	@PreAuthorize("hasAuthority('COMPANY')")
+//	@PreAuthorize("hasAuthority('COMPANY')")
 	public void showModifyRecruit(Model model, Long bno) {
 		model.addAttribute("recruiterVO", recruiterService.selectRecruit(bno));
 		System.out.println("컨트롤러:::" + bno + "번 구인글 수정 페이지 호출");

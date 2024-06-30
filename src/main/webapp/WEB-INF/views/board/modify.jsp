@@ -4,6 +4,8 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
 <%@taglib uri="http://www.springframework.org/security/tags" prefix="security"%>
 
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+
 <%@include file="../include/header.jsp"%>
 
 <style>
@@ -26,10 +28,10 @@
 	    <a class="placeholder" tabindex="-1"></a>
 	    <div class="jv_header" data-rec_idx="48341817" data-rec_seq="0">
 <%-- 		    <div class="title_inner">
-	               <h3><c:out value="${recruiterVO.bwriter}"/> </h3>
+	               <h3><c:out value="${recruiterVO.bwriter}"/></h3>
 	         </div> --%>
 	        <h1 class="tit_job" >
-				<input class="form-control"  style="width: 75%; height: 70px; font-size: 30pt;" name="btitle" id="btitle" value="${recruiterVO.btitle}">
+				<input class="form-control"  style="width: 75%; height: 70px; font-size: 30pt;" name="btitle" id="btitle" value="${recruit.btitle}">
 	        </h1>
 <!-- 	        <div class="btn_apply">
 	        	<button type="button" id="jobApply" class="btn btn-outline btn-success jobApply">수정 완료</button>      
@@ -44,21 +46,21 @@
 	<div class="cont wrapper" >
 		<div class="col">
 			<dl>
-				<dt>등록일&nbsp;</dt><dd><c:out value="${recruiterVO.bregDate}"/></dd>
+				<dt>등록일&nbsp;</dt><dd><c:out value="${recruit.bregDate}"/></dd>
 			</dl>           
 			<dl >
-				<dt>마감일&nbsp;</dt><dd><input type="date" class="form-control inputdata" id="benddate" name="benddate" value= '<c:out value="${recruiterVO.bendDate }"/>'></dd>
+				<dt>마감일&nbsp;</dt><dd><input type="date" class="form-control inputdata" id="benddate" name="benddate" value= '<c:out value="${recruit.bendDate }"/>'></dd>
 			</dl>
 		</div>
 		<div class="col">
 			<dl>
-				<dt>직종&emsp;</dt><dd><input class="form-control inputdata" id="boccupation" name="boccupation" value= '<c:out value="${recruiterVO.boccupation}"/>'></dd>
+				<dt>직종&emsp;</dt><dd><input class="form-control inputdata" id="boccupation" name="boccupation" value='<c:out value="${recruit.boccupation}"/>'></dd>
 			</dl>           
 			<dl >
-				<dt>지역&emsp;</dt><dd><input class="form-control inputdata" id="bregion" name="bregion" value= '<c:out value="${recruiterVO.bregion }"/>'></dd>
+				<dt>지역&emsp;</dt><dd><input class="form-control inputdata" id="bregion" name="bregion" value='<c:out value="${recruit.bregion }"/>'></dd>
 			</dl>
 			<dl >
-				<dt>모집인원&nbsp;</dt><dd><input type="number" id="bhcnt" class="inputdata" value='<c:out value="${recruiterVO.bhcnt }"/>'></dd>
+				<dt>모집인원&nbsp;</dt><dd><input type="number" id="bhcnt" class="inputdata" value='<c:out value="${recruit.bhcnt }"/>'></dd>
 			</dl>
 		</div>
 		<br>
@@ -72,7 +74,7 @@
 	<form role="form" method="post" name="frmRegister" id="frmRegister" action="${contextPath}/board/application?"><%-- "${contextPath}/board/detail?bno=${recruiterVO.bno}" --%>
 		<%-- 내용 --%>
 		<div class="form-group">
-			<textarea class="form-control" name="bcontent" id="bcontent" style="height: 500px;"><c:out value="${recruiterVO.bcontent}"/></textarea>
+			<textarea class="form-control" name="bcontent" id="bcontent" style="height: 500px;"><c:out value="${recruit.bcontent}"/></textarea>
 		</div><%-- 내용 끝 --%>
 		<%-- 첨부파일 --%>
 		<div class="panel panel-default">
@@ -88,9 +90,9 @@
 				</div>
 			</div>
 		</div><%-- 첨부파일 끝 --%>
-		<div class="form-group" style="width: 100px; display: inline-block;">
+<%-- 		<div class="form-group" style="width: 100px; display: inline-block;">
 			<input class="form-control" name="bwriter" id="bwriter"  value='<security:authentication property="principal.username"/>' readonly>
-		</div>
+		</div> --%>
 		<div class="btn_apply" style="margin-left: 80%;">
 			<button type="button" id="jobApply" class="btn btn-outline btn-success jobApply">수정 완료</button>
 			<button type="button" id="jobCancle" class="btn btn-outline btn-danger jobCancle" >수정 취소</button>
@@ -103,7 +105,7 @@
 <form id="frmSendValue">
 <%-- 		<input type="hidden" id="pageNum" name="pageNum" value="${myBoardPaging.pageNum }">
 		<input type="hidden" id="rowAmountPerPage" name="rowAmountPerPage" value="${myBoardPaging.rowAmountPerPage }"> --%>
-		<input type="hidden" id="bno" name="bno" value="${recruiterVO.bno}">
+		<input type="hidden" id="bno" name="bno" value="${recruit.bno}">
 <%-- 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"> --%>
 </form>
 
@@ -123,7 +125,7 @@
 	<%-- 취소버튼 클릭--%>
 	$(".jobCancle").on("click",function() {
 		frmRegister.empty();
-		.attr("action", "${contextPath}/detail");
+		attr("action", "${contextPath}/detail");
 		frmSendValue.attr("method","get");
 		frmSendValue.submit();
 	})

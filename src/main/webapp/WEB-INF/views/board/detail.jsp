@@ -1,104 +1,53 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
+<%@taglib uri="http://www.springframework.org/security/tags" prefix="security"%>
 
-<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
-<%@ include file="../include/header.jsp" %>
+<%@include file="../include/header.jsp"%>
+
 <style>
-	.alert,dl{
-	display: inline-block;
-	width: 200px;
-	margin-left: 50px;
-	}
-	dd{
-	color: #28288C;
-	}
-	dt{
-	float: left;
-	}
-	.bcontentTextBox{
-	margin-left: 100px;
-	background-color: white;
-	}
-	
-	.subcontent{
-  width:100%;
-  height:100%;
-  position:absolute; /* ��ġ���� : ���� ���� (login-box) �� �������� */
-  padding:90px 70px 50px 70px; /* ���鼳�� : ��/������/�Ʒ�/���� */
-  
-  }
-	.subcontent .resumeList, 
-	.subcontent .row{
-	  top:0;
-	  left:0;
-	  right:0;
-	  bottom:0;
-	  margin-top:150px;
-	  position:absolute;
-	  padding-left: 5%; 
-	padding-right: 10%;
-	}
-	.subcontent .tab{
-		margin-right: 30px;
-	}
-	
-	
-	.subcontent .tab{
-	  font-size:22px;
-	  margin-right:15px;
-	  padding-bottom:5px;
-	  margin:0 15px 10px 0;
-	  display:inline-block; /* inline 과 block의 속성을 모두 가지게 -> 같은 줄에 입력가능함과 동시에 간격설정 가능  */
-	  border-bottom:2px solid transparent;
-	}
-	.subcontent .btnResumeList:checked + .tab, /* üũ�ڽ� ���� �� ���� ���� ��� ����  */
-	.subcontent .btnReplyList:checked + .tab{ /* + �� ���� ���� ������ -> �տ��� ������ ��� �ٷ� ������ ��ġ�ϴ� ������Ҹ� ����  */
-	  color:#28288C;
-	  border-color:#1161ee;
-	}
-	.subcontent .btnResumeList,
-	.subcontent .btnReplyList,
-	.subcontent .check{
-	  display:none; /* 체크박스 디스플레이 삭제  */
-	} 
-	.titleWrapper{
-	padding-left: 25%; 
-	padding-right: 20%;
-	}
-	.btn_apply{
-	margin-left: 67%; 
-	display: inline-block;
-	}
-	
+	.alert,dl {display: inline-block; width: 200px; margin-left: 50px;}
+	dd {color: #28288C;}
+	dt {float: left;}
+	.bcontentTextBox {margin-left: 100px; background-color: white;}
+	.subcontent {width:100%; height:100%; position:absolute; padding:90px 70px 50px 70px;}
+	.subcontent .resumeList, .subcontent .row
+		{top:0; left:0; right:0; bottom:0; margin-top:150px; position:absolute; padding-left: 5%; padding-right: 10%;}
+	.subcontent .tab {margin-right: 30px;}
+	.subcontent .tab {font-size:22px; margin-right:15px; padding-bottom:5px; margin:0 15px 10px 0; display:inline-block; border-bottom:2px solid transparent;}
+	.subcontent .btnResumeList:checked + .tab, .subcontent .btnReplyList:checked + .tab
+		{color:#28288C; border-color:#1161ee;}
+	.subcontent .btnResumeList, .subcontent .btnReplyList, .subcontent .check {display:none;} 
+	.titleWrapper {padding-left: 25%; padding-right: 20%;}
+	.btn_apply {margin-left: 67%; display: inline-block;}
 </style>
 
 <hr>
-<div class="titleWrapper">
-<%-- 제목 기업 지원 --%>
-<div class="wrap_jv_header">
-    <a class="placeholder" tabindex="-1"></a>
-    <div class="jv_header" data-rec_idx="48341817" data-rec_seq="0">
-	    <div class="title_inner">
-                            
-               <h3><c:out value="${recruit.bwriter }"/> </h3>
-         </div>
-        <h1 class="tit_job" style="margin-left: 5%;">
-                        <c:out value="${recruit.btitle}"/>    
-        </h1>
-        <div class="btn_apply" >
-        <button type="button" id="btnToList" data-oper="list" class="btn  btn-outline btn-info btnToList"><span>목록</span></button>
-            <button type="button" id="jobApply" class="btn btn-outline btn-success jobApply">입사지원</button>        
-        </div>
-    </div>
-</div>
-   <%-- 제목 기업 지원 끝--%>
 
-<hr>
+<%-- 구인글 정보 --%>
+<div class="titleWrapper">
+	<%-- 제목 --%>
+	<div class="wrap_jv_header">
+		<a class="placeholder" tabindex="-1"></a>
+		<div class="jv_header" data-rec_idx="48341817" data-rec_seq="0">
+			<div class="title_inner">
+				<h3><c:out value="${recruit.bwriter}"/></h3>
+			</div>
+			<h1 class="tit_job" style="margin-left: 5%;">
+			<c:out value="${recruit.btitle}"/>    
+			</h1>
+			<div class="btn_apply" >
+				<button type="button" id="btnToList" data-oper="list" class="btn  btn-outline btn-info btnToList"><span>목록</span></button>
+				<button type="button" id="jobApply" class="btn btn-outline btn-success jobApply">입사지원</button>        
+			</div>
+		</div>
+	</div><%-- 제목 끝--%>
+    
+    <hr>
+	
 <%-- 세부 기본내용 --%>
 <div class="cont wrapper" >
 	<div class="col">
@@ -112,13 +61,13 @@
      </div>
      <div class="col">
  		<dl>
-		    <dt>직종&emsp;</dt><dd><c:out value="직종|boccupation"/></dd>
+		    <dt>직종&emsp;</dt><dd><c:out value="${recruit.boccupation}"/></dd>
 		</dl>           
 		<dl >
-		    <dt>지역&emsp;</dt><dd><c:out value="지역|bregion"/></dd>
+		    <dt>지역&emsp;</dt><dd><c:out value="${recruit.bregion }"/></dd>
 		</dl>
 		<dl >
-		    <dt>모집인원&nbsp;</dt><dd><c:out value="${recruit.bhcnt }"/></dd>
+		    <dt>모집인원&nbsp;</dt><dd><c:out value="${recruit.bhcnt}"/></dd>
 		</dl>
      </div>
         <br>
@@ -130,7 +79,7 @@
 <div class="form-group">
 	<div class="col-sm-10">
 	    <textarea class="form-control bcontentTextBox" name="bcontent" style="resize: none; height: 500px;" 
-	               readonly="readonly"><c:out value="${recruit.bcontent }"/></textarea>
+	               readonly="readonly"><c:out value="${recruit.bcontent}"/></textarea>
 	</div>
 </div>
 <hr class="textboxHR" style="height: 500px;">
