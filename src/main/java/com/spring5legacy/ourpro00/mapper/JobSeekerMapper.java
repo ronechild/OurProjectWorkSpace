@@ -31,8 +31,7 @@ public interface JobSeekerMapper {
 	
 	
 	// 특정 구직글 삭제
-	public int deleteJobSeeker(Long ano);
-
-		
+	public boolean deleteJobSeeker(Long ano);
+	
 
 }

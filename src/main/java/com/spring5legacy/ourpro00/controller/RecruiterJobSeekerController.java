@@ -17,11 +17,8 @@ import com.spring5legacy.ourpro00.domain.RecruiterVO;
 import com.spring5legacy.ourpro00.service.JobSeekerService;
 import com.spring5legacy.ourpro00.service.RecruiterService;
 
-import lombok.AllArgsConstructor;
-
 @Controller
 @RequestMapping(value = {"/board/*"})
-@AllArgsConstructor
 public class RecruiterJobSeekerController {
 
 	private JobSeekerService jobSeekerService ;
@@ -35,6 +32,7 @@ public class RecruiterJobSeekerController {
 	}
 	
 	// 홈페이지
+	@GetMapping("/homepage")
 	@PostMapping("/homepage")
 	@PreAuthorize("permitAll")
 	public void showRecruitList(Model model,@ModelAttribute("recruiter") RecruiterVO  recruiter) {
@@ -70,15 +68,12 @@ public class RecruiterJobSeekerController {
 //		System.out.println("컨트롤러:::" + bno + "번 구인글 호출");
 //	}
 	@GetMapping("/detail")
-//	@PreAuthorize("permitAll")
+	@PreAuthorize("permitAll")
 	public String showRecruit(Model model, Long bno) {
 		System.out.println(bno);
 		model.addAttribute("recruit", recruiterService.selectRecruit(bno));
 		model.addAttribute("jsList", jobSeekerService.getJobSeekerListForDetail(bno)) ;
 		System.out.println("컨트롤러:::" + bno + "번 구인글 호출" +recruiterService.selectRecruit(bno));
-		
-		System.out.println("7번 bno의 데이터 : " + recruiterService.selectRecruit(7L));
-		
 		return "/board/detail";
 	}
 	
@@ -91,7 +86,7 @@ public class RecruiterJobSeekerController {
 //		System.out.println("컨트롤러:::" + bno + "번 구인글 수정 페이지 호출");
 //	}
 	@GetMapping("/modify")
-//	@PreAuthorize("hasAuthority('COMPANY')")
+	@PreAuthorize("hasAuthority('COMPANY')")
 	public void showModifyRecruit(Model model, Long bno) {
 		model.addAttribute("recruiterVO", recruiterService.selectRecruit(bno));
 		System.out.println("컨트롤러:::" + bno + "번 구인글 수정 페이지 호출");
@@ -119,12 +114,14 @@ public class RecruiterJobSeekerController {
     //@PreAuthorize("isAuthenticated()")
     public String registerJobSeeker(JobSeekerVO jobSeeker, RedirectAttributes redirectAttr) {
     	System.out.println("controller: 전달된 정보 jobSeeker: " + jobSeeker);
-    	Long ano = jobSeekerService.registerJobSeeker(jobSeeker) ;
+    
+    	String awriter =  jobSeekerService.registerJobSeeker(jobSeeker) ;
+    	System.out.println(awriter + "가져왔냐?");
     	
     	//redirectAttr.addAttribute("result", ano) ;
-    	redirectAttr.addFlashAttribute("result", ano) ;
+    	redirectAttr.addFlashAttribute("jsList", awriter) ;
     	
-    	return "redirect:/myboard/list" ;
+    	return "redirect:/board/resumelist?awriter=" + awriter ;
     }
 	
 	
@@ -148,7 +145,7 @@ public class RecruiterJobSeekerController {
        System.out.println("컨트롤러:::" + ano + "번 이력서 호출");
     }
 	
-    //이력서 수정 페이지 호출
+  //이력서 수정 페이지 호출
     @GetMapping("/modifyA")
     public void showModify(Long ano, Model model) {
     	JobSeekerVO jobSeeker = jobSeekerService.getJobSeeker(ano) ;
@@ -158,16 +155,17 @@ public class RecruiterJobSeekerController {
     //이력서 수정
     @PostMapping("/modifyA")
     public String modifyJobSeeker(JobSeekerVO jobSeeker, RedirectAttributes redirectAttr) {
-
+    	
+    	String awriter = jobSeeker.getAwriter();
+    	
     	if(jobSeekerService.modifyJobSeeker(jobSeeker)) {
     		redirectAttr.addFlashAttribute("result", "successModify") ;
     		
     	} 
     	
-    	redirectAttr.addAttribute("ano", jobSeeker.getAno()) ;
+    	redirectAttr.addFlashAttribute("jsList", awriter) ;
     	
-    	//return "redirect:/myboard/detail" + myBoardPaging.addPagingParamsToURI();
-    	return "redirect:/myboard/detail";
+    	return "redirect:/board/resumelist?awriter=" + awriter ;
     }
     
   //이력서 삭제
@@ -176,10 +174,10 @@ public class RecruiterJobSeekerController {
     	if ((jobSeeker = jobSeekerService.deleteJobSeeker(jobSeeker)) != null) {
     		System.out.println("controller::service로부터 전달된 jobSeeker: " + jobSeeker);
     		redirectAttr.addFlashAttribute("result", "successRemove") ;
-            redirectAttr.addFlashAttribute("deletedAttachFileCnt", String.valueOf(jobSeeker.getDeletedAttachFileCnt())  ) ;
+           redirectAttr.addFlashAttribute("deletedAttachFileCnt", String.valueOf(jobSeeker.getDeletedAttachFileCnt())  ) ;
     	}
     	
-    	return "redirect:/myboard/list" ;
+    	return "redirect:/board/homepage" ;
     }
     
     

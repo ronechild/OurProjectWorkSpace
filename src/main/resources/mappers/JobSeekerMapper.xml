@@ -10,7 +10,7 @@
 			WHERE awriter = #{awriter} 
 	</select>
 	
-		<!-- 디테일 페이지 구직글 목록 조회 -->
+	<!-- 디테일 페이지 구직글 목록 조회 -->
 	<select id="selectJobSeekerListForDetail" resultType="com.spring5legacy.ourpro00.domain.JobSeekerVO">
 		SELECT ano, atitle, acontent, awriter, aregdate, bno   
 			FROM ouruser.tbl_apply

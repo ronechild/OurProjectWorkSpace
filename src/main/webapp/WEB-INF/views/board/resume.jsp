@@ -55,7 +55,9 @@
         <div class="btn_apply">
             <button type="button" id="btnResumelist" class="btn btn-outline btn-warning btnResumelist" >목록</button> 
             <button type="button" id="btnHome" class="btn btn-outline btn-warning btnHome" >홈</button>   
-            <button type="button" id="btnTodetail" class="btn btn-outline btn-warning btnTodetail" >구직글로 ㄱ</button>       
+            <button type="button" id="btnToModifyA" class="btn btn-outline btn-warning btnToModifyA" >수정</button>
+            <button type="button" id="btnTodetail" class="btn btn-outline btn-warning btnTodetail" >구직글로 ㄱ</button>   
+                
                 
         </div>
     </div>
@@ -194,6 +196,13 @@
 	 	frmSendValue.attr("method","post");
 	 	
 	 	frmSendValue.submit();
+     });
+ 
+ <%-- 수정 버튼 클릭--%>
+ $(".btnToModifyA").on("click",function(){
+    
+    var ano = '<c:out value="${jobSeeker.ano}"/>' ;
+       location.href = "${contextPath}/board/modifyA?ano=" + ano  ;
      });
  
   
