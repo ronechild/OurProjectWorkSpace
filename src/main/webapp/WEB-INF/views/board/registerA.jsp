@@ -4,196 +4,205 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath }"/>
+
+
+   
+   
 
 <%@ include file="../include/header.jsp" %>
 <style>
-	.alert,dl{
-	display: inline-block;
-	width: 200px;
-	margin-left: 50px;
-	}
-	dd{
-	color: #28288C;
-	}
-	dt{
-	float: left;
-	}
-	.bcontentTextBox{
-	margin-left: 100px;
-	background-color: white;
-	}
-	.contentBox{
-	margin-left: 100px;
-	margin-right: 100px;
-	}
-	.btn_apply{
-	margin-left: 60%; 
-	display: inline-block;
-	}
-	.inputdata{
-	width: 60%; 
-	display: inline-block;
-	}
-	.titleWrapper{
-	padding-left: 25%; 
-	padding-right: 20%;
-	}
-	
+   .alert,dl{
+   display: inline-block;
+   width: 200px;
+   margin-left: 50px;
+   }
+   dd{
+   color: #28288C;
+   }
+   dt{
+   float: left;
+   }
+   .bcontentTextBox{
+   margin-left: 100px;
+   background-color: white;
+   }
+   .contentBox{
+   margin-left: 100px;
+   margin-right: 100px;
+   }
+   .btn_apply{
+   margin-left: 60%; 
+   display: inline-block;
+   }
+   .inputdata{
+   width: 60%; 
+   display: inline-block;
+   }
+   .titleWrapper{
+   padding-left: 25%; 
+   padding-right: 20%;
+   }
+   
 </style>
+           <form role="form" method="post" name="frmRegister" id="frmRegister" action="${contextPath }/board/registerA" >
 
 <hr>
-
-<%-- 구인글 정보 --%>
+<%-- 제목 기업 지원 --%>
 <div class="titleWrapper">
-	<%-- 제목 --%>
-	<div class="wrap_jv_header" >
-	    <a class="placeholder" tabindex="-1"></a>
-	    <div class="jv_header" data-rec_idx="48341817" data-rec_seq="0">
-		    <div class="title_inner">
-	               <h3><c:out value="${recruiterVO.bwriter}"/><small> - 구인글 작성</small></h3>
-	         </div>
-	        <h1 class="tit_job" >
-				<input class="form-control"  style="width: 100%; height: 70px; font-size: 30pt;" name="btitle" id="btitle" placeholder="구인글 제목" autofocus>
-	        </h1>
-	    </div>
+<div class="wrap_jv_header" >
+    <a class="placeholder" tabindex="-1"></a>
+    <div class="jv_header" data-rec_idx="48341817" data-rec_seq="0">
+       <div class="title_inner">
+                            
+               <h3><c:out value="${recruit.bwriter }"/>    이력서 작성 </h3> 
+         </div>
+      
+         <h1 class="tit_job" >
+         <input class="form-control"  style="width: 75%; height: 70px; font-size: 30pt;" name="atitle" id="atitle" placeholder="이력서 제목을 입력하세요">
+        </h1>
+       
+        
+        <div class="btn_apply">
+           <button type="button" id="jobApply" class="btn btn-outline btn-success jobApply">등록</button>      
+            <button type="button" id="jobCancle" class="btn btn-outline btn-danger jobCancle" >지원 취소</button>        
+        </div>
+       
     </div>
-   <%-- 구인글 정보 끝--%>
+    </div>
+   <%-- 제목 기업 지원 끝--%>
 
 <hr>
-
-<%--세부 정보 --%>
-	<div class="cont wrapper" >
-		<div class="col">   
-			<dl >
-				<dt>마감일&nbsp;</dt><dd><input type="date" class="form-control inputdata" id="benddate" name="benddate"/></dd>
-			</dl>
-			<dl>
-				<dt>직종&emsp;</dt><dd><input class="form-control inputdata" id="boccupation" name="boccupation"/></dd>
-			</dl>           
-			<dl >
-				<dt>지역&emsp;</dt><dd><input class="form-control inputdata" id="bregion" name="bregion"></dd>
-			</dl>
-			<dl >
-				<dt>모집인원&nbsp;</dt><dd><input type="number" id="bhcnt" class="inputdata"></dd>
-			</dl>
-		</div>
-		<div class="btn_apply" style="margin-left: 80%;">
-			<button type="button" id="jobApply" class="btn btn-outline btn-success jobApply">등록</button>
-			<button type="button" id="jobCancle" class="btn btn-outline btn-danger jobCancle" >취소</button>
-		</div>
-	</div><%-- 세부 정보 끝--%>
-</div><%-- 구인글 정보 끝 --%>
-
-<hr>
-
-<%-- 구인글 내용 --%>
+<%-- 세부 기본내용 --%>
+<div class="cont wrapper" >
+   <div class="col">
+      <dl>
+          <dt>등록일&nbsp;</dt><dd><c:out value="${recruit.bregDate}"/></dd>
+      </dl>           
+      <dl >
+          <dt style="margin-top: 7px">마감일&nbsp;</dt><dd><c:out value="${recruit.bendDate }"/></dd>
+      </dl>
+     </div>
+     <div class="col">
+       <dl>
+          <%-- <dt>직종&emsp;</dt><dd><c:out value="직종|boccupation"/></dd> --%>
+           <dt>직종&emsp;</dt><dd><c:out value="직종|boccupation"/></dd>
+      </dl>           
+      <dl >
+          <dt>지역&emsp;</dt><dd><c:out value="지역|bregion"/></dd>
+      </dl>
+      <dl >
+          <dt>모집인원&nbsp;</dt><dd><c:out value="${jobSeeker.bhcnt }"/></dd>
+      </dl>
+      <dl>
+      <dt>글번호</dt><dd><c:out value="${jobSeeker.bno }"/></dd>
+      </dl>
+     </div>
+        <br>
+            </div>
+       </div>
+            <%-- 세부 기본내용 끝--%>
+            <hr>
 <div class="contentBox">
-	<form role="form" method="post" name="frmRegister" id="frmRegister"  action="${contextPath}/board/register">
-		<%-- 내용 --%>
-		<div class="form-group">
-			<textarea class="form-control" name="bcontent" id="bcontent" style="height: 500px;" placeholder="구인글 내용"></textarea>
-		</div><%-- 내용 끝 --%>
-		<%-- 첨부파일 --%>
-		<div class="panel panel-default">
-			<div class="panel-heading"><h4>첨부 파일</h4></div>
-			<div class="panel-body">
-				<div class="form-group uploadDiv">
-					<input type="file" class="btn btn-primary fileInput" name="fileInput" id="fileInput" multiple>
-				</div>
-				<div class="form-group fileUploadResult">
-					<ul>
-<%-- 첨부파일 영역 --%>
-					</ul>
-				</div>
-			</div>
-		</div><%-- 첨부파일 끝 --%>
-<%-- 		<div class="form-group" style="width: 100px; display: inline-block;">
-			<input class="form-control" name="bwriter" id="bwriter"  value='<security:authentication property="principal.username"/>' readonly>
-		</div> --%>
-		
-<%-- 		<security:csrfInput/> --%>
-	</form>
-</div><%-- 구인글 내용 끝 --%>
 
-
-
-
-
-<form id="frmSendValue">
-<%-- 		<input type="hidden" id="pageNum" name="pageNum" value="${myBoardPaging.pageNum }">
-		<input type="hidden" id="rowAmountPerPage" name="rowAmountPerPage" value="${myBoardPaging.rowAmountPerPage }"> --%>
-		<input type="hidden" id="bno" name="bno" value="${recruiterVO.bno}">
-<%-- 		<input type="hidden" id="boccupation" name="boccupation" value="${myBoardPaging.boccupation}">
-		<input type="hidden" id="bregion" name="bregion" value="${myBoardPaging.bregion}"> --%>
-</form>
+      <div class="form-group">
+      <input type="hidden" id="bno" name="bno" value="${jobSeeker.bno }">
+          <textarea class="form-control" name="acontent" id="acontent" style="height: 500px;"
+           placeholder="1. 자기소개 &#10;&#10;2. 지원 동기 &#10;&#10;3. 경력사항 &#10;&#10; 각각의 항목을 500자 내로 작성해주세요"></textarea>
+          <hr>
+             
+       </div>
+       </div>
+       
+          
+        <div class="panel panel-default">
+            <div class="panel-heading"> <h4>증명 서류</h4> </div> <%-- /.panel-heading --%>
+            <div class="panel-body">
+            
+                    <div class="form-group uploadDiv">
+                          <input type="file" class="btn btn-primary fileInput" name="fileInput" id="fileInput" multiple>
+                          
+                    </div>   
+                    <div class="form-group fileUploadResult">
+                       <ul>
+                          <%-- 업로드후  --%>
+                       </ul>
+                    </div>   
+                
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+                  <%--  <security:authentication property="principal.username"/> --%>
+      <div class="form-group" style="width: 100px; display: inline-block;">
+      
+         <input class="form-control" name="awriter" id="awriter"  value="stu1" readonly>
+         
+      </div>
+      
+      <div class="btn_apply" style="margin-left: 80%;">
+         <button type="button" id="jobApply" class="btn btn-outline btn-success jobApply">등록</button>      
+             <button type="button" id="jobCancle" class="btn btn-outline btn-danger jobCancle" >지원 취소</button>    
+        </div>
+      <security:csrfInput/>
+   </form>
 
 
 
 
  <script>
- var frmSendValue = $("#frmSendValue");
  var frmRegister = $("#frmRegister");
+ var fileUploadResultUL = $(".fileUploadResult ul") ;
  <%-- 취소버튼 클릭--%>
  $(".jobCancle").on("click",function(){
-	 	frmRegister.empty();
-	 	frmRegister.attr("action", "${contextPath}/board/homepage");
-	 	frmRegister.attr("method","get");
-	 	
-	 	frmRegister.submit();
-	 });
- 
- 
- 
+       frmRegister.empty();
+       frmRegister.attr("action", "${contextPath}/board/homepage");
+       frmRegister.attr("method","get");
+       
+       frmRegister.submit();
+    });
 <%--등록버튼 클릭 처리 제이쿼리--%>
  $(".jobApply").on("click",function(){
-	 if(!checkValues()){
-			return;
-		}
-	 var attachFileInputHTML="";
-	 $("div.fileUploadResult ul li").each(function(i, objLi){
-		   var attachLi = $(objLi);
-		   
-		   
-		   attachFileInputHTML
-		   +="<input type='hidden' name='attachFileList[" + i + "].uuid' value='" + attachLi.data("uuid") + "'>"
-		   +  "<input type='hidden' name='attachFileList[" + i + "].uploadPath' value='" + attachLi.data("uploadpath") + "'>"
-		   +  "<input type='hidden' name='attachFileList[" + i + "].fileName' value='" + attachLi.data("filename") + "'>"
-		   +  "<input type='hidden' name='attachFileList[" + i + "].fileType' value='" + attachLi.data("filetype") + "'>"
-		   
-	   });
-	 //alert(attachFileInputHTML);
-	 
-	 
-	 
-	 if(attachFileInputHTML){
-	  	   frmRegister.append(attachFileInputHTML);
-	  	   }
-	
-	 
-	 
-		 frmRegister.submit();
-	});
- 
+    //alert("되긴함?") ;
+    if(!checkValues()){
+         return;
+      }
+    var attachFileInputHTML="";
+    $(".fileUploadResult ul li").each(function(i, objLi){
+         var attachLi = $(objLi);
+         
+         
+         attachFileInputHTML
+         +="<input type='hidden' name='jobSeekerAttachFileList[" + i + "].uuid' value='" + attachLi.data("uuid") + "'>"
+         +  "<input type='hidden' name='jobSeekerAttachFileList[" + i + "].uploadPath' value='" + attachLi.data("uploadpath") + "'>"
+         +  "<input type='hidden' name='jobSeekerAttachFileList[" + i + "].fileName' value='" + attachLi.data("filename") + "'>"
+         /* +  "<input type='hidden' name='jobSeekerAttachFileList[" + i + "].ano' value='" + attachLi.data("") + "'>" */
+         
+      });
+    //alert(attachFileInputHTML);
+    if(attachFileInputHTML){
+        frmRegister.append(attachFileInputHTML);
+        }
+    frmRegister.submit();
+});
  <%--내용확인 함수--%>
  function checkValues() {
- 	var btitle = document.getElementById("btitle").value;
- 	var bcontent = document.getElementById("bcontent").value;
- 	var benddate = document.getElementById("benddate").value;
- 	var bhcnt = document.getElementById("bhcnt").value;
- 	
- 	
- 	
- 	var regExp = /^\s+$/;
- 	
-		if(!btitle||!bcontent||!benddate||!bhcnt||regExp.test(btitle)||regExp.test(bcontent)||regExp.test(bhcnt)||regExp.test(bhcnt)){
-			alert("모든 내용을입력하세요"+btitle+bcontent+benddate+bhcnt);
-			return false;
-		}else{
-			
-			//frmRegister.submit();
-			return true;
-		}
-	}
+    var atitle = document.getElementById("atitle").value;
+    var acontent = document.getElementById("acontent").value;
+    
+    
+    
+    var regExp = /^\s+$/;
+    
+      if(!atitle||!acontent||regExp.test(atitle)||regExp.test(acontent)){
+         alert("모든 내용을입력하세요"+atitle+acontent);
+         return false;
+      }else{
+         
+         //frmRegister.submit();
+         return true;
+      }
+   }
  <%-- 파일크기및 확장자제한 --%>
  function checkUploadFile(fileName, fileSize) {
     

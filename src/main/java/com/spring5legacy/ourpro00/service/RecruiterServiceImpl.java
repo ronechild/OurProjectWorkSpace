@@ -24,6 +24,9 @@ public class RecruiterServiceImpl implements RecruiterService{
 	public List<RecruiterVO> selectRecruitList(RecruiterVO recruiter) {
 		System.out.println("서비스:::구인글 목록 조회 : ");
 		
+		
+		System.out.println("입력 받은 구인글 목록 : " + recruiterMapper.selectRecruitList(recruiter));
+		
 		return recruiterMapper.selectRecruitList(recruiter);
 	}
 
@@ -33,6 +36,9 @@ public class RecruiterServiceImpl implements RecruiterService{
 		System.out.println("서비스:::특정 구인글 조회 : " + bno);
 		RecruiterVO recruiterVO = recruiterMapper.selectRecruit(bno);
 		System.out.println( bno + "번 글 호출 완료");
+		
+		System.out.println("recruiterVO : " + recruiterVO);
+		
 		return recruiterVO;
 	}
 

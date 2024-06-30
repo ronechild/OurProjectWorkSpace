@@ -10,11 +10,12 @@ public interface JobSeekerAttachFileMapper {
 	public List<JobSeekerAttachFileVO> selectAttachFiles(Long ano);
 	
 	// 첨부파일 첨부 : 
-	public void instertAttachFile(JobSeekerAttachFileVO jobSeekerAttachFile);
+	public void insertAttachFile(JobSeekerAttachFileVO jobSeekerAttachFile);
 	
 	// 첨부파일 삭제 : 
 	public void deleteAttachFile(String auuid);
 	
 	// 첨부파일 모두 삭제 : 
-	public int deleteAttachFiles(Long ano);
+	public int deleteAttachFiles(Long ano) ;
+	
 }

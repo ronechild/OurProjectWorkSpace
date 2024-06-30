@@ -30,6 +30,7 @@
                 <value>classpath:mappers/CommentMapper.xml</value>
                 <value>classpath:mappers/JobSeekerMapper.xml</value>
                 <value>classpath:mappers/RecruiterMapper.xml</value>
+				<value>classpath:mappers/JobSeekerAttachFileMapper.xml</value>
             </list>
         </property>
     </bean> 

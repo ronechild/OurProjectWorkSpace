@@ -25,5 +25,5 @@ public class JobSeekerVO {
 	
 	private List<JobSeekerAttachFileVO> jobSeekerAttachFileList ;
 	
-	private Integer deletedAttachFileCnt;
+	private int deletedAttachFileCnt;
 }

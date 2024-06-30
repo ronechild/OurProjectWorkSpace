@@ -112,10 +112,10 @@
      </div>
      <div class="col">
  		<dl>
-		    <dt>직종&emsp;</dt><dd><c:out value="직종|boccupation"/></dd>
+		    <dt>직종&emsp;</dt><dd><c:out value="${recruit.boccupation}"/></dd>
 		</dl>           
 		<dl >
-		    <dt>지역&emsp;</dt><dd><c:out value="지역|bregion"/></dd>
+		    <dt>지역&emsp;</dt><dd><c:out value="${recruit.bregion}"/></dd>
 		</dl>
 		<dl >
 		    <dt>모집인원&nbsp;</dt><dd><c:out value="${recruit.bhcnt }"/></dd>
@@ -433,7 +433,7 @@ var myCommentModule = (function() {
  
  <%-- 입사지원버튼 활성화 appli화면으로--%>
  $(".jobApply").on("click",function(){
-	 	frmSendValue.attr("action", "${contextPath}/board/application");
+	 	frmSendValue.attr("action", "${contextPath}/board/registerA");
 	 	frmSendValue.attr("method","get");
 	 	
 	 	frmSendValue.submit();

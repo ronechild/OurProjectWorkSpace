@@ -19,7 +19,7 @@ public interface JobSeekerService {
 	public void getRowTotal();
 	
 	// 구직글 등록
-	public Long registerJobSeeker(JobSeekerVO jobSeeker);
+	public String registerJobSeeker(JobSeekerVO jobSeeker);
 	
 	//특정 구직글 수정페이지
 	public JobSeekerVO showModify(Long bno) ;
@@ -31,8 +31,6 @@ public interface JobSeekerService {
 	// 특정 구직글 삭제
 	//public boolean deleteJobSeeker(Long ano);
 	public JobSeekerVO deleteJobSeeker(JobSeekerVO jobSeeker);
-
-	
 
 
 	

@@ -3,6 +3,7 @@ package com.spring5legacy.ourpro00.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.spring5legacy.ourpro00.domain.JobSeekerAttachFileVO;
 import com.spring5legacy.ourpro00.domain.JobSeekerVO;
@@ -26,11 +27,11 @@ public class JobSeekerServiceImpl implements JobSeekerService{
 	}
 	
 	// 구직글 목록 조회 
-	@Override
-	public List<JobSeekerVO> getJobSeekerListForDetail(Long bno) {
-		System.out.println("구직글 목록");
-		return jobSeekerMapper.selectJobSeekerListForDetail(bno);
-	}
+		@Override
+		public List<JobSeekerVO> getJobSeekerListForDetail(Long bno) {
+			System.out.println("구직글 목록");
+			return jobSeekerMapper.selectJobSeekerListForDetail(bno);
+		}
 
 	// 특정 구직글 조회
 	@Override
@@ -48,22 +49,33 @@ public class JobSeekerServiceImpl implements JobSeekerService{
 			jobSeekerMapper.selectRowTotal() ;
 		}
 		
-		// 구직글 등록
+		// 이력서 등록
+	@Transactional
 	@Override
-		public Long registerJobSeeker(JobSeekerVO jobSeeker) {
+		public String registerJobSeeker(JobSeekerVO jobSeeker) {
 			System.out.println("등록 전달 jobSeeker: " + jobSeeker);
 			jobSeekerMapper.insertJobSeeker(jobSeeker) ;
 			System.out.println("등록 후 jobSeeker: " + jobSeeker);
 			
 			List<JobSeekerAttachFileVO> attachFileList = jobSeeker.getJobSeekerAttachFileList() ;
 			
-			if(attachFileList != null && attachFileList.size() > 0) {
-				for(JobSeekerAttachFileVO attachFile : attachFileList) {
-					attachFile.setAno(jobSeeker.getAno());
-					jobSeekerAttachFileMapper.instertAttachFile(attachFile);
-				}
-			}
-			return jobSeeker.getAno();
+//			if(attachFileList != null && attachFileList.size() > 0) {
+//				for(JobSeekerAttachFileVO attachFile : attachFileList) {
+//					attachFile.setAno(jobSeeker.getAno());
+//					jobSeekerAttachFileMapper.instertAttachFile(attachFile);
+//				}
+//			}
+			System.out.println(attachFileList + "나오냐?");
+			System.out.println("여기?");
+			if (attachFileList != null && attachFileList.size() > 0) {
+	            attachFileList
+	            .forEach(attachFile -> { attachFile.setAno(jobSeeker.getAno()) ;
+	            System.out.println("아님 여기?");
+	                                        jobSeekerAttachFileMapper.insertAttachFile(attachFile) ;
+	                    }); //forEach-end
+	        }
+
+			return jobSeeker.getAwriter();
 		}
 	
 	//이력서 수정페이지 호출
@@ -84,20 +96,21 @@ public class JobSeekerServiceImpl implements JobSeekerService{
 
 		@Override
 		public boolean modifyJobSeeker(JobSeekerVO jobSeeker) {
-			System.out.println("서비스: 게시물 수정 메서드에 전달된 VO: " + jobSeeker);
+			System.out.println("서비스 - 수정 메서드에 전달: " + jobSeeker);
 			
-			long ano = jobSeeker.getAno() ;
+			Long ano = jobSeeker.getAno() ;
 		
 			boolean modifyResult = jobSeekerMapper.updateJobSeeker(jobSeeker) == 1;
-			
+			System.out.println("가져온 ano: "  + ano);
 			jobSeekerAttachFileMapper.deleteAttachFiles(ano);
+			System.out.println("여기까진 된거지?2");
 			
 			List<JobSeekerAttachFileVO> attachFileList = jobSeeker.getJobSeekerAttachFileList() ;
 			
 			if(modifyResult && attachFileList != null) {
 				for(JobSeekerAttachFileVO attachFile : attachFileList) {
 					attachFile.setAno(ano);
-					jobSeekerAttachFileMapper.instertAttachFile(attachFile); 
+					jobSeekerAttachFileMapper.insertAttachFile(attachFile); 
 				}
 			}
 			
@@ -107,19 +120,21 @@ public class JobSeekerServiceImpl implements JobSeekerService{
 		// 특정 구직글 삭제
 		@Override
 		public JobSeekerVO deleteJobSeeker(JobSeekerVO jobSeeker) {
-			long ano = jobSeeker.getAno();
+			Long ano = jobSeeker.getAno();
 			System.out.println("게시물 삭제 ano: " + ano);
 			
 		//	List<JobSeekerAttachFileVO> attachFileList = jobSeekerAttachFileMapper.selectAttachFiles(ano) ;
 			
-			Integer deletedAttachFileCnt = jobSeekerAttachFileMapper.deleteAttachFiles(ano) ;
+			int deletedAttachFileCnt = jobSeekerAttachFileMapper.deleteAttachFiles(ano);
+					
 			System.out.println("db로부터 삭제된 파일 갯수: " + jobSeekerAttachFileMapper.deleteAttachFiles(ano));
-			if(jobSeekerMapper.deleteJobSeeker(ano) == 1) {
+			if(jobSeekerMapper.deleteJobSeeker(ano)) {
 				jobSeeker.setDeletedAttachFileCnt(deletedAttachFileCnt);
 				System.out.println("controller로 전달: " + jobSeeker);
 				return jobSeeker;
 			} else {
-				return null;
+				System.out.println("삭제 한거 없음~~~");
+				return null ;
 			}
 			
 		}
