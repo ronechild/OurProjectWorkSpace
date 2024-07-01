@@ -123,6 +123,7 @@
 <input class="form-control inputdata" type="hidden" id="breplyCnt" name="breplyCnt" value="${recruiterVO.breplyCnt}">
 <input class="form-control inputdata" type="hidden" id="bappCnt" name="bappCnt" value="${recruiterVO.bappCnt}">
 <input class="form-control inputdata" type="hidden" id="bblind" name="bblind" value="${recruiterVO.bblind}">
+<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 
 <%-- <input type="hidden" id="pageNum" name="pageNum" value="${myBoardPaging.pageNum}">
 <input type="hidden" id="rowAmountPerPage" name="rowAmountPerPage" value="${myBoardPaging.rowAmountPerPage}"> --%>
@@ -132,6 +133,14 @@
 </form>
 
 <script>
+	
+	<%-- csrf 토큰 처리 --%>
+	var _csrfHeaderName = "${_csrf.headerName}";
+	var _csrfTokenValue = "${_csrf.token}";
+	
+	$(document).ajaxSend(function(e, xhr, options){
+		xhr.setRequestHeader(_csrfHeaderName, _csrfTokenValue);
+	})
 	
 	var frmModify = $("#frmModify");
 	var fileUploadResultUL = $(".fileUploadResult ul");

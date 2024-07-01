@@ -99,17 +99,27 @@
 <input class="form-control inputdata" type="hidden" id="breplyCnt" name="breplyCnt">
 <input class="form-control inputdata" type="hidden" id="bappCnt" name="bappCnt">
 <input class="form-control inputdata" type="hidden" id="bblind" name="bblind">
+<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 
 <%-- <input type="hidden" id="pageNum" name="pageNum" value="${myBoardPaging.pageNum}">
 <input type="hidden" id="rowAmountPerPage" name="rowAmountPerPage" value="${myBoardPaging.rowAmountPerPage}">
 <input type="hidden" id="boccupation" name="boccupation" value="${myBoardPaging.boccupation}">
 <input type="hidden" id="bregion" name="bregion" value="${myBoardPaging.bregion}"> --%>
 
-<%-- <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"> --%>
+
 
 </form>
 
 <script>
+	
+	<%-- csrf 토큰 처리 --%>
+	var _csrfHeaderName = "${_csrf.headerName}";
+	var _csrfTokenValue = "${_csrf.token}";
+	
+	$(document).ajaxSend(function(e, xhr, options){
+		xhr.setRequestHeader(_csrfHeaderName, _csrfTokenValue);
+	})
+	
 	
 	var frmRegister = $("#frmRegister");
 	var fileUploadResultUL = $(".fileUploadResult ul");
@@ -261,6 +271,10 @@
 			contentType : false, 
 			processData : false, 
 			dataType : "json", 
+			
+			beforeSend : function(xhr) {
+	    		xhr.setRequestHeader(_csrfHeaderName, _csrfTokenValue);
+	    	}, <%-- csrf 토큰 처리 --%>
 			
 			success : function(uploadResult, status) {
 				console.log(uploadResult);

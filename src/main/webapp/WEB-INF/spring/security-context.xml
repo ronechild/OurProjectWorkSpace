@@ -7,12 +7,15 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 	<bean id="memberDetailsService" class="com.spring5legacy.ourpro00.common.security.MemberDetailsService"/>
-
+	
 	<bean id="bcryptPassWordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+	
+	<bean id="loginAuthenticationSuccessHandler" class="com.spring5legacy.ourpro00.common.security.LoginAuthenticationSuccessHandler"></bean>
 
 	<security:http>
-		<security:form-login login-page="/signup" login-processing-url="/login"  authentication-success-forward-url="/board/homepage"/>
-		<security:logout/>	
+		<security:form-login login-page="/signup"  default-target-url="/board/homepage"
+						     authentication-success-handler-ref="loginAuthenticationSuccessHandler"/>
+		<security:logout logout-success-url="/board/homepage"/>	
 	</security:http>
 	
 	<security:authentication-manager>

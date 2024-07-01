@@ -17,8 +17,23 @@
 			WHERE bno = #{bno} ORDER BY bno DESC
 	</select>
 	
+	 <resultMap type="com.spring5legacy.ourpro00.domain.JobSeekerAttachFileVO" id="attachFileMap">
+      <result property="Uuid" column="Uuid"/>
+      <result property="FileName" column="FileName"/>
+      <result property="UploadPath" column="UploadPath"/>      
+      <result property="ano" column="ano"/>
+   </resultMap>
+   <resultMap type="com.spring5legacy.ourpro00.domain.JobSeekerVO" id="JobSeekerVOMap">
+      <result property="ano" column="ano"/>
+      <result property="atitle" column="atitle"/>
+      <result property="acontent" column="acontent"/>
+      <result property="awriter" column="awriter"/>
+      <result property="aregDate" column="aregDate"/>
+      <result property="bno" column="bno"/>
+      <collection property="jobSeekerAttachFileList"  resultMap="attachFileMap"/>
+   </resultMap>
 	<!-- 특정 구직글 조회 -->
-	<select id="selectJobSeeker" resultType="com.spring5legacy.ourpro00.domain.JobSeekerVO">
+	<select id="selectJobSeeker" resultType="com.spring5legacy.ourpro00.domain.JobSeekerVO" resultMap="JobSeekerVOMap">
 		SELECT ano, atitle, acontent, awriter, aregdate, bno   
 			FROM ouruser.tbl_apply
 			WHERE ano = #{ano} 

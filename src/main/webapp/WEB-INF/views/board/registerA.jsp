@@ -1,25 +1,51 @@
-<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@taglib uri="http://www.springframework.org/security/tags" prefix="security"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath }"/>
 
-<%@include file="../include/header.jsp"%>
 
+	
+	
+
+<%@ include file="../include/header.jsp" %>
 <style>
-	.alert,dl{display: inline-block; width: 200px; margin-left: 50px;}
-	dd{color: #28288C;}
-	dt{float: left; }
-	.bcontentTextBox{margin-left: 100px; background-color: white;}
-	.contentBox{margin-left: 100px; margin-right: 100px;}
-	.btn_apply{margin-left: 60%; display: inline-block;}
-	.inputdata{width: 60%; display: inline-block;}
-	.titleWrapper{padding-left: 25%; padding-right: 20%;}
+	.alert,dl{
+	display: inline-block;
+	width: 200px;
+	margin-left: 50px;
+	}
+	dd{
+	color: #28288C;
+	}
+	dt{
+	float: left;
+	}
+	.bcontentTextBox{
+	margin-left: 100px;
+	background-color: white;
+	}
+	.contentBox{
+	margin-left: 100px;
+	margin-right: 100px;
+	}
+	.btn_apply{
+	margin-left: 60%; 
+	display: inline-block;
+	}
+	.inputdata{
+	width: 60%; 
+	display: inline-block;
+	}
+	.titleWrapper{
+	padding-left: 25%; 
+	padding-right: 20%;
+	}
+	
 </style>
-
-<form role="form" method="post" name="frmRegister" id="frmRegister" action="${contextPath }/board/registerA" >
+        	<form role="form" method="post" name="frmRegister" id="frmRegister" action="${contextPath }/board/registerA" >
 
 <hr>
 <%-- 제목 기업 지원 --%>
@@ -92,17 +118,22 @@
         <div class="panel panel-default">
             <div class="panel-heading"> <h4>증명 서류</h4> </div> <%-- /.panel-heading --%>
             <div class="panel-body">
+            
                     <div class="form-group uploadDiv">
                        	<input type="file" class="btn btn-primary fileInput" name="fileInput" id="fileInput" multiple>
+                       	
                     </div>	
                     <div class="form-group fileUploadResult">
                     	<ul>
-<%-- 업로드후  --%>
+                    		<%-- 업로드후  --%>
                     	</ul>
                     </div>	
-            </div><!-- /.panel-body -->
-        </div><!-- /.panel -->
-		<%--  <security:authentication property="principal.username"/> --%>
+                
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+	               <%--  <security:authentication property="principal.username"/> --%>
 		<div class="form-group" style="width: 100px; display: inline-block;">
 		<!-- awriter -->
 			<input class="form-control" name="awriter" id="awriter"  value="stu1" readonly>
@@ -114,7 +145,7 @@
 	       	<button type="button" id="jobCancle" class="btn btn-outline btn-danger jobCancle" >지원 취소</button>    
         </div>
 		<security:csrfInput/>
-</form>
+	</form>
 
 
 
@@ -130,7 +161,6 @@
 	 	
 	 	frmRegister.submit();
 	 });
-
 <%--등록버튼 클릭 처리 제이쿼리--%>
  $(".jobApply").on("click",function(){
 	 //alert("되긴함?") ;

@@ -4,8 +4,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <%@ page session="false" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.text.ParseException" %>
 
+<c:set var="contextPath" value="${pageContext.request.contextPath }" />
 <%@ include file="../include/header.jsp" %>
+<c:set var="now" value="<%= new java.util.Date() %>" />
+<fmt:formatDate var="formattedToday" value="${now}" pattern="yyyy/MM/dd" />
+
 <style>
 	th{text-align: center;}
 	a{color: black;}
@@ -20,26 +27,24 @@
 	position: absolute;
 	display: inline-block;
 	}
+	.newRegister{
+	margin: auto;
+    display: block;
+	}
 	
 </style>
 
-<h1>
-	Hello world!  
-</h1>
+<img class="card-img-bottom d-block newRegister" src="${contextPath }/resources/images/banner.png" alt="Card image cap">
 <br><br><br><br><br><br><br><br><br><br><br>
-<div class="input-group search-input custom-search-form pull-right" >
-                                <input type="text" class="form-control" placeholder="Search...">
-                                <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-</div>
 <br><br>
 <div>
 <ul>
 <%-- items="$" var="jobList" --%>
 <c:forEach  items="${recruitList }" var = "recruit">
+  <fmt:formatDate var="formbendDate" value="${recruit.bendDate}" pattern="yyyy/MM/dd" />
+
+<c:if test="${formbendDate ge formattedToday}">
+
 	<div class="jobBox">
 		<div class="col-lg-3 col-md-6">
                     <div class="panel panel-primary">
@@ -66,6 +71,7 @@
                     </div>
                 </div>
 	</div>
+	</c:if>
 </c:forEach>
 
 	
@@ -73,28 +79,14 @@
 </ul>
 </div>
 
-<%--페이징 버튼 --%>
-<div class="col-sm-6 pull-right" >
-	<div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate">
-		<ul class="pagination">
-			<li class="paginate_button previous disabled" aria-controls="dataTables-example" tabindex="0" id="dataTables-example_previous">
-				<a href="#">Previous</a>
-			</li>
-			<li class="paginate_button active" aria-controls="dataTables-example" tabindex="0">
-				<a href="#">1</a>
-			</li>
-			<li class="paginate_button next" aria-controls="dataTables-example" tabindex="0" id="dataTables-example_next">
-				<a href="#">Next</a>
-			</li>
-		</ul>
-	</div>
-</div>
+
 
 <form id="frmSendValue">
 
 </form>
 
 <script>
+
 var frmSendValue = $("#frmSendValue");
 $(".panel-footer").on("click",function(){
 	var bno = $(this).children("#bnotrunk").val();
@@ -106,6 +98,17 @@ $(".panel-footer").on("click",function(){
 	frmSendValue.submit();
 	
 })
+
+$(".newRegister").on("click",function(){
+	
+	frmSendValue.attr("action", "${contextPath}/board/register");
+	frmSendValue.attr("method","get");
+	    	
+	frmSendValue.submit();
+	
+})
+
+
 
 
 
