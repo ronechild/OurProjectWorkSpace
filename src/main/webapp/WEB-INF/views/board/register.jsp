@@ -131,19 +131,23 @@
 		
 		var attachFileInputHTML = "";
 		
-		$("div.fileUploadResult ul li").each(function(i, objLi) {
+		$(".fileUploadResult ul li").each(function(i, objLi) {
 			var attachLi = $(objLi);
 			
 			attachFileInputHTML += 
-			"<input type='hidden' name='attachFileList[" + i + "].uuid' value='" + attachLi.data("uuid") + "'>" + 
-			"<input type='hidden' name='attachFileList[" + i + "].uploadPath' value='" + attachLi.data("uploadpath") + "'>" + 
-			"<input type='hidden' name='attachFileList[" + i + "].fileName' value='" + attachLi.data("filename") + "'>" + 
-			"<input type='hidden' name='attachFileList[" + i + "].fileType' value='" + attachLi.data("filetype") + "'>";
+			"<input type='hidden' name='attachFileList[" + i + "].bUuid' value='" + attachLi.data("uuid") + "'>" + 
+			"<input type='hidden' name='attachFileList[" + i + "].bFileName' value='" + attachLi.data("filename") + "'>" + 
+			"<input type='hidden' name='attachFileList[" + i + "].bUploadPath' value='" + attachLi.data("uploadpath") + "'>"/*  + 
+			"<input type='hidden' name='attachFileList[" + i + "].bno' value='" + "${recruiterVO.bno}" + "'>" *//*  + 
+			"<input type='hidden' name='attachFileList[" + i + "].bDelFlag'>" *//*  + 
+			"<input type='hidden' name='attachFileList[" + i + "].fileType' value='" + attachLi.data("filetype") + "'>" */;
 		})
 		
 		if(attachFileInputHTML) {
 			frmRegister.append(attachFileInputHTML);
 		}
+		
+		console.log(attachFileInputHTML);
 		
 		frmRegister.submit();
 	})

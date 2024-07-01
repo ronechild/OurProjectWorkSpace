@@ -4,7 +4,7 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.spring5legacy.ourpro00.mapper.JobSeekerAttachFileMapper">
+<mapper namespace="com.spring5legacy.ourpro00.mapper.RecruiterAttachFileMapper">
 
     <select id="selectAttachFiles" resultType="com.spring5legacy.ourpro00.domain.RecruiterAttachFileVO">
     SELECT bUUID, bUPLOADPATH, bFILENAME, bNO
@@ -14,13 +14,13 @@
     
     <insert id="insertAttachFile">
         INSERT INTO ouruser.tbl_hireattachfile
-        VALUES (#{uuid}, #{fileName}, #{uploadPath},  #{bno})    
+        VALUES (#{bUuid}, #{bFileName}, #{bUploadPath}, #{bno}, DEFAULT)    
     </insert>
     
     <update id="updateAttachFileDelFlag">
     	UPDATE ouruser.tbl_hireattachfile
     		SET bdelFlag = 1
-    		WHERE buuid = #{buuid}
+    		WHERE bUuid = #{bUuid}
     </update>
     
     <delete id="deleteAttachFiles">
@@ -28,7 +28,7 @@
     </delete>
     
     <delete id="deleteAttachFile">
-        DELETE FROM ouruser.tbl_hireattachfile WHERE buuid = #{buuid}    
+        DELETE FROM ouruser.tbl_hireattachfile WHERE bUuid = #{bUuid}    
     </delete>
 
 	

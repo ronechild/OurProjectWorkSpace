@@ -11,7 +11,7 @@ public interface RecruiterAttachFileMapper {
 	public List<RecruiterVO> selectAttachFiles(Long bno);
 	
 	// 첨부파일 첨부 : 
-	public void instertAttachFile(RecruiterAttachFileVO recruiterAttachFile);
+	public void insertAttachFile(RecruiterAttachFileVO recruiterAttachFile);
 	
 	// 첨부파일 블라인드 처리 : 
 	public void updateAttachFileDelFlag(String bUuid);

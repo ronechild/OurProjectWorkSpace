@@ -31,6 +31,7 @@
                 <value>classpath:mappers/JobSeekerMapper.xml</value>
                 <value>classpath:mappers/RecruiterMapper.xml</value>
 				<value>classpath:mappers/JobSeekerAttachFileMapper.xml</value>
+				<value>classpath:mappers/RecruiterAttachFileMapper.xml</value>
             </list>
         </property>
     </bean> 

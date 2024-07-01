@@ -139,6 +139,8 @@
 	<%-- 취소 버튼 클릭--%><%-- * --%>
 	$(".modifyCancle").on("click", function() {
 		frmModify.empty();
+		console.log('${recruiterVO.bno}');
+		frmModify.append('<input type="hidden" id="bno" name="bno" value="' + '${recruiterVO.bno}' + '">');
 		frmModify.attr("action", "${contextPath}/board/detail");
 		frmModify.attr("method", "get");
 		
@@ -178,6 +180,8 @@
 		<%-- 진짜로 삭제하시겠습니까? 등등 --%>
 		window.alert("${recruiterVO.btitle}" + "글이 삭제되었습니다.");
 		frmModify.attr("action", "${contextPath}/board/removeB");
+		
+		frmModify.submit();
 	})
 	
 	<%-- 내용확인 --%>

@@ -97,15 +97,21 @@ public class RecruiterJobSeekerController {
 		return "/board/detail";
 	}
 	
-	@PostMapping("/detail")
-//	@PreAuthorize("permitAll")
-	public String showRecruit2(Model model, Long bno) {
-		System.out.println(bno);
-		model.addAttribute("recruit", recruiterService.selectRecruit(bno));
-		model.addAttribute("jsList", jobSeekerService.getJobSeekerListForDetail(bno)) ;
-		System.out.println("컨트롤러:::" + bno + "번 구인글 호출" +recruiterService.selectRecruit(bno));
-		return "redirect:/board/detail?bno=" + bno;
-	}
+//	@PostMapping("/detail")
+////	@PreAuthorize("permitAll")
+//	public String showRecruit2(Model model, Long bno) {
+//		System.out.println(bno);
+//		model.addAttribute("recruit", recruiterService.selectRecruit(bno));
+//		model.addAttribute("jsList", jobSeekerService.getJobSeekerListForDetail(bno)) ;
+//		System.out.println("컨트롤러:::" + bno + "번 구인글 호출" +recruiterService.selectRecruit(bno));
+//		return "redirect:/board/detail?bno=" + bno;
+//	}
+//	
+//	@GetMapping("/asdf")
+//	public String showRecruit3(Long bno) {
+//		System.out.println("bno : " + bno);
+//		return "redirect:/board/detail?bno=" + bno;
+//	}
 	
 	
 	// 구인글 수정 페이지 (구인자)

@@ -66,7 +66,7 @@ public class RecruiterServiceImpl implements RecruiterService{
 		if(attachFileList != null && 0 < attachFileList.size()) {
 			for(RecruiterAttachFileVO attachFile : attachFileList) {
 				attachFile.setBno(recruiterVO.getBno());
-				recruiterAttachFileMapper.instertAttachFile(attachFile);
+				recruiterAttachFileMapper.insertAttachFile(attachFile);
 				System.out.println("\t" + "\t" + "첨부한 파일 이름 : " + attachFile.getBFileName());
 			}
 		}
@@ -101,7 +101,7 @@ public class RecruiterServiceImpl implements RecruiterService{
 		if(updated) { // 수정 시, 첨부파일 모두 삭제하고, 수정완료 버튼을 눌렀을 때에도 작동해야함 > attachFileList != null 삭제
 			for(RecruiterAttachFileVO attachFile : attachFileList) {
 				attachFile.setBno(recruiterVO.getBno());
-				recruiterAttachFileMapper.instertAttachFile(attachFile);
+				recruiterAttachFileMapper.insertAttachFile(attachFile);
 				System.out.println("\t" + "\t" + "첨부한 파일 이름 : " + attachFile.getBFileName());
 			}
 		}
