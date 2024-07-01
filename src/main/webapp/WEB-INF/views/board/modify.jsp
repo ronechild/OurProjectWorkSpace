@@ -19,7 +19,7 @@
 	.titleWrapper{padding-left:25%; padding-right:20%;}
 </style>
 
-<form role="form" id="frmModify" name="frmModify" method=post>
+<form role="form" id="frmModify" name="frmModify" method="post">
 
 <hr>
 
@@ -139,7 +139,7 @@
 	<%-- 취소 버튼 클릭--%><%-- * --%>
 	$(".modifyCancle").on("click", function() {
 		frmModify.empty();
-		frmModify.attr("action", "${contextPath}/detail?bno=" + "${recruiterVO.bno}");
+		frmModify.attr("action", "${contextPath}/board/detail");
 		frmModify.attr("method", "get");
 		
 		frmModify.submit();

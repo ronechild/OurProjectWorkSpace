@@ -555,7 +555,7 @@ var myCommentModule = (function() {
  $(".btnToList").on("click",function(){
  	frmSendValue.find("#bno").remove();
  	frmSendValue.attr("action", "${contextPath}/board/homepage");
- 	frmSendValue.attr("method","post");
+ 	frmSendValue.attr("method","get");
  	
  	frmSendValue.submit();
  });
