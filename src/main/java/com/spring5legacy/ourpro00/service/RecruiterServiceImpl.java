@@ -94,17 +94,17 @@ public class RecruiterServiceImpl implements RecruiterService{
 		boolean updated = recruiterMapper.updateRecruit(recruiterVO) == 1; // 수정 여부 : 1
 		
 		// 첨부파일 처리 : 
-//		recruiterAttachFileMapper.deleteAttachFiles(recruiterVO.getBno());
-//		
-//		List<RecruiterAttachFileVO> attachFileList = recruiterVO.getAttachFileList();
-//				
-//		if(updated) { // 수정 시, 첨부파일 모두 삭제하고, 수정완료 버튼을 눌렀을 때에도 작동해야함 > attachFileList != null 삭제
-//			for(RecruiterAttachFileVO attachFile : attachFileList) {
-//				attachFile.setBno(recruiterVO.getBno());
-//				recruiterAttachFileMapper.instertAttachFile(attachFile);
-//				System.out.println("\t" + "\t" + "첨부한 파일 이름 : " + attachFile.getBFileName());
-//			}
-//		}
+		recruiterAttachFileMapper.deleteAttachFiles(recruiterVO.getBno());
+		
+		List<RecruiterAttachFileVO> attachFileList = recruiterVO.getAttachFileList();
+				
+		if(updated) { // 수정 시, 첨부파일 모두 삭제하고, 수정완료 버튼을 눌렀을 때에도 작동해야함 > attachFileList != null 삭제
+			for(RecruiterAttachFileVO attachFile : attachFileList) {
+				attachFile.setBno(recruiterVO.getBno());
+				recruiterAttachFileMapper.instertAttachFile(attachFile);
+				System.out.println("\t" + "\t" + "첨부한 파일 이름 : " + attachFile.getBFileName());
+			}
+		}
 		
 		System.out.println("\t" + recruiterVO.getBno() + "번 글 수정 완료");
 	}

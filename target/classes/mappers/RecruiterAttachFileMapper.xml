@@ -28,7 +28,7 @@
     </delete>
     
     <delete id="deleteAttachFile">
-        DELETE FROM ouruser.tbl_hireattachfile WHERE buuid = #{uuid}    
+        DELETE FROM ouruser.tbl_hireattachfile WHERE buuid = #{buuid}    
     </delete>
 
 	

@@ -16,9 +16,9 @@ public interface RecruiterAttachFileMapper {
 	// 첨부파일 블라인드 처리 : 
 	public void updateAttachFileDelFlag(String bUuid);
 	
-//	// 첨부파일 삭제 : 
-//	public void deleteAttachFile(String bUuid);
-//	
-//	// 첨부파일 모두 삭제 : 
-//	public void deleteAttachFiles(Long bno);
+	// 첨부파일 삭제 : 
+	public void deleteAttachFile(String bUuid);
+	
+	// 첨부파일 모두 삭제 : 
+	public void deleteAttachFiles(Long bno);
 }
