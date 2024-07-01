@@ -24,13 +24,36 @@
 <hr>
 
 <%-- 구인글 정보 --%>
-<div class="titleWrapper">
+<div class="titleWrapper" style="padding-left:20%; padding-right:20%; margin:0px">
 	<%-- 제목 --%>
 	<div class="wrap_jv_header">
 		<a class="placeholder" tabindex="-1"></a>
 		<div class="jv_header" data-rec_idx="48341817" data-rec_seq="0">
 			<div class="title_inner">
-				<h3><c:out value="${recruiterVO.bwriter}"/><small> - 구인글 수정</small><span style="float:right"><small>등록일&nbsp;<c:out value="${recruiterVO.bregDate}"/></small></span></h3><%-- * --%>
+<!-- 				<script>
+					function changeDateFormat(date) {
+						var newDate = new Date(date);
+						
+						var daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
+						
+						var year = newDate.getFullYear();
+						var month = String(newDate.getMonth() + 1).padStart(2, '0');
+						var day = String(newDate.getDate()).padStart(2, '0');
+						var dayOfWeek = daysOfWeek[newDate.getDay()];
+						var hour = String(newDate.getHours()).padStart(2, '0');
+						var minute = String(newDate.getMinutes()).padStart(2, '0');
+						var second = String(newDate.getSeconds()).padStart(2, '0');
+						
+						return year + "-" + month + "-" + day + " " + dayOfWeek + " " + hour + ":" + minute + ":" + second;
+					}
+					
+					var bregDate = "${recruiterVO.bregDate}";
+					console.log("bregDate : " + bregDate);
+					
+					var newBregDate = changeDateFormat(bregDate);
+					console.log("newBregDate : " + newBregDate);
+				</script> -->
+				<h3><c:out value="${recruiterVO.bwriter}"/><small> - 구인글 수정</small><span style="float:right"><small>등록일 : &nbsp;<c:out value="${recruiterVO.bregDate}"/></small></span></h3><%-- * --%>
 			</div>
 			<h1 class="tit_job" >
 				<input class="form-control" style="width:100%; height:70px; font-size:30pt;" id="btitle" name="btitle" value="${recruiterVO.btitle}">
@@ -41,12 +64,12 @@
 	<hr>
 	
 	<%--세부 정보 --%>
-	<div class="cont wrapper" >
+	<div class="cont wrapper">
 		<div class="col">
 			<dl>
-				<dt>마감일&nbsp;</dt><dd><input type="date" class="form-control inputdata" id="bendDate" name="bendDate"></dd>
+				<dt>마감일 : &nbsp;</dt><dd><input type="date" class="form-control inputdata" id="bendDate" name="bendDate"></dd>
 				<script>
-					function changeDateFormat(date) {
+					function changeDateFormat2(date) {
 						var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 						var parts = date.split(' ');
 						
@@ -60,7 +83,7 @@
 					var bendDate = "${recruiterVO.bendDate}";
 					console.log("bendDate : " + bendDate);
 					
-					var bendDateYYYYMMDD = changeDateFormat(bendDate);
+					var bendDateYYYYMMDD = changeDateFormat2(bendDate);
 					console.log("bendDateYYYYMMDD : " + bendDateYYYYMMDD);
 					
 					window.onload = function() {
@@ -69,16 +92,16 @@
 				</script>
 			</dl>
 			<dl>
-				<dt>직종&emsp;</dt><dd><input class="form-control inputdata" id="boccupation" name="boccupation" value='<c:out value="${recruiterVO.boccupation}"/>'></dd>
+				<dt>직종 : &emsp;</dt><dd><input class="form-control inputdata" id="boccupation" name="boccupation" value='<c:out value="${recruiterVO.boccupation}"/>'></dd>
 			</dl> 
 			<dl>
-				<dt>지역&emsp;</dt><dd><input class="form-control inputdata" id="bregion" name="bregion" value='<c:out value="${recruiterVO.bregion}"/>' ></dd>
+				<dt>지역 : &emsp;</dt><dd><input class="form-control inputdata" id="bregion" name="bregion" value='<c:out value="${recruiterVO.bregion}"/>' ></dd>
 			</dl>
 			<dl>
-				<dt>모집인원&nbsp;</dt><dd><input type="number" class="form-control inputdata" id="bhcnt" name="bhcnt" value='<c:out value="${recruiterVO.bhcnt}"/>'></dd>
+				<dt>모집인원 : &nbsp;</dt><dd><input type="number" class="form-control inputdata" id="bhcnt" name="bhcnt" value='<c:out value="${recruiterVO.bhcnt}"/>'></dd>
 			</dl>
 		</div>
-		<div class="btn_apply" style="margin-left:80%;">
+		<div class="btn_apply" style="float:right;">
 			<button type="button" id="modifyRecruit" class="btn btn-outline btn-success modifyRecruit">수정 완료</button>
 			<button type="button" id="modifyCancle" class="btn btn-outline btn-warning modifyCancle">수정 취소</button>
 			<button type="button" id="removeRecruit" class="btn btn-outline btn-danger removeRecruit">삭제</button>
@@ -89,7 +112,7 @@
 <hr>
 
 <%-- 구인글 내용 --%>
-<div class="contentBox">
+<div class="contentBox" style="padding-left:20%; padding-right:20%; margin:0px">
 	<%-- 내용 --%>
 	<div class="form-group">
 		<textarea class="form-control" style="height:500px;" id="bcontent" name="bcontent" autofocus><c:out value="${recruiterVO.bcontent}"/></textarea>
@@ -97,13 +120,49 @@
 	<%-- 첨부 파일 --%>
 	<div class="panel panel-default">
 		<div class="panel-heading"><h4>첨부 파일</h4></div>
-			<div class="panel-body">
-				<div class="form-group uploadDiv">
-					<input type="file" class="btn btn-primary fileInput" id="fileInput" name="fileInput" multiple>
-				</div>
+		<div class="panel-body">
+			<div class="form-group uploadDiv">
+				<input type="file" class="btn btn-primary fileInput" id="fileInput" name="fileInput" multiple>
+			</div>
 			<div class="form-group fileUploadResult">
 				<ul>
 <%-- 첨부 파일 영역 --%>
+<c:choose>
+	<c:when test="${empty recruiterVO.attachFileList}">
+		<li style="font-size:14pt; list-style-type:none;">첨부파일이 없습니다.</li>
+	</c:when>
+	<c:otherwise>
+		<c:forEach var="attachFile" items="${recruiterVO.attachFileList}">
+			<c:set var="fullFileName" value="${attachFile.repoPath}/${attachFile.uploadPath}/${attachFile.uuid}_${attachFile.fileName}"/>
+			<c:choose>
+				<c:when test="${attachFile.fileType == 'F'}">
+					<li class="attachLi" 
+							data-repopath="${attachFile.repoPath}"
+							data-uploadpath="${attachFile.uploadPath}" 
+							data-uuid="${attachFile.uuid}" 
+							data-filename="${attachFile.fileName}"
+							data-filetype="${attachFile.fileType}">
+						<img src='${contextPath}/resources/icons/icon-attach.png' style='width:50px;'/>&emsp;${attachFile.fileName}
+						<span class='glyphicon glyphicon-remove-sign' data-filename='${fullFileName}' data-filetype='F' style='color:red;'></span>
+					</li>
+				</c:when>
+				<c:when test="${attachFile.fileType == 'I'}">
+					<c:set var="thumbnail" value="${attachFile.repoPath}/${attachFile.uploadPath}/s_${attachFile.uuid}_${attachFile.fileName}"/>
+					<li class="attachLi" 
+							data-repopath="${attachFile.repoPath}"
+							data-uploadpath="${attachFile.uploadPath}" 
+							data-uuid="${attachFile.uuid}" 
+							data-filename="${attachFile.fileName}"
+							data-filetype="${attachFile.fileType}">
+						<img src="${contextPath}/displayThumbnail?thumbnail=${thumbnail}" style='width:50px;'/>&emsp;${attachFile.fileName}
+						<span class='glyphicon glyphicon-remove-sign' data-filename='${thumbnail}' data-filetype='I' style='color:red;'></span>
+					</li>
+				</c:when>
+			</c:choose>
+		</c:forEach>
+	</c:otherwise>
+</c:choose>
+
 				</ul>
 			</div>
 		</div>

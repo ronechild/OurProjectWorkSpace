@@ -11,7 +11,7 @@
 <style>
 	.alert, dl{display:inline-block; width:200px; margin-left:50px;}
 	dd{color:#28288C;}
-	dt{float:left;}
+	dt{float:left; height:34px;}
 	.bcontentTextBox{margin-left:100px; background-color:white;}
 	.contentBox{margin-left:100px; margin-right:100px;}
 	.btn_apply{margin-left:60%; display:inline-block;}
@@ -24,7 +24,7 @@
 <hr>
 
 <%-- 구인글 정보 --%>
-<div class="titleWrapper">
+<div class="titleWrapper" style="padding-left:20%; padding-right:20%; margin:0px">
 	<%-- 제목 --%>
 	<div class="wrap_jv_header" >
 	    <a class="placeholder" tabindex="-1"></a>
@@ -41,22 +41,22 @@
 	<hr>
 
 	<%--세부 정보 --%>
-	<div class="cont wrapper" >
+	<div class="cont wrapper">
 		<div class="col">   
-			<dl >
-				<dt>마감일&nbsp;</dt><dd><input type="date" class="form-control inputdata" id="bendDate" name="bendDate"/></dd>
+			<dl>
+				<dt>마감일 : &nbsp;</dt><dd><input type="date" class="form-control inputdata" id="bendDate" name="bendDate"/></dd>
 			</dl>
 			<dl>
-				<dt>직종&emsp;</dt><dd><input class="form-control inputdata" id="boccupation" name="boccupation"/></dd>
+				<dt>직종 : &emsp;</dt><dd><input class="form-control inputdata" id="boccupation" name="boccupation"/></dd>
 			</dl>           
 			<dl>
-				<dt>지역&emsp;</dt><dd><input class="form-control inputdata" id="bregion" name="bregion"></dd>
+				<dt>지역 : &emsp;</dt><dd><input class="form-control inputdata" id="bregion" name="bregion"></dd>
 			</dl>
 			<dl>
-				<dt>모집인원&nbsp;</dt><dd><input type="number" class="form-control inputdata" id="bhcnt" name="bhcnt"></dd>
+				<dt>모집인원 : &nbsp;</dt><dd><input type="number" class="form-control inputdata" id="bhcnt" name="bhcnt"></dd>
 			</dl>
 		</div>
-		<div class="btn_apply" style="margin-left:80%;">
+		<div class="btn_apply" style="float:right;">
 			<button type="button" id="registerRecruit" class="btn btn-outline btn-success registerRecruit">등록</button>
 			<button type="button" id="registerCancle" class="btn btn-outline btn-danger registerCancle">취소</button>
 		</div>
@@ -66,7 +66,7 @@
 <hr>
 
 <%-- 구인글 내용 --%>
-<div class="contentBox">
+<div class="contentBox" style="padding-left:20%; padding-right:20%; margin:0px">
 	<%-- 내용 --%>
 	<div class="form-group">
 		<textarea class="form-control" style="height:500px;" id="bcontent" name="bcontent" placeholder="구인글 내용"></textarea>
