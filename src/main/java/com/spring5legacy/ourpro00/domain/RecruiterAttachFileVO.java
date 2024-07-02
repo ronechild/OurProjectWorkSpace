@@ -15,5 +15,6 @@ public class RecruiterAttachFileVO { // 구인자가 구인글을 등록할 때 
 	private String bFileName;
 	private Long bno;
 	private String bDelFlag;
-	private String bUploadPath = "C:/myupload";
+	private String bUploadPath;
+	private String bRepoPath = "C:/myupload";
 }

@@ -44,7 +44,7 @@
             </div>
             
             <div class="sign-up-html">
-                <form class="frmRegister" action="${contextPath}/register" method="post">
+                <form class="frmRegister" action="${contextPath}/memberRegister" method="post">
                     <div class="group">
                         <label for="userid" class="label">USERID</label>
                         <input id="userid" name="userid" type="text" class="input" required>
@@ -124,8 +124,7 @@ function checkPasswordStrength() {
 }
 
 <%--  --%>
-function registerUser(event) {
-    event.preventDefault(); // 기본 폼 제출을 방지
+function registerUser() {
 
     var userid = document.getElementById("userid").value;
     var userpw = document.getElementById("userpw").value;
@@ -138,34 +137,9 @@ function registerUser(event) {
         alert("Passwords do not match");
         return;
     }
-
-    var csrfParameterName = "${_csrf.parameterName}";
-    var csrfToken = "${_csrf.token}";
-
-    var data = {
-        userid: userid,
-        userpw: userpw,
-        username: username,
-        email: email,
-        phone: phone
-    };
-    data[csrfParameterName] = csrfToken;
-
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "${contextPath}/register", true);
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                alert("Registration successful");
-                // 성공시 추가 행동 (예: 로그인 페이지로 리디렉션)
-            } else {
-                alert("Registration failed");
-                // 실패시 추가 행동
-            }
-        }
-    };
-    xhr.send(JSON.stringify(data));
+    
+    frmRegister.submit();
+    
 }
 
 </script>

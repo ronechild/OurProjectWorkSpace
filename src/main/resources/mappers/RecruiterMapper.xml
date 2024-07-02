@@ -12,11 +12,35 @@
 	</select>
 	
 	<!-- 특정 구인글 조회 -->
-	<select id="selectRecruit" resultType="com.spring5legacy.ourpro00.domain.RecruiterVO">
-		SELECT bno, btitle, bcontent, bwriter, bregDate, bendDate, breplyCnt, bappCnt,
-       				 bblind, boccupation, bregion, bhcnt
-    	FROM ouruser.tbl_hiring
-    	WHERE bno = #{bno}
+	<resultMap id="RecruiterAttachFileVOMap" type="com.spring5legacy.ourpro00.domain.RecruiterAttachFileVO">
+		<result property="bUuid" column="bUuid"></result>
+		<result property="bFileName" column="bFileName"></result>
+		<result property="bno" column="bno"></result>
+		<result property="bDelFlag" column="bDelFlag"></result>
+		<result property="bUploadPath" column="bUploadPath"></result>
+		<result property="bRepoPath" column="bRepoPath"></result>
+	</resultMap>
+	<resultMap id="RecruiterVOMap" type="com.spring5legacy.ourpro00.domain.RecruiterVO">
+		<result property="bno" column="bno"></result>
+		<result property="btitle" column="btitle"></result>
+		<result property="bcontent" column="bcontent"></result>
+		<result property="bwriter" column="bwriter"></result>
+		<result property="bregDate" column="bregDate"></result>
+		<result property="bendDate" column="bendDate"></result>
+		<result property="breplyCnt" column="breplyCnt"></result>
+		<result property="bappCnt" column="bappCnt"></result>
+		<result property="bblind" column="bblind"></result>
+		<result property="boccupation" column="boccupation"></result>
+		<result property="bregion" column="bregion"></result>
+		<result property="bhcnt" column="bhcnt"></result>
+		<collection property="attachFileList" resultMap="RecruiterAttachFileVOMap"></collection>
+	</resultMap>
+	<select id="selectRecruit" resultMap="RecruiterVOMap">
+		SELECT a.BNO, a.BTITLE, a.BCONTENT, a.BWRITER, 
+		       a.BREGDATE, a.bendDate, a.breplyCnt, a.bappCnt, a.bblind, a.boccupation, a.bregion, a.bhcnt, 
+               b.bUuid, b.bFileName, b.bno, b.bDelFlag, b.bUploadPath
+          FROM ouruser.tbl_hiring a LEFT OUTER JOIN ouruser.tbl_hireattachfile b ON (a.bno = b.bno)
+         WHERE a.bno = #{bno}
 	</select>
 	
 	<!-- 구인글 총 수 -->

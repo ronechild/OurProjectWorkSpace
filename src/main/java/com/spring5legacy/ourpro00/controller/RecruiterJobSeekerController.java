@@ -104,6 +104,9 @@ public class RecruiterJobSeekerController {
     @PreAuthorize("hasAuthority('COMPANY')")
 	public void showModifyRecruit(Model model, Long bno) {
 		model.addAttribute("recruiterVO", recruiterService.selectRecruit(bno));
+		
+		System.out.println("컨트롤러:::recruiterVO : " + recruiterService.selectRecruit(bno));
+		
 		System.out.println("컨트롤러:::" + bno + "번 구인글 수정 페이지 호출");
 	}
 	
@@ -111,7 +114,6 @@ public class RecruiterJobSeekerController {
 	@PostMapping("/modify")
 	@PreAuthorize("hasAuthority('COMPANY')")
 	public String modifyRecruit(RecruiterVO recruiterVO) {
-		
 		recruiterService.updateRecruit(recruiterVO);
 		Long bno = recruiterVO.getBno();
 		System.out.println("컨트롤러:::" + bno + "번 구인글 수정 완료 후" + bno + "번 구인글 호출");

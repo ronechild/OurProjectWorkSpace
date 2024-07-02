@@ -7,7 +7,7 @@
 <mapper namespace="com.spring5legacy.ourpro00.mapper.RecruiterAttachFileMapper">
 
     <select id="selectAttachFiles" resultType="com.spring5legacy.ourpro00.domain.RecruiterAttachFileVO">
-    SELECT bUUID, bUPLOADPATH, bFILENAME, bNO
+    SELECT bUUID, bUPLOADPATH, bFILENAME, bNO, bDelFlag
         FROM ouruser.tbl_hireattachfile
         WHERE bno = #{bno}
     </select>

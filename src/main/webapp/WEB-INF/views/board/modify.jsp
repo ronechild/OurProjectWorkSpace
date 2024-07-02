@@ -30,7 +30,7 @@
 		<a class="placeholder" tabindex="-1"></a>
 		<div class="jv_header" data-rec_idx="48341817" data-rec_seq="0">
 			<div class="title_inner">
-<!-- 				<script>
+<%-- 				<script>
 					function changeDateFormat(date) {
 						var newDate = new Date(date);
 						
@@ -52,7 +52,7 @@
 					
 					var newBregDate = changeDateFormat(bregDate);
 					console.log("newBregDate : " + newBregDate);
-				</script> -->
+				</script> --%>
 				<h3><c:out value="${recruiterVO.bwriter}"/><small> - 구인글 수정</small><span style="float:right"><small>등록일 : &nbsp;<c:out value="${recruiterVO.bregDate}"/></small></span></h3><%-- * --%>
 			</div>
 			<h1 class="tit_job" >
@@ -127,25 +127,32 @@
 			<div class="form-group fileUploadResult">
 				<ul>
 <%-- 첨부 파일 영역 --%>
+<c:forEach var="attachFile" items="${recruiterVO.attachFileList}">
 <c:choose>
-	<c:when test="${empty recruiterVO.attachFileList}">
+	<c:when test="${empty attachFile.bFileName}">
 		<li style="font-size:14pt; list-style-type:none;">첨부파일이 없습니다.</li>
 	</c:when>
 	<c:otherwise>
-		<c:forEach var="attachFile" items="${recruiterVO.attachFileList}">
+		
+<%-- 			<script>
+				console.log("${attachFile.bRepoPath}");
+				console.log("${attachFile.bUploadPath}");
+				console.log("${attachFile.bUuid}");
+				console.log("${attachFile.bFileName}");
+			</script> --%>
 			<c:set var="fullFileName" value="${attachFile.repoPath}/${attachFile.uploadPath}/${attachFile.uuid}_${attachFile.fileName}"/>
-			<c:choose>
-				<c:when test="${attachFile.fileType == 'F'}">
+			<%-- <c:choose>
+				<c:when test="${attachFile.fileType == 'F'}"> --%>
 					<li class="attachLi" 
 							data-repopath="${attachFile.repoPath}"
 							data-uploadpath="${attachFile.uploadPath}" 
 							data-uuid="${attachFile.uuid}" 
 							data-filename="${attachFile.fileName}"
-							data-filetype="${attachFile.fileType}">
+							<%-- data-filetype="${attachFile.fileType}" --%>>
 						<img src='${contextPath}/resources/icons/icon-attach.png' style='width:50px;'/>&emsp;${attachFile.fileName}
 						<span class='glyphicon glyphicon-remove-sign' data-filename='${fullFileName}' data-filetype='F' style='color:red;'></span>
 					</li>
-				</c:when>
+				<%-- </c:when>
 				<c:when test="${attachFile.fileType == 'I'}">
 					<c:set var="thumbnail" value="${attachFile.repoPath}/${attachFile.uploadPath}/s_${attachFile.uuid}_${attachFile.fileName}"/>
 					<li class="attachLi" 
@@ -158,11 +165,11 @@
 						<span class='glyphicon glyphicon-remove-sign' data-filename='${thumbnail}' data-filetype='I' style='color:red;'></span>
 					</li>
 				</c:when>
-			</c:choose>
-		</c:forEach>
+			</c:choose> --%>
+		
 	</c:otherwise>
 </c:choose>
-
+</c:forEach>
 				</ul>
 			</div>
 		</div>
@@ -231,8 +238,8 @@
 			attachFileInputHTML += 
 			"<input type='hidden' name='attachFileList[" + i + "].uuid' value='" + attachLi.data("uuid") + "'>" + 
 			"<input type='hidden' name='attachFileList[" + i + "].uploadPath' value='" + attachLi.data("uploadpath") + "'>" + 
-			"<input type='hidden' name='attachFileList[" + i + "].fileName' value='" + attachLi.data("filename") + "'>" + 
-			"<input type='hidden' name='attachFileList[" + i + "].fileType' value='" + attachLi.data("filetype") + "'>";
+			"<input type='hidden' name='attachFileList[" + i + "].fileName' value='" + attachLi.data("filename") + "'>"/*  + 
+			"<input type='hidden' name='attachFileList[" + i + "].fileType' value='" + attachLi.data("filetype") + "'>" */;
 		})
 		
 		if(attachFileInputHTML) {
@@ -310,7 +317,7 @@
 		$(uploadResult).each(function(i, attachFile) {
 			fullFileName = encodeURI(attachFile.repoPath + "/" + attachFile.uploadPath + "/" + attachFile.uuid + "_" + attachFile.fileName);
 			
-			if(attachFile.fileType == "F") {
+			/* if(attachFile.fileType == "F") { */
 				htmlStr += 
 				"<li " + 
 				"		data-uploadpath='" + attachFile.uploadPath + "'" + 
@@ -321,7 +328,7 @@
 				"	<span class='glyphicon glyphicon-remove-sign' data-filename='" + fullFileName + "' data-filetype='F' style='color:red;'></span>" + 
 				"</li>"
 				
-			} else {
+			/* } else {
 				var thumbnail = encodeURI(attachFile.repoPath + "/" + attachFile.uploadPath + "/s_" + attachFile.uuid + "_" + attachFile.fileName);
 				
 				htmlStr += 
@@ -333,7 +340,7 @@
 				"	<img src='${contextPath}/displayThumbnail?thumbnail=" + thumbnail + "' style='width:50px;'/> &emsp;" + attachFile.fileName + 
 				"	<span class='glyphicon glyphicon-remove-sign' data-filename='" + thumbnail + "' data-filetype='I' style='color:red;'></span>" + 
 				"</li>"
-			}
+			} */
 		})
 		
 		fileUploadResultUL.append(htmlStr);

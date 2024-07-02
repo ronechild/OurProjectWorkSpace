@@ -31,6 +31,7 @@ public class RecruiterServiceImpl implements RecruiterService{
 	@Override
 	public RecruiterVO selectRecruit(Long bno) {
 		System.out.println("서비스:::특정 구인글 조회 : " + bno);
+		System.out.println("서비스:::recruiterVO : " + recruiterMapper.selectRecruit(bno));
 		RecruiterVO recruiterVO = recruiterMapper.selectRecruit(bno);
 		System.out.println( bno + "번 글 호출 완료");
 		return recruiterVO;
@@ -46,7 +47,6 @@ public class RecruiterServiceImpl implements RecruiterService{
 	@Override
 	public void insertRecruit(RecruiterVO recruiterVO) {
 		System.out.println("서비스:::구인글 등록 : ");
-		System.out.println("서비스:::recruiterVO : " + recruiterVO);
 		
 //		System.out.println("bno: " + recruiterVO.getBno());
 //		System.out.println("btitle: " + recruiterVO.getBtitle());
@@ -79,15 +79,8 @@ public class RecruiterServiceImpl implements RecruiterService{
 	public void updateRecruit(RecruiterVO recruiterVO) {
 		System.out.println("서비스:::구인글 수정 : ");
 		
-		System.out.println("bno: " + recruiterVO.getBno());
-		System.out.println("btitle: " + recruiterVO.getBtitle());
-		System.out.println("bcontent: " + recruiterVO.getBcontent());
-		System.out.println("bwriter: " + recruiterVO.getBwriter());
-		System.out.println("bregDate: " + recruiterVO.getBregDate());
-		System.out.println("bendDate: " + recruiterVO.getBendDate());
-		System.out.println("boccupation: " + recruiterVO.getBoccupation());
-		System.out.println("bregion: " + recruiterVO.getBregion());
-		System.out.println("bhcnt: " + recruiterVO.getBhcnt());
+		System.out.println("서비스:::recruiterVO : " + recruiterVO);
+		
 		
 		recruiterMapper.updateRecruit(recruiterVO);
 		
