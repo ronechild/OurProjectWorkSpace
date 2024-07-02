@@ -30,4 +30,6 @@
 	<context:component-scan base-package="com.spring5legacy.ourpro00.controller"/>
 	<context:component-scan base-package="com.spring5legacy.ourpro00.common.fileupload"/>
 	
+	<security:global-method-security pre-post-annotations="enabled" secured-annotations="enabled" />
+	
 </beans:beans>

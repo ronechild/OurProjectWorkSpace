@@ -8,11 +8,43 @@
 	
 	</select>
 	
+<<<<<<< Updated upstream
 	<!-- 특정 구직글 조회 -->
 	<select id="selectJobSeeker">
 		SELECT ano, atitle, acontent, awriter, aregdate, bno   
 			FROM ouruser.tbl_apply
 		WHERE ano = #{ano} 
+=======
+	<!-- 디테일 페이지 구직글 목록 조회 -->
+	<select id="selectJobSeekerListForDetail" resultType="com.spring5legacy.ourpro00.domain.JobSeekerVO">
+		SELECT ano, atitle, acontent, awriter, aregdate, bno   
+			FROM ouruser.tbl_apply
+			WHERE bno = #{bno} ORDER BY bno DESC
+	</select>
+	
+	 <resultMap type="com.spring5legacy.ourpro00.domain.JobSeekerAttachFileVO" id="attachFileMap">
+      <result property="Uuid" column="Uuid"/>
+      <result property="FileName" column="FileName"/>
+      <result property="UploadPath" column="UploadPath"/>      
+      <result property="ano" column="ano"/>
+      <result property="fileType" column="fileType"/>
+   </resultMap>
+   <resultMap type="com.spring5legacy.ourpro00.domain.JobSeekerVO" id="JobSeekerVOMap">
+      <result property="ano" column="ano"/>
+      <result property="atitle" column="atitle"/>
+      <result property="acontent" column="acontent"/>
+      <result property="awriter" column="awriter"/>
+      <result property="aregDate" column="aregDate"/>
+      <result property="bno" column="bno"/>
+      <collection property="jobSeekerAttachFileList"  resultMap="attachFileMap"/>
+   </resultMap>
+	<!-- 특정 구직글 조회 -->
+	<select id="selectJobSeeker" resultType="com.spring5legacy.ourpro00.domain.JobSeekerVO" resultMap="JobSeekerVOMap">
+		SELECT c.ano, c.atitle, c.acontent, c.awriter, c.aregdate, c.bno,   
+                  d.uuid, d.filename, d.uploadpath, d.ano, d.fileType
+         FROM ouruser.tbl_apply  c LEFT OUTER JOIN ouruser.tbl_applyattachfile d ON (c.ano = d.ano)
+         WHERE c.ano = #{ano}
+>>>>>>> Stashed changes
 	</select>
 	
 	<!-- 구직글 총 수 -->

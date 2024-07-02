@@ -1,5 +1,9 @@
 Manifest-Version: 1.0
+<<<<<<< Updated upstream
 Built-By: soldesk
+=======
+Built-By: PC
+>>>>>>> Stashed changes
 Build-Jdk: 11.0.23
 Created-By: Maven Integration for Eclipse
 

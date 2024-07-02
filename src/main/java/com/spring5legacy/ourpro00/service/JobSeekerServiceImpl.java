@@ -16,8 +16,17 @@ public class JobSeekerServiceImpl implements JobSeekerService{
 
 	// 특정 구직글 조회
 	@Override
+<<<<<<< Updated upstream
 	public void selectJobSeeker() {
 		
+=======
+	public JobSeekerVO getJobSeeker(Long ano) {
+			System.out.println("받은 ano: " + ano);
+			JobSeekerVO jobSeeker = jobSeekerMapper.selectJobSeeker(ano) ;
+			List<JobSeekerAttachFileVO> jobSeekerAttachFileList = jobSeekerAttachFileMapper.selectAttachFiles(ano) ;
+			jobSeeker.setJobSeekerAttachFileList(jobSeekerAttachFileList);
+			return jobSeeker;
+>>>>>>> Stashed changes
 	}
 
 	// 구직글 총 수

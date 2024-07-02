@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring5legacy.ourpro00.mapper.RecruiterAttachFileMapper">
+
+    <select id="selectAttachFiles" resultType="com.spring5legacy.ourpro00.domain.RecruiterAttachFileVO">
+    SELECT bUUID, bUPLOADPATH, bFILENAME, bNO, bDelFlag
+        FROM ouruser.tbl_hireattachfile
+        WHERE bno = #{bno}
+    </select>
+    
+    <insert id="insertAttachFile">
+        INSERT INTO ouruser.tbl_hireattachfile
+        VALUES (#{bUuid}, #{bFileName}, #{bUploadPath}, #{bno}, DEFAULT)    
+    </insert>
+    
+    <update id="updateAttachFileDelFlag">
+    	UPDATE ouruser.tbl_hireattachfile
+    		SET bdelFlag = 1
+    		WHERE bUuid = #{bUuid}
+    </update>
+    
+    <delete id="deleteAttachFiles">
+        DELETE FROM ouruser.tbl_hireattachfile WHERE bno = #{bno}
+    </delete>
+    
+    <delete id="deleteAttachFile">
+        DELETE FROM ouruser.tbl_hireattachfile WHERE bUuid = #{bUuid}    
+    </delete>
+
+	
+</mapper>

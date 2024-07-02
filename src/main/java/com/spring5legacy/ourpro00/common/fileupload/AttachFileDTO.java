@@ -14,7 +14,12 @@ public class AttachFileDTO {
 	private String uuid;
 	private String fileName;
 	private String uploadPath;
+<<<<<<< Updated upstream
 	
 	private String repoPath = "C:myupload";
+=======
+	private String fileType ;
+	private String repoPath = "C:/myupload";
+>>>>>>> Stashed changes
 	
 }
