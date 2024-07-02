@@ -11,8 +11,8 @@ import lombok.ToString;
 @NoArgsConstructor
 public class RecruiterAttachFileVO { // 구인자가 구인글을 등록할 때 첨부하는 파일 VO
 	
-	private String bUuid;
-	private String bFileName;
+	private String buuid;
+	private String bfileName;
 	private Long bno;
 	private String bDelFlag;
 	private String bUploadPath;

@@ -145,9 +145,9 @@
 			var attachLi = $(objLi);
 			
 			attachFileInputHTML += 
-			"<input type='hidden' name='attachFileList[" + i + "].bUuid' value='" + attachLi.data("uuid") + "'>" + 
-			"<input type='hidden' name='attachFileList[" + i + "].bFileName' value='" + attachLi.data("filename") + "'>" + 
-			"<input type='hidden' name='attachFileList[" + i + "].bUploadPath' value='" + attachLi.data("uploadpath") + "'>"/*  + 
+			"<input type='hidden' name='attachFileList[" + i + "].buuid' value='" + attachLi.data("uuid") + "'>" + 
+			"<input type='hidden' name='attachFileList[" + i + "].bfileName' value='" + attachLi.data("filename") + "'>" + 
+			"<input type='hidden' name='attachFileList[" + i + "].buploadPath' value='" + attachLi.data("uploadpath") + "'>"/*  + 
 			"<input type='hidden' name='attachFileList[" + i + "].bno' value='" + "${recruiterVO.bno}" + "'>" *//*  + 
 			"<input type='hidden' name='attachFileList[" + i + "].bDelFlag'>" *//*  + 
 			"<input type='hidden' name='attachFileList[" + i + "].fileType' value='" + attachLi.data("filetype") + "'>" */;
@@ -173,7 +173,7 @@
 		var regExp = /^\s+$/;
 		
 /* 		if(!btitle||!bcontent||!bendDate||!boccupation||!bregion||!bhcnt||regExp.test(btitle)||regExp.test(bcontent)||regExp.test(bendDate)||regExp.test(boccupation)||regExp.test(bregion)||regExp.test(bhcnt)) { */
-		if(!btitle||!bcontent||regExp.test(btitle)||regExp.test(bcontent)){
+/* 		if(!btitle||!bcontent||regExp.test(btitle)||regExp.test(bcontent)){ */
 			window.alert("모든 내용을입력하세요");
 			return false;
 			
@@ -215,29 +215,29 @@
 		
 		<%-- 아이콘/썸네일 생성 --%>
 		$(uploadResult).each(function(i, attachFile) {
-			fullFileName = encodeURI(attachFile.repoPath + "/" + attachFile.uploadPath + "/" + attachFile.uuid + "_" + attachFile.fileName);
+			fullFileName = encodeURI(attachFile.brepoPath + "/" + attachFile.buploadPath + "/" + attachFile.buuid + "_" + attachFile.bfileName);
 			
 			if(attachFile.fileType == "F") {
 				htmlStr += 
 				"<li " + 
-				"		data-uploadpath='" + attachFile.uploadPath + "'" + 
-				"		data-uuid='" + attachFile.uuid + "'" + 
-				"		data-filename='" + attachFile.fileName + "'" + 
+				"		data-uploadpath='" + attachFile.buploadPath + "'" + 
+				"		data-uuid='" + attachFile.buuid + "'" + 
+				"		data-filename='" + attachFile.bfileName + "'" + 
 				"		data-filetype='F'>" + 
-				"	<img src='${contextPath}/resources/icons/icon-attach.png' style='width:50px;'/> &emsp;" + attachFile.fileName + 
+				"	<img src='${contextPath}/resources/icons/icon-attach.png' style='width:50px;'/> &emsp;" + attachFile.bfileName + 
 				"	<span class='glyphicon glyphicon-remove-sign' data-filename='" + fullFileName + "' data-filetype='F' style='color:red;'></span>" + 
 				"</li>"
 				
 			} else {
-				var thumbnail = encodeURI(attachFile.repoPath + "/" + attachFile.uploadPath + "/s_" + attachFile.uuid + "_" + attachFile.fileName);
+				var thumbnail = encodeURI(attachFile.brepoPath + "/" + attachFile.buploadPath + "/s_" + attachFile.buuid + "_" + attachFile.bfileName);
 				
 				htmlStr += 
 				"<li " + 
-				"		data-uploadpath='" + attachFile.uploadPath + "'" + 
-				"		data-uuid='" + attachFile.uuid + "'" + 
-				"		data-filename='" + attachFile.fileName + "'" + 
+				"		data-uploadpath='" + attachFile.buploadPath + "'" + 
+				"		data-uuid='" + attachFile.buuid + "'" + 
+				"		data-filename='" + attachFile.bfileName + "'" + 
 				"		data-filetype='I'>" + 
-				"	<img src='${contextPath}/displayThumbnail?thumbnail=" + thumbnail + "' style='width:50px;'/> &emsp;" + attachFile.fileName + 
+				"	<img src='${contextPath}/displayThumbnail?thumbnail=" + thumbnail + "' style='width:50px;'/> &emsp;" + attachFile.bfileName + 
 				"	<span class='glyphicon glyphicon-remove-sign' data-filename='" + thumbnail + "' data-filetype='I' style='color:red;'></span>" + 
 				"</li>"
 			}

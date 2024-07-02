@@ -129,7 +129,7 @@
 <%-- 첨부 파일 영역 --%>
 <c:forEach var="attachFile" items="${recruiterVO.attachFileList}">
 <c:choose>
-	<c:when test="${empty attachFile.bFileName}">
+	<c:when test="${empty attachFile.bfileName}">
 		<li style="font-size:14pt; list-style-type:none;">첨부파일이 없습니다.</li>
 	</c:when>
 	<c:otherwise>
@@ -236,9 +236,9 @@
 			var attachLi = $(objLi);
 			
 			attachFileInputHTML += 
-			"<input type='hidden' name='attachFileList[" + i + "].uuid' value='" + attachLi.data("uuid") + "'>" + 
-			"<input type='hidden' name='attachFileList[" + i + "].uploadPath' value='" + attachLi.data("uploadpath") + "'>" + 
-			"<input type='hidden' name='attachFileList[" + i + "].fileName' value='" + attachLi.data("filename") + "'>"/*  + 
+			"<input type='hidden' name='attachFileList[" + i + "].buuid' value='" + attachLi.data("uuid") + "'>" + 
+			"<input type='hidden' name='attachFileList[" + i + "].buploadPath' value='" + attachLi.data("uploadpath") + "'>" + 
+			"<input type='hidden' name='attachFileList[" + i + "].bfileName' value='" + attachLi.data("filename") + "'>"/*  + 
 			"<input type='hidden' name='attachFileList[" + i + "].fileType' value='" + attachLi.data("filetype") + "'>" */;
 		})
 		

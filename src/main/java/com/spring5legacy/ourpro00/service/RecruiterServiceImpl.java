@@ -67,7 +67,7 @@ public class RecruiterServiceImpl implements RecruiterService{
 			for(RecruiterAttachFileVO attachFile : attachFileList) {
 				attachFile.setBno(recruiterVO.getBno());
 				recruiterAttachFileMapper.insertAttachFile(attachFile);
-				System.out.println("\t" + "\t" + "첨부한 파일 이름 : " + attachFile.getBFileName());
+				System.out.println("\t" + "\t" + "첨부한 파일 이름 : " + attachFile.getBfileName());
 			}
 		}
 		
@@ -95,7 +95,7 @@ public class RecruiterServiceImpl implements RecruiterService{
 			for(RecruiterAttachFileVO attachFile : attachFileList) {
 				attachFile.setBno(recruiterVO.getBno());
 				recruiterAttachFileMapper.insertAttachFile(attachFile);
-				System.out.println("\t" + "\t" + "첨부한 파일 이름 : " + attachFile.getBFileName());
+				System.out.println("\t" + "\t" + "첨부한 파일 이름 : " + attachFile.getBfileName());
 			}
 		}
 		
