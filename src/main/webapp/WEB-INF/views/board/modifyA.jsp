@@ -56,7 +56,8 @@
          </div>
       
          <h1 class="tit_job" >
-			<input class="form-control"  style="width: 75%; height: 70px; font-size: 30pt;" name="atitle" id="atitle" value='<c:out value="${jobSeeker.atitle}"/>'>
+			<input class="form-control"  style="width: 75%; height: 70px; font-size: 30pt;" name="atitle" id="atitle"
+			 value='<c:out value="${jobSeeker.atitle}"/>' autofocus>
         </h1>
        
         
@@ -112,11 +113,46 @@
             
                     <div class="form-group uploadDiv">
                        	<input type="file" class="btn btn-primary fileInput" name="fileInput" id="fileInput" multiple>
-                       	
                     </div>	
                     <div class="form-group fileUploadResult">
                     	<ul>
-                    		<%-- 업로드후  --%>
+                    	
+<c:forEach var="attachFile" items="${jobSeeker.jobSeekerAttachFileList }">
+<c:choose >
+<c:when  test="${empty attachFile.fileName }">
+<li> 파일이 없습니다 </li>
+</c:when>
+<c:otherwise>
+        <c:choose>
+        <c:when test="${attachFile.fileType == 'F' }">
+            <li class="attachLi"
+                data-repopath = "${attachFile.repoPath }"
+                data-uploadpath = "${attachFile.uploadPath }"
+                data-uuid = "${attachFile.uuid }"
+                data-filename = "${attachFile.fileName }"
+                data-filetype = "F" >
+                    <img src='${contextPath}/resources/icons/icon-attach.png' style='width:25px;'>
+                    &emsp;${attachFile.fileName}
+            </li>
+        </c:when>
+        <c:otherwise>
+            <c:set var="thumbnail" value="${attachFile.repoPath}/${attachFile.uploadPath}/s_${attachFile.uuid}_${attachFile.fileName}"/>
+            <li class="attachLi"
+                data-repopath = "${attachFile.repoPath }"
+                data-uploadpath = "${attachFile.uploadPath }"
+                data-uuid = "${attachFile.uuid }"
+                data-filename = "${attachFile.fileName }"
+                data-filetype = "I" >
+                     <img src='${contextPath}/resources/icons/icon-attach.png' style='width:25px;'>
+                    &nbsp;&nbsp;${attachFile.fileName}
+            </li>
+            <c:remove var="thumbnail"/>
+        </c:otherwise>
+        </c:choose>
+   
+</c:otherwise>
+</c:choose>
+</c:forEach>
                     	</ul>
                     </div>	
                 
@@ -127,7 +163,7 @@
 	               <%--  <security:authentication property="principal.username"/> --%>
 		<div class="form-group" style="width: 100px; display: inline-block;">
 		<!-- awriter -->
-			<input class="form-control" name="awriter" id="awriter"  value="stu1" readonly>
+			<input class="form-control" name="awriter" id="awriter"  value='<security:authentication property="principal.username"/>' readonly>
 			
 		</div>
 		
@@ -135,6 +171,7 @@
 			 <button type="button" class="btn btn-primary" id="btnModify" data-oper="modify">수정</button>
    			 <button type="button" class="btn btn-danger" id="btnRemove" data-oper="remove">삭제</button>
    			 <button type="button" class="btn btn-warning" id="btnToList" data-oper="toList">목록</button>
+   			 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token }">
      </div>
 		<security:csrfInput/>
 		
@@ -146,6 +183,9 @@
 	</form>
 
  <script>
+ var csrfHeaderName = "${_csrf.headerName}"; 
+ var csrfTokenValue = "${_csrf.token}";
+ 
  var frmModifyA = $("#frmModifyA");
  var fileUploadResultUL = $(".fileUploadResult ul") ;
  <%-- 버튼 클릭--%>
@@ -177,10 +217,10 @@
 				   +="<input type='hidden' name='jobSeekerAttachFileList[" + i + "].uuid' value='" + attachLi.data("uuid") + "'>"
 				   +  "<input type='hidden' name='jobSeekerAttachFileList[" + i + "].uploadPath' value='" + attachLi.data("uploadpath") + "'>"
 				   +  "<input type='hidden' name='jobSeekerAttachFileList[" + i + "].fileName' value='" + attachLi.data("filename") + "'>"
+				   +  "<input type='hidden' name='jobSeekerAttachFileList[" + i + "].fileType' value='" + attachLi.data("filetype") + "'>"
 				   /* +  "<input type='hidden' name='jobSeekerAttachFileList[" + i + "].ano' value='" + attachLi.data("") + "'>" */
 				   
 			   });
-			 alert(attachFileInputHTML);
 			 if(attachFileInputHTML){
 				 frmModifyA.append(attachFileInputHTML);
 		  	   }
@@ -264,16 +304,32 @@
                                   attachFile.uuid + "_" + attachFile.fileName) ;	
  	
  		
- 			htmlStr
- 			+="<li data-uploadpath='" + attachFile.uploadPath + "'" 
- 			+ "    data-uuid='" + attachFile.uuid + "'" 
- 			+ "    data-filename='" + attachFile.fileName + "'" 
- 			+ "    data-filetype='F'>"
- 			+ "        <img src='${contextPath}/resources/icons/icon-attach.png' style='width:30px;'/>"
- 			+ "        &emsp;" + attachFile.fileName
- 			+ "        <span class='glyphicon glyphicon-remove-sign' data-filename='" + fullFileName + "'"
-             + "              data-filetype='F' style='color:red;'></span>"
- 			+ "</li>"
+ 	   if(attachFile.fileType == "F") {
+           htmlStr
+           +="<li data-uploadpath='" + attachFile.uploadPath + "'" 
+           + "    data-uuid='" + attachFile.uuid + "'" 
+           + "    data-filename='" + attachFile.fileName + "'" 
+           + "    data-filetype='F'>"
+           + "        <img src='${contextPath}/resources/icons/icon-attach.png' style='width:30px;'/>"
+           + "        &emsp;" + attachFile.fileName
+           + "        <span class='glyphicon glyphicon-remove-sign' data-filename='" + fullFileName + "'"
+              + "              data-filetype='F' style='color:red;'></span>"
+           + "</li>"
+        } else {
+           var thumbnail = encodeURI(attachFile.repoPath + "/" +
+                                     attachFile.uploadPath + "/s_" +
+                                     attachFile.uuid + "_" + attachFile.fileName) ;
+           htmlStr
+           +="<li data-uploadpath='" + attachFile.uploadPath + "'" 
+           + "    data-uuid='" + attachFile.uuid + "'" 
+           + "    data-filename='" + attachFile.fileName + "'" 
+           + "    data-filetype='I'>"
+           + "        <img src='${contextPath}/displayThumbnail?thumbnail=" + thumbnail + "' style='width:50px;'/>"
+           + "        &emsp;" + attachFile.fileName
+              + "        <span class='glyphicon glyphicon-remove-sign ' data-filename='" + thumbnail + "'"
+              + "          data-filetype='I' style='color:red;'></span>"
+           + "</li>"
+        }
  		
  		
  	});
@@ -317,7 +373,10 @@
      	url : "${contextPath}/doFileUpload" ,
      	data: formData ,
      	contentType: false ,  //contentType에 전송타입(즉, MIME 타입)을 지정하지 않음.
-     	processData: false ,  //contentType에 설정된 형식으로 data를 변환처리가 수행되지 않음
+     	processData: false ,  
+     	beforeSend: function(xhr) {
+            xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+        },
      	dataType: "json" ,
      	success: function(uploadResult, status){
      		console.log(uploadResult)  ;
@@ -348,6 +407,9 @@
         //data: JSON.stringify({fileName: fileName, fileType: fileType}) ,
         // contentType: "application/json; charset=utf-8" ,
          dataType: "text" ,
+         beforeSend: function(xhr){
+	         xhr.setRequestHeader(csrfHeaderName, csrfTokenValue) ;
+		} ,
          success: function(result) {
          	if(result == "DelSuccess") {
          		alert("파일이 삭제되었습니다.") ;

@@ -13,17 +13,17 @@ import lombok.AllArgsConstructor;
 @Controller
 @AllArgsConstructor
 public class MemberRegisterController {
-	
+
 	private MemberRegisterService memberRegisterService;
 	private PasswordEncoder passwordEncoder;
-	
+
 	@PostMapping("/memberRegister")
 	@Transactional
 	public String MemberRegister(MemberVO memberVO) {
 		memberVO.setUserpw(passwordEncoder.encode(memberVO.getUserpw()));
 		System.out.println(memberVO);
 		memberRegisterService.RegisterMember(memberVO);
-		
+
 		return "/common/signup";
 	}
 }

@@ -22,6 +22,7 @@
       <result property="FileName" column="FileName"/>
       <result property="UploadPath" column="UploadPath"/>      
       <result property="ano" column="ano"/>
+      <result property="fileType" column="fileType"/>
    </resultMap>
    <resultMap type="com.spring5legacy.ourpro00.domain.JobSeekerVO" id="JobSeekerVOMap">
       <result property="ano" column="ano"/>
@@ -34,9 +35,10 @@
    </resultMap>
 	<!-- 특정 구직글 조회 -->
 	<select id="selectJobSeeker" resultType="com.spring5legacy.ourpro00.domain.JobSeekerVO" resultMap="JobSeekerVOMap">
-		SELECT ano, atitle, acontent, awriter, aregdate, bno   
-			FROM ouruser.tbl_apply
-			WHERE ano = #{ano} 
+		SELECT c.ano, c.atitle, c.acontent, c.awriter, c.aregdate, c.bno,   
+                  d.uuid, d.filename, d.uploadpath, d.ano, d.fileType
+         FROM ouruser.tbl_apply  c LEFT OUTER JOIN ouruser.tbl_applyattachfile d ON (c.ano = d.ano)
+         WHERE c.ano = #{ano}
 	</select>
 	
 	<!-- 구직글 총 수 -->

@@ -134,12 +134,6 @@
 	</c:when>
 	<c:otherwise>
 		
-<%-- 			<script>
-				console.log("${attachFile.bRepoPath}");
-				console.log("${attachFile.bUploadPath}");
-				console.log("${attachFile.bUuid}");
-				console.log("${attachFile.bFileName}");
-			</script> --%>
 			<c:set var="fullFileName" value="${attachFile.repoPath}/${attachFile.uploadPath}/${attachFile.uuid}_${attachFile.fileName}"/>
 			<%-- <c:choose>
 				<c:when test="${attachFile.fileType == 'F'}"> --%>
@@ -236,9 +230,9 @@
 			var attachLi = $(objLi);
 			
 			attachFileInputHTML += 
-			"<input type='hidden' name='attachFileList[" + i + "].buuid' value='" + attachLi.data("uuid") + "'>" + 
-			"<input type='hidden' name='attachFileList[" + i + "].buploadPath' value='" + attachLi.data("uploadpath") + "'>" + 
-			"<input type='hidden' name='attachFileList[" + i + "].bfileName' value='" + attachLi.data("filename") + "'>"/*  + 
+			"<input type='hidden' name='attachFileList[" + i + "].uuid' value='" + attachLi.data("uuid") + "'>" + 
+			"<input type='hidden' name='attachFileList[" + i + "].uploadPath' value='" + attachLi.data("uploadpath") + "'>" + 
+			"<input type='hidden' name='attachFileList[" + i + "].fileName' value='" + attachLi.data("filename") + "'>"/*  + 
 			"<input type='hidden' name='attachFileList[" + i + "].fileType' value='" + attachLi.data("filetype") + "'>" */;
 		})
 		

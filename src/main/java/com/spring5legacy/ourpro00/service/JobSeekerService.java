@@ -29,7 +29,6 @@ public interface JobSeekerService {
 	public boolean modifyJobSeeker(Long ano, String atitle, String acontent);
 	
 	// 특정 구직글 삭제
-	//public boolean deleteJobSeeker(Long ano);
 	public JobSeekerVO deleteJobSeeker(JobSeekerVO jobSeeker);
 
 

@@ -39,6 +39,7 @@ public class FileUploadController {
     //썸네일 파일 전송: 썸네일 이름을 받아서 썸네일 파일을 byte배열 타입으로 웹브라우저로 전송(GET 방식 사용)
     @GetMapping(value = "/displayThumbnail")
     public ResponseEntity<byte[]> sendThumbnail(String thumbnail) {
+    	System.out.println("받은 썸네일: " + thumbnail);
         File thumbnailFile = new File(thumbnail) ;
         System.out.println("썸네일: " + thumbnailFile);
 
@@ -50,10 +51,7 @@ public class FileUploadController {
         HttpHeaders httpHeaders = new HttpHeaders() ;
 
         try {
-            //HttpHeader에 썸네일파일의 MIME 타입을 설정
             httpHeaders.add("Content-Type", Files.probeContentType(thumbnailFile.toPath())) ;
-            //썸네일 파일의 복사본을 byte[]로 전송, 이 때, MIME 타입을 유지시키기 위하여, HttpHeader 객체를 같이 전송
-            //HttpHeader 정보를 같이 보내야 하므로 ResponseEntity 객체 사용
             result = new ResponseEntity<byte[]>(	FileCopyUtils.copyToByteArray(thumbnailFile),
                                                    	httpHeaders, HttpStatus.OK) ;
         } catch (IOException e) {
@@ -62,7 +60,6 @@ public class FileUploadController {
         return result ;
     }
 
-	
 	@PostMapping(value = "/doFileUpload" , produces = {"application/json;charset=utf-8"})
 	@ResponseBody
 	public List<AttachFileDTO> doFileUpload(MultipartFile[] uploadFiles){
@@ -78,8 +75,11 @@ public class FileUploadController {
 		File fileUploadPath = new File(uploadFileRepoDir, dateDir);
 		fileUploadPath.mkdirs();
 		
-		String uploadFileName = null;
-		String uuid = null;
+		 String uploadFileName = null ;
+	        String uuid = null ;
+	        File thumbnailFile = null ;
+	        FileOutputStream myfos = null ;
+	        InputStream myis = null ;
 		
 		for (MultipartFile uploadFile : uploadFiles) {
 			
@@ -103,20 +103,20 @@ public class FileUploadController {
 			try {
 				uploadFile.transferTo(saveuploadFile);
 				//이미지파일이면 썸네일 생성
-	            if(isImageFile(saveuploadFile)) {
-
-	                File thumbnameFile = new File(fileUploadPath, "s_" + uploadFileName);
+				if(isImageFile(saveuploadFile)) {
 	                
-	                FileOutputStream myfos = new FileOutputStream(thumbnameFile) ;
-	                
-	                InputStream myis = uploadFile.getInputStream() ; //원본 이미지 파일의 InputStream 사용
-	                
-	                Thumbnailator.createThumbnail(myis, myfos, 30, 30) ;
-	                
-	                myis.close() ;
-	                myfos.flush() ;
-	                myfos.close() ;
-	            } 
+                    attachFile.setFileType("I") ;  //파일유형 저장
+                    thumbnailFile = new File(fileUploadPath, "s_" + uploadFileName) ;
+                    
+                    myfos = new FileOutputStream(thumbnailFile) ;
+                    myis = uploadFile.getInputStream() ;
+                    Thumbnailator.createThumbnail(myis, myfos, 50, 50) ;
+                    myis.close() ;
+                    myfos.flush() ;
+                    myfos.close() ;
+                } else {
+                    attachFile.setFileType("F") ;  //파일유형 저장
+                }
 
 			} catch (IOException e) {
 				System.out.println("업로드 실패");

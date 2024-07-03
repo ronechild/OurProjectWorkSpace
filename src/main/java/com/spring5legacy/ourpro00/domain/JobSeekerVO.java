@@ -22,8 +22,8 @@ public class JobSeekerVO {
 	private String acontent;
 	private String awriter;
 	private Date aregDate;
-	
-	private List<JobSeekerAttachFileVO> jobSeekerAttachFileList ;
-	
+
+	private List<JobSeekerAttachFileVO> jobSeekerAttachFileList;
+
 	private int deletedAttachFileCnt;
 }

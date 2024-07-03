@@ -7,14 +7,14 @@
 <mapper namespace="com.spring5legacy.ourpro00.mapper.JobSeekerAttachFileMapper">
 
     <select id="selectAttachFiles" resultType="com.spring5legacy.ourpro00.domain.JobSeekerAttachFileVO">
-    SELECT aUUID, aUPLOADPATH, aFILENAME, aNO
+    SELECT UUID, UPLOADPATH, FILENAME, aNO, fileType
         FROM ouruser.tbl_applyattachfile
         WHERE ano = #{ano}
     </select>
     
     <insert id="insertAttachFile">
         INSERT INTO ouruser.tbl_applyattachfile
-        VALUES (#{uuid}, #{fileName}, #{uploadPath},  #{ano})    
+        VALUES (#{uuid}, #{fileName}, #{uploadPath},  #{ano}, #{fileType})    
     </insert>
     
     <delete id="deleteAttachFiles">
@@ -22,7 +22,7 @@
     </delete>
     
     <delete id="deleteAttachFile">
-        DELETE FROM ouruser.tbl_applyattachfile WHERE auuid = #{uuid}    
+        DELETE FROM ouruser.tbl_applyattachfile WHERE uuid = #{uuid}    
     </delete>
 
 	

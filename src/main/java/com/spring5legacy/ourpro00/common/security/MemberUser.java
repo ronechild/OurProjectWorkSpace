@@ -10,17 +10,15 @@ import com.spring5legacy.ourpro00.domain.MemberVO;
 import lombok.Getter;
 
 @Getter
-public class MemberUser  extends User{
-	
+public class MemberUser extends User {
+
 	private static final long serialVersionUID = 1L;
 	private MemberVO member;
-	
+
 	public MemberUser(MemberVO member) {
-		super(member.getUserid(), member.getUserpw(), 
-				    member.getAuthorityList().stream().map(auth -> new SimpleGrantedAuthority(auth.getAuthority()))
-				   .collect(Collectors.toList())
-				);
-		
+		super(member.getUserid(), member.getUserpw(), member.getAuthorityList().stream()
+				.map(auth -> new SimpleGrantedAuthority(auth.getAuthority())).collect(Collectors.toList()));
+
 		this.member = member;
 	}
 

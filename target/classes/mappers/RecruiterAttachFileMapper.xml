@@ -7,20 +7,20 @@
 <mapper namespace="com.spring5legacy.ourpro00.mapper.RecruiterAttachFileMapper">
 
     <select id="selectAttachFiles" resultType="com.spring5legacy.ourpro00.domain.RecruiterAttachFileVO">
-    SELECT buuid, buploadPath, bFILENAME, bno, bDelFlag
+    SELECT bUUID, bUPLOADPATH, bFILENAME, bNO, bDelFlag
         FROM ouruser.tbl_hireattachfile
         WHERE bno = #{bno}
     </select>
     
     <insert id="insertAttachFile">
         INSERT INTO ouruser.tbl_hireattachfile
-        VALUES (#{buuid}, #{bfileName}, #{buploadPath}, #{bno}, DEFAULT)    
+        VALUES (#{bUuid}, #{bFileName}, #{bUploadPath}, #{bno}, DEFAULT)    
     </insert>
     
     <update id="updateAttachFileDelFlag">
     	UPDATE ouruser.tbl_hireattachfile
     		SET bdelFlag = 1
-    		WHERE buuid = #{buuid}
+    		WHERE bUuid = #{bUuid}
     </update>
     
     <delete id="deleteAttachFiles">
@@ -28,7 +28,7 @@
     </delete>
     
     <delete id="deleteAttachFile">
-        DELETE FROM ouruser.tbl_hireattachfile WHERE buuid = #{buuid}    
+        DELETE FROM ouruser.tbl_hireattachfile WHERE bUuid = #{bUuid}    
     </delete>
 
 	

@@ -11,7 +11,7 @@ public class ToLoginLogoutPageController {
 	public String toLoginPage(String error, String logout, Model model) {
 		return "common/signup";
 	}
-	
+
 	@GetMapping("/logout")
 	public String toLogoutPage() {
 		return null;

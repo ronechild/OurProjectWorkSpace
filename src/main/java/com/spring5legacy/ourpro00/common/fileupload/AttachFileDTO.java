@@ -14,7 +14,7 @@ public class AttachFileDTO {
 	private String uuid;
 	private String fileName;
 	private String uploadPath;
-	
+	private String fileType ;
 	private String repoPath = "C:/myupload";
 	
 }

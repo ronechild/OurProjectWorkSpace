@@ -30,7 +30,7 @@
 	    <a class="placeholder" tabindex="-1"></a>
 	    <div class="jv_header" data-rec_idx="48341817" data-rec_seq="0">
 		    <div class="title_inner">
-	               <h3><c:out value="${recruiterVO.bwriter}"/><small> - 구인글 작성</small></h3><%-- * --%>
+	               <h3><c:out value="${principal.username}"/><small> - 구인글 작성</small></h3><%-- * --%>
 	         </div>
 	        <h1 class="tit_job" >
 				<input class="form-control" style="width:100%; height:70px; font-size:30pt;" id="btitle" name="btitle" placeholder="구인글 제목" autofocus>
@@ -86,27 +86,14 @@
 		</div>
 	</div><%-- 첨부 파일 끝 --%>
 
-<%-- 	<div class="form-group" style="width:100px; display:inline-block;">
-		<input class="form-control" id="bwriter" name="bwriter" value='<security:authentication property="principal.username"/>' readonly>
-	</div>
-	<security:csrfInput/> --%>
-
 </div><%-- 구인글 내용 끝 --%>
 
 <input class="form-control inputdata" type="hidden" id="bno" name="bno">
-<input class="form-control inputdata" type="hidden" id="bwriter" name="bwriter" value="작성자2"><%-- value='<security:authentication property="principal.username"/>' --%>
-<input class="form-control inputdata" type="hidden" id="bregDate" name="bregDate">
+<input class="form-control inputdata" type="hidden" id="bwriter" name="bwriter" value="${principal.username}">
 <input class="form-control inputdata" type="hidden" id="breplyCnt" name="breplyCnt">
 <input class="form-control inputdata" type="hidden" id="bappCnt" name="bappCnt">
 <input class="form-control inputdata" type="hidden" id="bblind" name="bblind">
 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-
-<%-- <input type="hidden" id="pageNum" name="pageNum" value="${myBoardPaging.pageNum}">
-<input type="hidden" id="rowAmountPerPage" name="rowAmountPerPage" value="${myBoardPaging.rowAmountPerPage}">
-<input type="hidden" id="boccupation" name="boccupation" value="${myBoardPaging.boccupation}">
-<input type="hidden" id="bregion" name="bregion" value="${myBoardPaging.bregion}"> --%>
-
-
 
 </form>
 
@@ -145,9 +132,9 @@
 			var attachLi = $(objLi);
 			
 			attachFileInputHTML += 
-			"<input type='hidden' name='attachFileList[" + i + "].buuid' value='" + attachLi.data("uuid") + "'>" + 
-			"<input type='hidden' name='attachFileList[" + i + "].bfileName' value='" + attachLi.data("filename") + "'>" + 
-			"<input type='hidden' name='attachFileList[" + i + "].buploadPath' value='" + attachLi.data("uploadpath") + "'>"/*  + 
+			"<input type='hidden' name='attachFileList[" + i + "].bUuid' value='" + attachLi.data("uuid") + "'>" + 
+			"<input type='hidden' name='attachFileList[" + i + "].bFileName' value='" + attachLi.data("filename") + "'>" + 
+			"<input type='hidden' name='attachFileList[" + i + "].bUploadPath' value='" + attachLi.data("uploadpath") + "'>"/*  + 
 			"<input type='hidden' name='attachFileList[" + i + "].bno' value='" + "${recruiterVO.bno}" + "'>" *//*  + 
 			"<input type='hidden' name='attachFileList[" + i + "].bDelFlag'>" *//*  + 
 			"<input type='hidden' name='attachFileList[" + i + "].fileType' value='" + attachLi.data("filetype") + "'>" */;
@@ -173,7 +160,7 @@
 		var regExp = /^\s+$/;
 		
 /* 		if(!btitle||!bcontent||!bendDate||!boccupation||!bregion||!bhcnt||regExp.test(btitle)||regExp.test(bcontent)||regExp.test(bendDate)||regExp.test(boccupation)||regExp.test(bregion)||regExp.test(bhcnt)) { */
-/* 		if(!btitle||!bcontent||regExp.test(btitle)||regExp.test(bcontent)){ */
+		if(!btitle||!bcontent||regExp.test(btitle)||regExp.test(bcontent)){
 			window.alert("모든 내용을입력하세요");
 			return false;
 			
@@ -215,29 +202,29 @@
 		
 		<%-- 아이콘/썸네일 생성 --%>
 		$(uploadResult).each(function(i, attachFile) {
-			fullFileName = encodeURI(attachFile.brepoPath + "/" + attachFile.buploadPath + "/" + attachFile.buuid + "_" + attachFile.bfileName);
+			fullFileName = encodeURI(attachFile.repoPath + "/" + attachFile.uploadPath + "/" + attachFile.uuid + "_" + attachFile.fileName);
 			
 			if(attachFile.fileType == "F") {
 				htmlStr += 
 				"<li " + 
-				"		data-uploadpath='" + attachFile.buploadPath + "'" + 
-				"		data-uuid='" + attachFile.buuid + "'" + 
-				"		data-filename='" + attachFile.bfileName + "'" + 
+				"		data-uploadpath='" + attachFile.uploadPath + "'" + 
+				"		data-uuid='" + attachFile.uuid + "'" + 
+				"		data-filename='" + attachFile.fileName + "'" + 
 				"		data-filetype='F'>" + 
-				"	<img src='${contextPath}/resources/icons/icon-attach.png' style='width:50px;'/> &emsp;" + attachFile.bfileName + 
+				"	<img src='${contextPath}/resources/icons/icon-attach.png' style='width:50px;'/> &emsp;" + attachFile.fileName + 
 				"	<span class='glyphicon glyphicon-remove-sign' data-filename='" + fullFileName + "' data-filetype='F' style='color:red;'></span>" + 
 				"</li>"
 				
 			} else {
-				var thumbnail = encodeURI(attachFile.brepoPath + "/" + attachFile.buploadPath + "/s_" + attachFile.buuid + "_" + attachFile.bfileName);
+				var thumbnail = encodeURI(attachFile.repoPath + "/" + attachFile.uploadPath + "/s_" + attachFile.uuid + "_" + attachFile.fileName);
 				
 				htmlStr += 
 				"<li " + 
-				"		data-uploadpath='" + attachFile.buploadPath + "'" + 
-				"		data-uuid='" + attachFile.buuid + "'" + 
-				"		data-filename='" + attachFile.bfileName + "'" + 
+				"		data-uploadpath='" + attachFile.uploadPath + "'" + 
+				"		data-uuid='" + attachFile.uuid + "'" + 
+				"		data-filename='" + attachFile.fileName + "'" + 
 				"		data-filetype='I'>" + 
-				"	<img src='${contextPath}/displayThumbnail?thumbnail=" + thumbnail + "' style='width:50px;'/> &emsp;" + attachFile.bfileName + 
+				"	<img src='${contextPath}/displayThumbnail?thumbnail=" + thumbnail + "' style='width:50px;'/> &emsp;" + attachFile.fileName + 
 				"	<span class='glyphicon glyphicon-remove-sign' data-filename='" + thumbnail + "' data-filetype='I' style='color:red;'></span>" + 
 				"</li>"
 			}

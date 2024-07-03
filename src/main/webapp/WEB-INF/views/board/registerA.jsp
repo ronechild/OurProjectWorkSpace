@@ -3,12 +3,7 @@
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath }"/>
-
-
-	
-	
 
 <%@ include file="../include/header.jsp" %>
 <style>
@@ -49,17 +44,19 @@
 
 <hr>
 <%-- 제목 기업 지원 --%>
-<div class="titleWrapper">
+<%-- 구직글 정보 --%>
+<div class="titleWrapper" style="padding-left:20%; padding-right:20%; margin:0px">
 <div class="wrap_jv_header" >
     <a class="placeholder" tabindex="-1"></a>
     <div class="jv_header" data-rec_idx="48341817" data-rec_seq="0">
 	    <div class="title_inner">
                             
-               <h3><c:out value="${recruit.bwriter }"/>    이력서 작성 </h3> 
+               <h3>${recruit.bwriter }    이력서 작성 </h3> 
          </div>
       
          <h1 class="tit_job" >
-			<input class="form-control"  style="width: 75%; height: 70px; font-size: 30pt;" name="atitle" id="atitle" placeholder="이력서 제목을 입력하세요">
+			<input class="form-control"  style="width: 75%; height: 70px; font-size: 30pt;" name="atitle" id="atitle"
+			 placeholder="이력서 제목을 입력하세요" autofocus>
         </h1>
        
         
@@ -92,10 +89,10 @@
 		    <dt>지역&emsp;</dt><dd><c:out value="지역|bregion"/></dd>
 		</dl>
 		<dl >
-		    <dt>모집인원&nbsp;</dt><dd><c:out value="${jobSeeker.bhcnt }"/></dd>
+		    <dt>모집인원&nbsp;</dt><dd><c:out value="${recruit.bhcnt }"/></dd>
 		</dl>
 		<dl>
-		<dt>글번호</dt><dd><c:out value="${jobSeeker.bno }"/></dd>
+		<dt>글번호</dt><dd><c:out value="${recruit.bno }"/></dd>
 		</dl>
      </div>
         <br>
@@ -103,16 +100,17 @@
        </div>
             <%-- 세부 기본내용 끝--%>
             <hr>
-<div class="contentBox">
+<%-- 구직글 내용 --%>
+<div class="contentBox" style="padding-left:20%; padding-right:20%; margin:0px">
 
 		<div class="form-group">
-		<input type="hidden" id="bno" name="bno" value="${jobSeeker.bno }">
+		<input type="hidden" id="bno" name="bno" value="${recruit.bno }">
 	    	<textarea class="form-control" name="acontent" id="acontent" style="height: 500px;"
 	    	 placeholder="1. 자기소개 &#10;&#10;2. 지원 동기 &#10;&#10;3. 경력사항 &#10;&#10; 각각의 항목을 500자 내로 작성해주세요"></textarea>
 	    	<hr>
 	    		
 	    </div>
-	    </div>
+	  
 	    
 		    
         <div class="panel panel-default">
@@ -121,12 +119,51 @@
             
                     <div class="form-group uploadDiv">
                        	<input type="file" class="btn btn-primary fileInput" name="fileInput" id="fileInput" multiple>
-                       	
                     </div>	
                     <div class="form-group fileUploadResult">
                     	<ul>
-                    		<%-- 업로드후  --%>
+<c:choose>
+<c:when test="${empty jobSeeker.jobSeekerAttachFileList }">
+</c:when>
+<c:otherwise>
+    <c:forEach var="attachFile" items="${jobSeeker.jobSeekerAttachFileList }">
+        <c:choose>
+        <c:when test="${attachFile.fileType == 'F' }">
+            <li class="attachLi"
+                data-repopath = "${attachFile.repoPath }"
+                data-uploadpath = "${attachFile.uploadPath }"
+                data-uuid = "${attachFile.uuid }"
+                data-filename = "${attachFile.fileName }"
+                data-filetype = "F" >
+                    <img src='${contextPath}/resources/icons/icon-attach2.png' style='width:25px;'>
+                    &emsp;${attachFile.fileName}
+            </li>
+        </c:when>
+        <c:otherwise>
+            <c:set var="thumbnail" value="${attachFile.repoPath}/${attachFile.uploadPath}/s_${attachFile.uuid}_${attachFile.fileName}"/>
+            <li class="attachLi"
+                data-repopath = "${attachFile.repoPath }"
+                data-uploadpath = "${attachFile.uploadPath }"
+                data-uuid = "${attachFile.uuid }"
+                data-filename = "${attachFile.fileName }"
+                data-filetype = "I" >
+                    <img src="${contextPath}/displayThumbnail?fileName=${thumbnail}" >
+                    &nbsp;&nbsp;${attachFile.fileName}
+            </li>
+            <c:remove var="thumbnail"/>
+        </c:otherwise>
+        </c:choose>
+    </c:forEach>
+</c:otherwise>
+</c:choose>
+
                     	</ul>
+                    	  </div>
+            <div class="btn_apply" style="margin-left: 80%;">
+			<button type="button" id="jobApply" class="btn btn-outline btn-success jobApply">등록</button>      
+	       	<button type="button" id="jobCancle" class="btn btn-outline btn-danger jobCancle" >지원 취소</button>    
+	       	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token }">
+        </div>
                     </div>	
                 
             </div>
@@ -136,27 +173,29 @@
 	               <%--  <security:authentication property="principal.username"/> --%>
 		<div class="form-group" style="width: 100px; display: inline-block;">
 		<!-- awriter -->
-			<input class="form-control" name="awriter" id="awriter"  value="stu1" readonly>
+			<input class="form-control" name="awriter" id="awriter"  value="${principal.username }" readonly>
 			
 		</div>
 		
-		<div class="btn_apply" style="margin-left: 80%;">
-			<button type="button" id="jobApply" class="btn btn-outline btn-success jobApply">등록</button>      
-	       	<button type="button" id="jobCancle" class="btn btn-outline btn-danger jobCancle" >지원 취소</button>    
-        </div>
-		<security:csrfInput/>
+	
+		<sec:csrfInput />
 	</form>
 
 
 
 
  <script>
+ var csrfHeaderName = "${_csrf.headerName}"; 
+ var csrfTokenValue = "${_csrf.token}";
+
+ 
  var frmRegister = $("#frmRegister");
  var fileUploadResultUL = $(".fileUploadResult ul") ;
  <%-- 취소버튼 클릭--%>
  $(".jobCancle").on("click",function(){
 	 	frmRegister.empty();
-	 	frmRegister.attr("action", "${contextPath}/board/homepage");
+	 	frmRegister.append('<input type="hidden" id="bno" name="bno" value="' + '${recruit.bno}' + '">');
+	 	frmRegister.attr("action", "${contextPath}/board/detail");
 	 	frmRegister.attr("method","get");
 	 	
 	 	frmRegister.submit();
@@ -176,6 +215,8 @@
 		   +="<input type='hidden' name='jobSeekerAttachFileList[" + i + "].uuid' value='" + attachLi.data("uuid") + "'>"
 		   +  "<input type='hidden' name='jobSeekerAttachFileList[" + i + "].uploadPath' value='" + attachLi.data("uploadpath") + "'>"
 		   +  "<input type='hidden' name='jobSeekerAttachFileList[" + i + "].fileName' value='" + attachLi.data("filename") + "'>"
+		   +  "<input type='hidden' name='jobSeekerAttachFileList[" + i + "].fileType' value='" + attachLi.data("filetype") + "'>" ;
+
 		   /* +  "<input type='hidden' name='jobSeekerAttachFileList[" + i + "].ano' value='" + attachLi.data("") + "'>" */
 		   
 	   });
@@ -232,7 +273,6 @@
  	var htmlStr = "";
  	
  	if(uploadResult == null || uploadResult.length == 0) {
- 	//if(!uploadResult) { //동작 않함
  		htmlStr = "<li>첨부파일이 없습니다.</li>" ;
  		fileUploadResultUL.html(htmlStr) ;
  		return ;
@@ -248,16 +288,32 @@
                                   attachFile.uuid + "_" + attachFile.fileName) ;	
  	
  		
- 			htmlStr
- 			+="<li data-uploadpath='" + attachFile.uploadPath + "'" 
- 			+ "    data-uuid='" + attachFile.uuid + "'" 
- 			+ "    data-filename='" + attachFile.fileName + "'" 
- 			+ "    data-filetype='F'>"
- 			+ "        <img src='${contextPath}/resources/icons/icon-attach.png' style='width:30px;'/>"
- 			+ "        &emsp;" + attachFile.fileName
- 			+ "        <span class='glyphicon glyphicon-remove-sign' data-filename='" + fullFileName + "'"
-             + "              data-filetype='F' style='color:red;'></span>"
- 			+ "</li>"
+ 	   if(attachFile.fileType == "F") {
+           htmlStr
+           +="<li data-uploadpath='" + attachFile.uploadPath + "'" 
+           + "    data-uuid='" + attachFile.uuid + "'" 
+           + "    data-filename='" + attachFile.fileName + "'" 
+           + "    data-filetype='F'>"
+           + "        <img src='${contextPath}/resources/icons/icon-attach.png' style='width:30px;'/>"
+           + "        &emsp;" + attachFile.fileName
+           + "        <span class='glyphicon glyphicon-remove-sign' data-filename='" + fullFileName + "'"
+              + "              data-filetype='F' style='color:red;'></span>"
+           + "</li>"
+        } else {
+           var thumbnail = encodeURI(attachFile.repoPath + "/" +
+                                     attachFile.uploadPath + "/s_" +
+                                     attachFile.uuid + "_" + attachFile.fileName) ;
+           htmlStr
+           +="<li data-uploadpath='" + attachFile.uploadPath + "'" 
+           + "    data-uuid='" + attachFile.uuid + "'" 
+           + "    data-filename='" + attachFile.fileName + "'" 
+           + "    data-filetype='I'>"
+           + "        <img src='${contextPath}/displayThumbnail?thumbnail=" + thumbnail + "' style='width:50px;'/>"
+           + "        &emsp;" + attachFile.fileName
+              + "        <span class='glyphicon glyphicon-remove-sign ' data-filename='" + thumbnail + "'"
+              + "          data-filetype='I' style='color:red;'></span>"
+           + "</li>"
+        } 
  		
  		
  	});
@@ -275,9 +331,8 @@
  $("#fileInput").on("change", function(){
  	
  	var fileInput = $("input[name='fileInput']") ;
-     //var fileInputs = $(this) ;
 
-     var uploadFiles = fileInput[0].files ;//반드시 [0]을 붙여야 함
+     var uploadFiles = fileInput[0].files ;
      console.log(uploadFiles) ;
      
 
@@ -300,8 +355,11 @@
      	type: "post" ,
      	url : "${contextPath}/doFileUpload" ,
      	data: formData ,
-     	contentType: false ,  //contentType에 전송타입(즉, MIME 타입)을 지정하지 않음.
-     	processData: false ,  //contentType에 설정된 형식으로 data를 변환처리가 수행되지 않음
+     	contentType: false ,
+     	processData: false ,  
+     	beforeSend: function(xhr) {
+            xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+        },
      	dataType: "json" ,
      	success: function(uploadResult, status){
      		console.log(uploadResult)  ;
@@ -318,8 +376,7 @@
  <%-- 이벤트 위임(Event Delegation) 적용 div.fileUploadResult > ul > li:nth-child(1) > span --%>
  $(".fileUploadResult ul").on("click", "li span" , function(){
      var fileName = $(this).data("filename") ;
-     
-     
+     var fileType = $(this).data("filetype") ;
      var fileLi = $(this).parent() ;
      //var fileLi = $(this).closest("li") ;
      
@@ -328,10 +385,13 @@
      $.ajax({
          type: "post" ,  
          url: "${contextPath}/deleteFile" ,
-         data: {fileName: fileName} ,
+         data: {fileName: fileName, fileType: fileType} ,
         //data: JSON.stringify({fileName: fileName, fileType: fileType}) ,
         // contentType: "application/json; charset=utf-8" ,
          dataType: "text" ,
+         beforeSend: function(xhr){
+	         xhr.setRequestHeader(csrfHeaderName, csrfTokenValue) ;
+		} ,
          success: function(result) {
          	if(result == "DelSuccess") {
          		alert("파일이 삭제되었습니다.") ;

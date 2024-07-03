@@ -22,19 +22,19 @@ public class RecruiterVO {
 	private String btitle;
 	private String bcontent;
 	private String bwriter;
-	
+
 	@DateTimeFormat(pattern = "yy-MM-dd")
 	private Date bregDate;
-	
+
 	@DateTimeFormat(pattern = "yy-MM-dd")
 	private Date bendDate;
-	
+
 	private Integer breplyCnt;
 	private Integer bappCnt;
-	private Integer bblind; 
+	private Integer bblind;
 	private String boccupation;
 	private String bregion;
 	private Integer bhcnt;
-	
+
 	private List<RecruiterAttachFileVO> attachFileList;
 }
