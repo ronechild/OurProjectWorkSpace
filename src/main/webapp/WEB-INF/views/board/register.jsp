@@ -132,9 +132,9 @@
 			var attachLi = $(objLi);
 			
 			attachFileInputHTML += 
-			"<input type='hidden' name='attachFileList[" + i + "].bUuid' value='" + attachLi.data("uuid") + "'>" + 
-			"<input type='hidden' name='attachFileList[" + i + "].bFileName' value='" + attachLi.data("filename") + "'>" + 
-			"<input type='hidden' name='attachFileList[" + i + "].bUploadPath' value='" + attachLi.data("uploadpath") + "'>"/*  + 
+			"<input type='hidden' name='attachFileList[" + i + "].buuid' value='" + attachLi.data("uuid") + "'>" + 
+			"<input type='hidden' name='attachFileList[" + i + "].bfileName' value='" + attachLi.data("filename") + "'>" + 
+			"<input type='hidden' name='attachFileList[" + i + "].buploadPath' value='" + attachLi.data("uploadpath") + "'>"/*  + 
 			"<input type='hidden' name='attachFileList[" + i + "].bno' value='" + "${recruiterVO.bno}" + "'>" *//*  + 
 			"<input type='hidden' name='attachFileList[" + i + "].bDelFlag'>" *//*  + 
 			"<input type='hidden' name='attachFileList[" + i + "].fileType' value='" + attachLi.data("filetype") + "'>" */;
@@ -213,8 +213,9 @@
 				"		data-filetype='F'>" + 
 				"	<img src='${contextPath}/resources/icons/icon-attach.png' style='width:50px;'/> &emsp;" + attachFile.fileName + 
 				"	<span class='glyphicon glyphicon-remove-sign' data-filename='" + fullFileName + "' data-filetype='F' style='color:red;'></span>" + 
-				"</li>"
+				"</li>";
 				
+				console.log(attachFile.uuid);
 			} else {
 				var thumbnail = encodeURI(attachFile.repoPath + "/" + attachFile.uploadPath + "/s_" + attachFile.uuid + "_" + attachFile.fileName);
 				
@@ -226,7 +227,7 @@
 				"		data-filetype='I'>" + 
 				"	<img src='${contextPath}/displayThumbnail?thumbnail=" + thumbnail + "' style='width:50px;'/> &emsp;" + attachFile.fileName + 
 				"	<span class='glyphicon glyphicon-remove-sign' data-filename='" + thumbnail + "' data-filetype='I' style='color:red;'></span>" + 
-				"</li>"
+				"</li>";
 			}
 		})
 		

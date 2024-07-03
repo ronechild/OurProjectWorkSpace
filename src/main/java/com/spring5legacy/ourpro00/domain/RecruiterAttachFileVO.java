@@ -11,10 +11,10 @@ import lombok.ToString;
 @NoArgsConstructor
 public class RecruiterAttachFileVO {
 	
-	private String bUuid;
-	private String bFileName;
+	private String buuid;
+	private String bfileName;
 	private Long bno;
-	private String bDelFlag;
-	private String bUploadPath;
-	private String bRepoPath = "C:/myupload";
+	private String bdelFlag;
+	private String buploadPath;
+	private String brepoPath = "C:/myupload";
 }

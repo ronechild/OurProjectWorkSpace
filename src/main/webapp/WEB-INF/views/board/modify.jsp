@@ -128,22 +128,23 @@
 				<ul>
 <%-- 첨부 파일 영역 --%>
 <c:forEach var="attachFile" items="${recruiterVO.attachFileList}">
+<script>console.log("${recruiterVO.attachFileList}");</script>
 <c:choose>
 	<c:when test="${empty attachFile.bfileName}">
 		<li style="font-size:14pt; list-style-type:none;">첨부파일이 없습니다.</li>
 	</c:when>
 	<c:otherwise>
 		
-			<c:set var="fullFileName" value="${attachFile.repoPath}/${attachFile.uploadPath}/${attachFile.uuid}_${attachFile.fileName}"/>
+			<c:set var="fullFileName" value="${attachFile.brepoPath}/${attachFile.buploadPath}/${attachFile.buuid}_${attachFile.bfileName}"/><%-- ????????????????? --%>
 			<%-- <c:choose>
 				<c:when test="${attachFile.fileType == 'F'}"> --%>
 					<li class="attachLi" 
-							data-repopath="${attachFile.repoPath}"
-							data-uploadpath="${attachFile.uploadPath}" 
-							data-uuid="${attachFile.uuid}" 
-							data-filename="${attachFile.fileName}"
-							<%-- data-filetype="${attachFile.fileType}" --%>>
-						<img src='${contextPath}/resources/icons/icon-attach.png' style='width:50px;'/>&emsp;${attachFile.fileName}
+							data-repopath="${attachFile.brepoPath}"
+							data-uploadpath="${attachFile.buploadPath}" 
+							data-uuid="${attachFile.buuid}" 
+							data-filename="${attachFile.bfileName}"
+							<%-- data-filetype="${attachFile.fileType}" --%>><%-- ????????????????? --%>
+						<img src='${contextPath}/resources/icons/icon-attach.png' style='width:50px;'/>&emsp;${attachFile.bfileName}
 						<span class='glyphicon glyphicon-remove-sign' data-filename='${fullFileName}' data-filetype='F' style='color:red;'></span>
 					</li>
 				<%-- </c:when>
@@ -230,10 +231,10 @@
 			var attachLi = $(objLi);
 			
 			attachFileInputHTML += 
-			"<input type='hidden' name='attachFileList[" + i + "].uuid' value='" + attachLi.data("uuid") + "'>" + 
-			"<input type='hidden' name='attachFileList[" + i + "].uploadPath' value='" + attachLi.data("uploadpath") + "'>" + 
-			"<input type='hidden' name='attachFileList[" + i + "].fileName' value='" + attachLi.data("filename") + "'>"/*  + 
-			"<input type='hidden' name='attachFileList[" + i + "].fileType' value='" + attachLi.data("filetype") + "'>" */;
+			"<input type='hidden' name='attachFileList[" + i + "].buuid' value='" + attachLi.data("uuid") + "'>" + 
+			"<input type='hidden' name='attachFileList[" + i + "].buploadPath' value='" + attachLi.data("uploadpath") + "'>" + 
+			"<input type='hidden' name='attachFileList[" + i + "].bfileName' value='" + attachLi.data("filename") + "'>"/*  + 
+			"<input type='hidden' name='attachFileList[" + i + "].bfileType' value='" + attachLi.data("filetype") + "'>" */;
 		})
 		
 		if(attachFileInputHTML) {

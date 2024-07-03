@@ -52,17 +52,16 @@
     <div class="jv_header" data-rec_idx="48341817" data-rec_seq="0">
        <div class="title_inner">
                             
-               <h3><c:out value="bwiter(기업명)"/> </h3>
+               <h3><c:out value="${recruit.bwriter}"/> </h3>
          </div>
         <h1 class="tit_job" style="margin-left: 5%;">
                         <c:out value="이력서 상세 페이지"/>    
         </h1>
-        <h4 style="display: inline-block;">이력서 상세 열람</h4>
-        <div class="btn_apply">
-            <button type="button" id="btnResumelist" class="btn btn-outline btn-warning btnResumelist" >내가 쓴 구직글들</button> 
+        <div class="btn_apply" style="margin:0%;float:right;">
+            <button type="button" id="btnTodetail" class="btn btn-outline btn-primary btnTodetail" >구인글로 돌아가기</button>   
+            <button type="button" id="btnToModifyA" class="btn btn-outline btn-danger btnToModifyA" >수정</button>
+            <button type="button" id="btnResumelist" class="btn btn-outline btn-success btnResumelist" >나의 모든 구직글</button> 
             <button type="button" id="btnHome" class="btn btn-outline btn-warning btnHome" >홈</button>   
-            <button type="button" id="btnToModifyA" class="btn btn-outline btn-warning btnToModifyA" >수정</button>
-            <button type="button" id="btnTodetail" class="btn btn-outline btn-warning btnTodetail" >구직글로 ㄱ</button>   
                 
                 
         </div>

@@ -85,12 +85,12 @@
 	
 		<!-- 특정 구인글 조회 -->
 	<resultMap id="RecruiterAttachFileVOMap" type="com.spring5legacy.ourpro00.domain.RecruiterAttachFileVO">
-		<result property="bUuid" column="bUuid"></result>
-		<result property="bFileName" column="bFileName"></result>
+		<result property="buuid" column="buuid"></result>
+		<result property="bfileName" column="bfileName"></result>
 		<result property="bno" column="bno"></result>
-		<result property="bDelFlag" column="bDelFlag"></result>
-		<result property="bUploadPath" column="bUploadPath"></result>
-		<result property="bRepoPath" column="bRepoPath"></result>
+		<result property="bdelFlag" column="bdelFlag"></result>
+		<result property="buploadPath" column="buploadPath"></result>
+		<result property="brepoPath" column="brepoPath"></result>
 	</resultMap>
 	<resultMap id="RecruiterVOMap" type="com.spring5legacy.ourpro00.domain.RecruiterVO">
 		<result property="bno" column="bno"></result>
@@ -108,9 +108,9 @@
 		<collection property="attachFileList" resultMap="RecruiterAttachFileVOMap"></collection>
 	</resultMap>
 	<select id="selectRecruit" resultMap="RecruiterVOMap">
-		SELECT a.BNO, a.BTITLE, a.BCONTENT, a.BWRITER, 
-		       a.BREGDATE, a.bendDate, a.breplyCnt, a.bappCnt, a.bblind, a.boccupation, a.bregion, a.bhcnt, 
-               b.bUuid, b.bFileName, b.bno, b.bDelFlag, b.bUploadPath
+		SELECT a.bno, a.btitle, a.bcontent, a.bwriter, 
+		       a.bregDate, a.bendDate, a.breplyCnt, a.bappCnt, a.bblind, a.boccupation, a.bregion, a.bhcnt, 
+               b.buuid, b.bfileName, b.bno, b.bdelFlag, b.buploadPath
           FROM ouruser.tbl_hiring a LEFT OUTER JOIN ouruser.tbl_hireattachfile b ON (a.bno = b.bno)
          WHERE a.bno = #{bno}
 	</select>
