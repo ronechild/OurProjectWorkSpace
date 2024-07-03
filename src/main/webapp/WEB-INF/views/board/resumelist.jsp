@@ -39,12 +39,9 @@
     <a class="placeholder" tabindex="-1"></a>
     <div class="jv_header" data-rec_idx="48341817" data-rec_seq="0">
        <div class="title_inner">
-                           
-               <h3><c:out value="awiter(구직자명)" /></h3>
+               <h3><c:out value="asdf" /></h3><%-- ${jobSeeker.awriter} --%>
          </div>
-        <h1 class="tit_job" style="margin-left: 5%;">
-                        <c:out value="24년 신규 채용 공고 |btitle(제목)"/>    
-        </h1>
+
         <div class="btn_apply" style="margin-left: 60%;">
         <button type="button" id="btnToList" data-oper="list" class="btn  btn-outline btn-info btnToList"><span>홈</span></button>
             <button type="button" id="jobApply" class="btn btn-outline btn-success jobApply">뭘 넣어야 할까</button>        
@@ -53,31 +50,7 @@
     </div>
    <%-- 제목 기업 지원 끝--%>
 
-<hr>
-<%-- 세부 기본내용 --%>
-<div class="cont wrapper" style="padding-left: 300px;">
-   <div class="col">
-      <dl>
-          <dt>등록일&nbsp;</dt><dd><c:out value="2024-06-27|bregdate"/></dd>
-      </dl>           
-      <dl >
-          <dt>마감일&nbsp;</dt><dd style="color: #800000;"><c:out value="2024-06-27|benddate"/></dd>
-      </dl>
-             <div class="alert alert-danger" style="height: 50px; width: 90px;">D-day - <c:out value="3"/></div>
-     </div>
-     <div class="col">
-       <dl>
-          <dt>직종&emsp;</dt><dd><c:out value="직종|boccupation"/></dd>
-      </dl>           
-      <dl >
-          <dt>지역&emsp;</dt><dd><c:out value="지역|bregion"/></dd>
-      </dl>
-      <dl >
-          <dt>모집인원&nbsp;</dt><dd><c:out value="인원|bhcnt"/></dd>
-      </dl>
-     </div>
-        <br>
-            </div>
+
             <%-- 세부 기본내용 끝--%>
             <hr>
 
@@ -97,8 +70,8 @@
       </thead>
       <tbody>
          <c:choose>
-        <c:when test="${not empty jsList }">
-           <c:forEach var="appList" items="${jsList }"  >
+        <c:when test="${not empty jobSeeker }">
+           <c:forEach var="appList" items="${jobSeeker }"  >
               <tr class="myTr" data-ano='<c:out value="${appList.ano}"/>'>
                   <td><c:out value="${appList.ano }"/></td>
                   <td><c:out value="${appList.awriter }"/></td>

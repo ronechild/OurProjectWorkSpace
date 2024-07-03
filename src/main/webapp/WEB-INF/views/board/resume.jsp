@@ -219,7 +219,7 @@
     
        var awriter = '<c:out value="${jobSeeker.awriter}"/>' ;
        
-       alert("  awriter가 작성한 이력서들") ;
+/*        alert("  awriter가 작성한 이력서들") ; */
        
        location.href="${contextPath}/board/resumelist?awriter=" + awriter  ;
     });

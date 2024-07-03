@@ -1,5 +1,6 @@
 package com.spring5legacy.ourpro00.controller;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -124,14 +125,16 @@ public class RecruiterJobSeekerController {
 	@GetMapping("/resumelist")
 	@PreAuthorize("hasAnyAuthority('USER','ADMIN')")
 	public void showJobSeekerList(Model model, String awriter) {
+		System.out.println("awriter : " + awriter);
 		model.addAttribute("jobSeeker", jobSeekerService.getJobSeekerList(awriter));
+		System.out.println("jobSeeker : " + jobSeekerService.getJobSeekerList(awriter));
 		System.out.println("컨트롤러:jsp에 전달할 model: " + model);
 	}
 
 	// 구인글 이력서 조회 페이지
 	@GetMapping("/resume")
 	@PreAuthorize("hasAnyAuthority('USER', 'COMPANY','ADMIN')")
-	public void showJobSeekerDetail(Long ano, Model model, Long bno) {
+	public void showJobSeekerDetail(@Param("ano") Long ano, Model model, @Param("bno") Long bno) {
 		model.addAttribute("recruit", recruiterService.selectRecruit(bno));
 		model.addAttribute("jobSeeker", jobSeekerService.getJobSeeker(ano));
 		System.out.println("컨트롤러:::" + ano + "번 이력서 호출");
